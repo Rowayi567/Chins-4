@@ -370,10 +370,6 @@ function SignupScreen({ onComplete, onBack }) {
     setForm(f => ({ ...f, [k]:v }));
     setErrors(e => ({ ...e, [k]:"" }));
     // Real-time age check on DOB field
-    if (k === "dob" && v) {
-      if (getAge(v) < 18) setAgeBlocked(true);
-      else setAgeBlocked(false);
-    }
   };
 
   const fStyle = (key) => ({ width:"100%", padding:"15px 16px", borderRadius:14, border:`1.5px solid ${errors[key]?"#D05657":form[key]?C.accent:"rgba(255,255,255,0.14)"}`, background:form[key]?"rgba(75,193,160,0.06)":"rgba(255,255,255,0.05)", color:"#fff", fontFamily:DM, fontSize:15, outline:"none", boxSizing:"border-box" });
