@@ -324,7 +324,7 @@ Back
 <div style={{ flex:1, padding:"28px 28px 0", display:"flex", flexDirection:"column", gap:14, position:"relative" }}>
 <div>
 <div style={{ fontSize:13, fontWeight:500, color:"rgba(255,255,255,0.48)", marginBottom:8, fontFamily:DM }}>Email</div>
-<input type="email" value={email} onChange={e=>{setEmail(e.target.value);setErrors(x=>({…x,email:""}))}} placeholder="you@example.com" style={fStyle(errors.email,email)}/>
+<input type="email" value={email} onChange={e=>{setEmail(e.target.value);setErrors(x=>({...x,email:""}))}} placeholder="you@example.com" style={fStyle(errors.email,email)}/>
 {errors.email&&<div style={{ fontSize:12,color:"#E1814C",marginTop:5,fontFamily:DM }}>{errors.email}</div>}
 </div>
 <div>
@@ -333,7 +333,7 @@ Back
 <span style={{ fontSize:13, color:C.accent, cursor:"pointer", fontFamily:DM }}>Forgot?</span>
 </div>
 <div style={{ position:"relative" }}>
-<input type={showPw?"text":"password"} value={password} onChange={e=>{setPassword(e.target.value);setErrors(x=>({…x,password:""}))}} placeholder="••••••••" style={{…fStyle(errors.password,password),paddingRight:48}}/>
+<input type={showPw?"text":"password"} value={password} onChange={e=>{setPassword(e.target.value);setErrors(x=>({...x,password:""}))}} placeholder="••••••••" style={{...fStyle(errors.password,password),paddingRight:48}}/>
 <button onClick={()=>setShowPw(v=>!v)} style={{ position:"absolute",right:14,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",fontSize:16,padding:0 }}>{showPw?"🙈":"👁️"}</button>
 </div>
 {errors.password&&<div style={{ fontSize:12,color:"#E1814C",marginTop:5,fontFamily:DM }}>{errors.password}</div>}
@@ -341,7 +341,7 @@ Back
 </div>
 <div style={{ padding:"20px 28px 44px", position:"relative" }}>
 <button onClick={handleLogin} disabled={loading} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:loading?"rgba(75,193,160,0.5)":C.accent, color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.35)", marginBottom:14 }}>
-{loading?"Signing in…":"Sign in →"}
+{loading?"Signing in...":"Sign in →"}
 </button>
 <div style={{ textAlign:"center", fontSize:14, color:"rgba(255,255,255,0.3)", fontFamily:DM }}>
 New here? <span onClick={onBack} style={{ color:C.accent, cursor:"pointer", fontWeight:600 }}>Create an account</span>
@@ -369,8 +369,8 @@ return d.toISOString().split("T")[0];
 const getAge = (dob) => (new Date() - new Date(dob)) / (1000*60*60*24*365.25);
 
 const set = (k, v) => {
-setForm(f => ({ …f, [k]:v }));
-setErrors(e => ({ …e, [k]:"" }));
+setForm(f => ({ ...f, [k]:v }));
+setErrors(e => ({ ...e, [k]:"" }));
 };
 
 const fStyle = (key) => ({ width:"100%", padding:"15px 16px", borderRadius:14, border:`1.5px solid ${errors[key]?"#D05657":form[key]?C.accent:"rgba(255,255,255,0.14)"}`, background:form[key]?"rgba(75,193,160,0.06)":"rgba(255,255,255,0.05)", color:"#fff", fontFamily:DM, fontSize:15, outline:"none", boxSizing:"border-box" });
@@ -436,7 +436,7 @@ Back
 <div><label style={lbl}>Last name</label><input value={form.lastName} onChange={e=>set("lastName",e.target.value)} placeholder="Your last name" style={fStyle("lastName")}/>{errors.lastName&&<div style={err}>{errors.lastName}</div>}</div>
 <div>
 <label style={lbl}>Gender</label>
-<div onClick={()=>setShowGender(!showGender)} style={{…fStyle("gender"),cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+<div onClick={()=>setShowGender(!showGender)} style={{...fStyle("gender"),cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
 <span style={{ color:form.gender?"#fff":"rgba(255,255,255,0.28)" }}>{form.gender||"Select"}</span>
 <span style={{ color:"rgba(255,255,255,0.28)",fontSize:11 }}>{showGender?"▲":"▼"}</span>
 </div>
@@ -454,7 +454,7 @@ type="date"
 value={form.dob}
 onChange={e=>set("dob",e.target.value)}
 max={maxDob}
-style={{…fStyle("dob"),colorScheme:"dark"}}
+style={{...fStyle("dob"),colorScheme:"dark"}}
 />
 {errors.dob&&<div style={err}>{errors.dob}</div>}
 <div style={{ fontSize:11, color:"rgba(255,255,255,0.28)", marginTop:6, fontFamily:DM }}>You must be 18 or older to join</div>
@@ -734,7 +734,7 @@ const { listening, speaking, speak, startListening, stopListening } = useVoiceRe
 
 // Speak latest Reed message
 useEffect(() => {
-const lastReed = […msgs].reverse().find(m=>m.role==="reed");
+const lastReed = [...msgs].reverse().find(m=>m.role==="reed");
 if (lastReed?.text && isCompanion) speak(lastReed.text.slice(0,300));
 }, [msgs.length]);
 
@@ -746,7 +746,7 @@ return (
 <div style={{ flex:1 }}>
 <div style={{ fontWeight:700, color:C.text, fontSize:15, fontFamily:DM }}>{chipLabel}</div>
 <div style={{ fontSize:11, color:speaking?C.accent:C.textDim, fontFamily:DM }}>
-{speaking?"speaking…":loading?"thinking…":isCompanion?"your companion":"getting to know you"}
+{speaking?"speaking...":loading?"thinking...":isCompanion?"your companion":"getting to know you"}
 </div>
 </div>
 <div style={{ display:"flex", alignItems:"center", gap:8 }}>
@@ -772,7 +772,7 @@ style={{ width:36, height:36, borderRadius:"50%", background:listening?"rgba(208
 {listening&&(
 <div style={{ margin:"8px 16px 0", padding:"10px 14px", background:"rgba(208,86,87,0.1)", borderRadius:12, border:"1px solid rgba(208,86,87,0.3)", display:"flex", alignItems:"center", gap:8 }}>
 <div style={{ width:8, height:8, borderRadius:"50%", background:"#D05657", animation:"pulse 1s infinite" }}/>
-<div style={{ fontFamily:DM, fontSize:13, color:"#D05657" }}>Listening… speak now</div>
+<div style={{ fontFamily:DM, fontSize:13, color:"#D05657" }}>Listening... speak now</div>
 </div>
 )}
 <div style={{ flex:1, overflowY:"auto", padding:"12px 16px" }}>
@@ -799,7 +799,7 @@ style={{ width:36, height:36, borderRadius:"50%", background:listening?"rgba(208
     <div ref={endRef}/>
   </div>
   <div style={{ padding:"10px 14px", borderTop:`1px solid ${C.border}`, display:"flex", gap:8, alignItems:"flex-end", flexShrink:0 }}>
-    <textarea value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();}}} placeholder={isCompanion?"talk to Reed…":"say something…"} rows={1} style={{ flex:1, padding:"11px 14px", borderRadius:22, border:`1px solid ${C.border}`, background:C.surface, color:C.text, resize:"none", fontFamily:DM, fontSize:14, outline:"none" }}/>
+    <textarea value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();}}} placeholder={isCompanion?"talk to Reed...":"say something..."} rows={1} style={{ flex:1, padding:"11px 14px", borderRadius:22, border:`1px solid ${C.border}`, background:C.surface, color:C.text, resize:"none", fontFamily:DM, fontSize:14, outline:"none" }}/>
     <button onClick={()=>send()} disabled={!input.trim()||loading} style={{ width:42, height:42, borderRadius:"50%", background:input.trim()&&!loading?C.accent:"rgba(255,255,255,0.1)", border:"none", cursor:"pointer", color:"#fff", fontSize:18, transition:"background 0.2s" }}>↑</button>
   </div>
 </div>
@@ -891,7 +891,7 @@ setAskLoading(false);
 })();
 },[]);
 
-const addAgentMsg=(role,text,delay=0)=>new Promise(res=>setTimeout(()=>{setAgentMsgs(prev=>[…prev,{role,text}]);res();},delay));
+const addAgentMsg=(role,text,delay=0)=>new Promise(res=>setTimeout(()=>{setAgentMsgs(prev=>[...prev,{role,text}]);res();},delay));
 
 const handleYes=async()=>{
 setPhase("syncing");
@@ -918,7 +918,7 @@ catch { setChatMsgs([{sender:"reed-sent",text:`Hey ${person.alias}, Reed thought
 setConnected(true); onConnect(person);
 };
 
-const sendChat=()=>{ if(!chatInput.trim()) return; setChatMsgs(prev=>[…prev,{sender:"me",text:chatInput.trim()}]); setChatInput(""); };
+const sendChat=()=>{ if(!chatInput.trim()) return; setChatMsgs(prev=>[...prev,{sender:"me",text:chatInput.trim()}]); setChatInput(""); };
 
 if(connected) return (
 <div style={{ position:"absolute", inset:0, background:C.bg, zIndex:200, display:"flex", flexDirection:"column" }}>
@@ -941,7 +941,7 @@ if(connected) return (
 ))}
 <div ref={endRef}/>
 </div>
-<ChatInputBar placeholder={`Message ${person.alias}…`} value={chatInput} onChange={e=>setChatInput(e.target.value)} onSend={sendChat} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendChat();}}} onVoiceSend={dur=>setChatMsgs(prev=>[…prev,{sender:"me",type:"voice",duration:dur}])} onPhotoSend={url=>setChatMsgs(prev=>[…prev,{sender:"me",type:"photo",url}])}/>
+<ChatInputBar placeholder={`Message ${person.alias}...`} value={chatInput} onChange={e=>setChatInput(e.target.value)} onSend={sendChat} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendChat();}}} onVoiceSend={dur=>setChatMsgs(prev=>[...prev,{sender:"me",type:"voice",duration:dur}])} onPhotoSend={url=>setChatMsgs(prev=>[...prev,{sender:"me",type:"photo",url}])}/>
 </div>
 );
 
@@ -969,7 +969,7 @@ return (
 {phase==="ask"&&(askLoading?<Dots/>:<><div style={{ fontSize:14, color:C.text, lineHeight:1.6, marginBottom:14, fontFamily:DM }}>{askText}</div><div style={{ display:"flex", gap:8 }}><button onClick={handleYes} style={{ flex:1, padding:"10px", borderRadius:12, background:C.accent, border:"none", color:"#fff", cursor:"pointer", fontWeight:600, fontFamily:DM, fontSize:13 }}>Check with their agent</button><button onClick={handleConnect} style={{ flex:1, padding:"10px", borderRadius:12, background:C.surface, border:`1px solid ${C.border}`, color:C.text, cursor:"pointer", fontFamily:DM, fontSize:13 }}>Connect directly</button></div></>)}
 {phase==="syncing"&&<div>{agentMsgs.map((m,i)=><div key={i} style={{ marginBottom:8, display:"flex", justifyContent:m.role==="reed"?"flex-start":"flex-end" }}><div style={{ maxWidth:"80%", padding:"8px 12px", borderRadius:12, background:m.role==="reed"?C.accentDim:"rgba(75,193,160,0.25)", color:C.text, fontSize:13, fontFamily:DM }}>{m.text}</div></div>)}{agentMsgs.length<3&&<Dots/>}</div>}
 {phase==="result"&&<><div style={{ fontSize:14, color:C.text, lineHeight:1.6, marginBottom:14, fontFamily:DM }}>{syncResult}</div><button onClick={handleConnect} style={{ width:"100%", padding:"12px", borderRadius:14, background:C.accent, border:"none", color:"#fff", cursor:"pointer", fontWeight:600, fontSize:15, fontFamily:DM }}>Connect with {person.alias} →</button></>}
-{phase==="connecting"&&<div style={{ color:C.accent, textAlign:"center", fontFamily:DM }}>Connecting…</div>}
+{phase==="connecting"&&<div style={{ color:C.accent, textAlign:"center", fontFamily:DM }}>Connecting...</div>}
 </div>
 </div>
 </div>
@@ -999,7 +999,7 @@ if (isAnimating || matchDone.current) return;
 matchDone.current = true;
 setIsAnimating(true);
 setReedMood("thinking");
-setReedBubble({ text:"give me a sec…", type:"thinking" });
+setReedBubble({ text:"give me a sec...", type:"thinking" });
 await new Promise(r=>setTimeout(r,1500));
 try {
 const raw = await callAI(
@@ -1165,9 +1165,9 @@ useEffect(()=>{ endRef.current?.scrollIntoView({behavior:"smooth"}); },[chatMsgs
 useEffect(()=>{ grpEndRef.current?.scrollIntoView({behavior:"smooth"}); },[groupMsgs]);
 
 const openChatWith = (chat) => { setOpenChat(chat); setChatMsgs(chat.messages||[]); };
-const sendMsg = () => { if(!chatInput.trim()) return; setChatMsgs(prev=>[…prev,{sender:"me",text:chatInput.trim()}]); setChatInput(""); };
-const sendGroupMsg = () => { if(!groupInput.trim()) return; setGroupMsgs(prev=>[…prev,{sender:"me",text:groupInput.trim()}]); setGroupInput(""); };
-const joinGroup = (g) => { setSuggestions(prev=>prev.filter(x=>x.id!==g.id)); setMyGroups(prev=>[…prev,{…g,unread:0,time:"now"}]); };
+const sendMsg = () => { if(!chatInput.trim()) return; setChatMsgs(prev=>[...prev,{sender:"me",text:chatInput.trim()}]); setChatInput(""); };
+const sendGroupMsg = () => { if(!groupInput.trim()) return; setGroupMsgs(prev=>[...prev,{sender:"me",text:groupInput.trim()}]); setGroupInput(""); };
+const joinGroup = (g) => { setSuggestions(prev=>prev.filter(x=>x.id!==g.id)); setMyGroups(prev=>[...prev,{...g,unread:0,time:"now"}]); };
 
 if(openChat) return (
 <div style={{ flex:1, display:"flex", flexDirection:"column", background:C.bg }}>
@@ -1197,7 +1197,7 @@ if(openChat) return (
 ))}
 <div ref={endRef}/>
 </div>
-<ChatInputBar placeholder={`Message ${openChat.alias||openChat.name}…`} value={chatInput} onChange={e=>setChatInput(e.target.value)} onSend={sendMsg} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMsg();}}} onVoiceSend={dur=>setChatMsgs(prev=>[…prev,{sender:"me",type:"voice",duration:dur}])} onPhotoSend={url=>setChatMsgs(prev=>[…prev,{sender:"me",type:"photo",url}])}/>
+<ChatInputBar placeholder={`Message ${openChat.alias||openChat.name}...`} value={chatInput} onChange={e=>setChatInput(e.target.value)} onSend={sendMsg} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMsg();}}} onVoiceSend={dur=>setChatMsgs(prev=>[...prev,{sender:"me",type:"voice",duration:dur}])} onPhotoSend={url=>setChatMsgs(prev=>[...prev,{sender:"me",type:"photo",url}])}/>
 </div>
 );
 
@@ -1215,7 +1215,7 @@ if(openGroup) return (
 <div ref={grpEndRef}/>
 </div>
 <div style={{ padding:"10px 16px",borderTop:`1px solid ${C.border}`,display:"flex",gap:8 }}>
-<textarea value={groupInput} onChange={e=>setGroupInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendGroupMsg();}}} placeholder="Message the group…" rows={1} style={{ flex:1,padding:"11px 14px",borderRadius:22,border:`1px solid ${C.border}`,background:C.surface,color:C.text,resize:"none",fontFamily:DM,fontSize:14,outline:"none" }}/>
+<textarea value={groupInput} onChange={e=>setGroupInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendGroupMsg();}}} placeholder="Message the group..." rows={1} style={{ flex:1,padding:"11px 14px",borderRadius:22,border:`1px solid ${C.border}`,background:C.surface,color:C.text,resize:"none",fontFamily:DM,fontSize:14,outline:"none" }}/>
 <button onClick={sendGroupMsg} disabled={!groupInput.trim()} style={{ width:42,height:42,borderRadius:"50%",background:groupInput.trim()?C.accent:"rgba(255,255,255,0.1)",border:"none",cursor:"pointer",color:"#fff",fontSize:18 }}>↑</button>
 </div>
 </div>
@@ -1306,7 +1306,7 @@ setDigestLoading(false);
 })();
 },[]);
 const filtered = category==="all"?events:events.filter(e=>e.time===category);
-const toggleGoing = (id) => setEvents(prev=>prev.map(e=>e.id===id?{…e,going:!e.going}:e));
+const toggleGoing = (id) => setEvents(prev=>prev.map(e=>e.id===id?{...e,going:!e.going}:e));
 return (
 <div style={{ flex:1, display:"flex", flexDirection:"column", background:C.bg, overflow:"hidden" }}>
 <div style={{ padding:"18px 20px 12px", borderBottom:`1px solid ${C.border}` }}>
@@ -1381,7 +1381,7 @@ return (
 Not your usual crowd. Someone genuinely different — Reed thinks you’d surprise each other.
 </div>
 </div>
-{loading&&<div style={{ padding:"24px", background:C.surface, borderRadius:24, border:`1px solid ${C.border}`, display:"flex", flexDirection:"column", alignItems:"center", gap:12 }}><Dots/><div style={{ fontSize:12, color:C.textSub, fontFamily:DM }}>Reed is thinking outside the box…</div></div>}
+{loading&&<div style={{ padding:"24px", background:C.surface, borderRadius:24, border:`1px solid ${C.border}`, display:"flex", flexDirection:"column", alignItems:"center", gap:12 }}><Dots/><div style={{ fontSize:12, color:C.textSub, fontFamily:DM }}>Reed is thinking outside the box...</div></div>}
 {match&&!loading&&(
 <div style={{ background:"rgba(255,255,255,0.09)", borderRadius:24, border:`1px solid ${C.border}`, overflow:"hidden" }}>
 <div style={{ height:140, background:match.person.gradient, position:"relative", display:"flex", alignItems:"flex-end", padding:"0 20px 20px" }}>
@@ -1401,7 +1401,7 @@ Not your usual crowd. Someone genuinely different — Reed thinks you’d surpri
 </div>
 <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>{match.person.interests.slice(0,4).map(i=><span key={i} style={{ padding:"4px 10px", borderRadius:20, background:C.surface, border:`1px solid ${C.border}`, color:C.textSub, fontSize:12, fontFamily:DM }}>{i}</span>)}</div>
 <div style={{ display:"flex", gap:8, marginTop:4 }}>
-<button onClick={()=>{ if(match) setPassed(prev=>[…prev,match.person.id]); findMatch(); }} style={{ flex:1, padding:"12px", borderRadius:16, border:`1px solid ${C.border}`, background:"none", color:C.text, cursor:"pointer", fontSize:14, fontFamily:DM }}>Pass</button>
+<button onClick={()=>{ if(match) setPassed(prev=>[...prev,match.person.id]); findMatch(); }} style={{ flex:1, padding:"12px", borderRadius:16, border:`1px solid ${C.border}`, background:"none", color:C.text, cursor:"pointer", fontSize:14, fontFamily:DM }}>Pass</button>
 <button style={{ flex:2, padding:"12px", borderRadius:16, border:"none", background:C.accent, color:"#fff", cursor:"pointer", fontWeight:600, fontSize:14, fontFamily:DM }}>Say hello →</button>
 </div>
 </div>
@@ -1506,7 +1506,7 @@ return (
 
 // ── Profile Screen ────────────────────────────────────────────────────────────
 function ProfileScreen({ profile, privacyMode, onPrivacyChange, userPhoto, onPhotoUpload, onLogout, onDeleteAccount }) {
-const p = profile || { name:"You", vibe:"Still getting to know you…", interests:[], lookingFor:"", emoji:"🧍" };
+const p = profile || { name:"You", vibe:"Still getting to know you...", interests:[], lookingFor:"", emoji:"🧍" };
 const photoRef = useRef(null);
 const [showSettings, setShowSettings] = useState(false);
 
@@ -1626,13 +1626,13 @@ case "connect": return (
 <ellipse cx="9" cy="7.5" rx="3.2" ry="3.2" fill={active?color:"rgba(255,255,255,0.38)"} opacity={active?0.55:0.6}/>
 <path d="M3 20 C3 15.5 5.8 13 9 13 C10.1 13 11.1 13.3 12 13.9" stroke={c} strokeWidth={sw} strokeLinecap="round" fill="none" opacity={active?0.55:0.6}/>
 <ellipse cx="15.5" cy="7" rx="3.4" ry="3.4" fill={c}/>
-<path d="M9 21 C9 16.2 12 13.5 15.5 13.5 C19 13.5 22 16.2 22 21" {…sc} strokeWidth="1.8"/>
+<path d="M9 21 C9 16.2 12 13.5 15.5 13.5 C19 13.5 22 16.2 22 21" {...sc} strokeWidth="1.8"/>
 </svg>
 );
 case "chats": return (
 <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-<path d="M3 3.5 H19 A1.5 1.5 0 0 1 20.5 5 V13 A1.5 1.5 0 0 1 19 14.5 H10 L5.5 19 V14.5 H3 A1.5 1.5 0 0 1 1.5 13 V5 A1.5 1.5 0 0 1 3 3.5 Z" {…sc}/>
-<line x1="6" y1="8.5" x2="16" y2="8.5" {…sc}/><line x1="6" y1="11.5" x2="12" y2="11.5" {…sc}/>
+<path d="M3 3.5 H19 A1.5 1.5 0 0 1 20.5 5 V13 A1.5 1.5 0 0 1 19 14.5 H10 L5.5 19 V14.5 H3 A1.5 1.5 0 0 1 1.5 13 V5 A1.5 1.5 0 0 1 3 3.5 Z" {...sc}/>
+<line x1="6" y1="8.5" x2="16" y2="8.5" {...sc}/><line x1="6" y1="11.5" x2="12" y2="11.5" {...sc}/>
 </svg>
 );
 case "plans": return (
@@ -1667,15 +1667,15 @@ case "mingle": return (
 );
 case "reed": return (
 <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-<circle cx="11" cy="11" r="9" {…sc}/>
+<circle cx="11" cy="11" r="9" {...sc}/>
 <circle cx="8" cy="9.5" r="1.1" fill={c}/><circle cx="14" cy="9.5" r="1.1" fill={c}/>
-<path d="M7.5 13.5 Q11 16.5 14.5 13.5" {…sc}/>
+<path d="M7.5 13.5 Q11 16.5 14.5 13.5" {...sc}/>
 </svg>
 );
 case "profile": return (
 <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-<circle cx="11" cy="7.5" r="3.5" {…sc}/>
-<path d="M3.5 20 C3.5 15.5 6.8 12.5 11 12.5 C15.2 12.5 18.5 15.5 18.5 20" {…sc}/>
+<circle cx="11" cy="7.5" r="3.5" {...sc}/>
+<path d="M3.5 20 C3.5 15.5 6.8 12.5 11 12.5 C15.2 12.5 18.5 15.5 18.5 20" {...sc}/>
 </svg>
 );
 default: return null;
@@ -1731,7 +1731,7 @@ setLoading(false);
 
 const processReply = (raw, histBase) => {
 const clean = raw.replace(/<profile>[\s\S]*?</profile>/g,"").replace(/<animal>[\s\S]*?</animal>/g,"").trim();
-setHist([…histBase,{role:"assistant",content:clean}]);
+setHist([...histBase,{role:"assistant",content:clean}]);
 const pm = raw.match(/<profile>([\s\S]*?)</profile>/);
 if(pm&&!profile){
 try{
@@ -1741,25 +1741,25 @@ setProfileInsertIdx(msgs.length+1);
 // Reed wraps up, then transitions to main app
 const signoff = "okay — I think I’ve got you. give me a moment and I’ll go find your people.";
 setTimeout(()=>{
-setMsgs(prev=>[…prev,{role:"reed",text:signoff}]);
+setMsgs(prev=>[...prev,{role:"reed",text:signoff}]);
 }, 600);
 setTimeout(()=>{ setScreen("main"); }, 3200);
 }catch{}
 }
 const am = raw.match(/<animal>([\s\S]*?)</animal>/);
 if(am&&!chipAnimal){ try{ const a=JSON.parse(am[1]); setChipAnimal(a); setShowAnimalToast(true); setTimeout(()=>setShowAnimalToast(false),8000); }catch{} }
-setMsgs(prev=>[…prev,{role:"reed",text:clean}]);
+setMsgs(prev=>[...prev,{role:"reed",text:clean}]);
 };
 
 const send = async (textOverride) => {
 const txt = (textOverride||input).trim();
 if(!txt||loading) return;
 setInput("");
-setMsgs(prev=>[…prev,{role:"user",text:txt}]);
-const nH = […hist,{role:"user",content:txt}];
+setMsgs(prev=>[...prev,{role:"user",text:txt}]);
+const nH = [...hist,{role:"user",content:txt}];
 setLoading(true);
 try { const raw=await callReed(nH); processReply(raw,nH); }
-catch(e){ setMsgs(prev=>[…prev,{role:"reed",text:`⚠️ ${e.message}`}]); }
+catch(e){ setMsgs(prev=>[...prev,{role:"reed",text:`⚠️ ${e.message}`}]); }
 setLoading(false);
 };
 
