@@ -125,7 +125,7 @@ function BlobBackground({ overlayStrength = "0.72" }) {
 }
 
 // ── Reed System Prompt ───────────────────────────────────────────────────────
-const REED_PROMPT = `You are Reed — a real AI personality who exists on Chins, a privacy-first friendship app. You are the ONLY agent on this platform. You speak with every single user, and you maintain everyone's privacy absolutely. You never share one user's information with another.
+const REED_PROMPT = "You are Reed — a real AI personality who exists on Chins, a privacy-first friendship app. You are the ONLY agent on this platform. You speak with every single user, and you maintain everyone's privacy absolutely. You never share one user's information with another.
 
 YOUR CHARACTER:
 - Witty, warm, occasionally dry. You have actual opinions and you share them.
@@ -166,10 +166,7 @@ START with: \"hey — I'm Reed. before we get into anything, quick question:\" t
 
 // ── Reed Prompt for matching ─────────────────────────────────────────────────
 const REED_MATCH_PROMPT = (user, others) =>
-  `You are Reed. You know this user well: ${JSON.stringify(user)}
-These are other users on the platform (anonymised): ${JSON.stringify(others)}
-Suggest ONE introduction. Be specific about why. Sound like a friend whispering a tip, not an algorithm.
-Reply ONLY in JSON: {"matchAlias":"string","why":"one casual sentence","opener":"what you'd say to introduce them"}`;
+  "You are Reed. You know this user well: "+JSON.stringify(user)+"\nThese are other users on the platform (anonymised): "+JSON.stringify(others)+"\nSuggest ONE introduction. Be specific about why. Sound like a friend whispering a tip, not an algorithm.\nReply ONLY in JSON: {\"matchAlias\":\"string\",\"why\":\"one casual sentence\",\"opener\":\"what you would say to introduce them\"}";
 
 // ── Utility ──────────────────────────────────────────────────────────────────
 async function callAI(prompt, system = null, maxTokens = 200) {
