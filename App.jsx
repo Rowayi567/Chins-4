@@ -821,7 +821,7 @@ const total=duration*1000, start=Date.now()-(progress/100)*total;
 timerRef.current=setInterval(()=>{ const p=Math.min(100,((Date.now()-start)/total)*100); setProgress(p); if(p>=100){clearInterval(timerRef.current);setPlaying(false);setProgress(0);} },50);
 };
 useEffect(()=>()=>clearInterval(timerRef.current),[]);
-const fmt=s=>'${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`;
+const fmt=s=>`${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`;
 const activeBg=isMe?"rgba(255,255,255,0.9)":C.accent, inactiveBg=isMe?"rgba(255,255,255,0.35)":"rgba(255,255,255,0.2)";
 return (
 <div style={{ display:"flex", alignItems:"center", gap:10, padding:"10px 14px", borderRadius:20, background:isMe?"rgba(255,255,255,0.15)":C.surface, minWidth:180, maxWidth:240, border:isMe?"none":`1px solid ${C.border}` }}>
