@@ -14,7 +14,7 @@ accentGlow: "rgba(75,193,160,0.3)",
 amber: "#E1814C",
 text: "#FFFFFF",
 textSub: "rgba(255,255,255,0.7)",
-textDim: rgba(255,255,255,0.4)",
+textDim: "rgba(255,255,255,0.4)",
 silverDim: "rgba(255,255,255,0.08)",
 };
 
