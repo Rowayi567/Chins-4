@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-const API = ‘https://api.anthropic.com/v1/messages’;
+const API = 'https://api.anthropic.com/v1/messages';
 const API_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
 
 const C = {
