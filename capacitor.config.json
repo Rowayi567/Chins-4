@@ -11,5 +11,11 @@
   },
   "ios": {
     "backgroundColor": "#021a16"
+  },
+  "plugins": {
+    "EasUpdate": {
+      "projectId": "b90ccf39-af74-419b-871f-35fb072988a1"
+    }
   }
 }
+
