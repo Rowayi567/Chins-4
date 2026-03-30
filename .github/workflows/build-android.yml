@@ -41,9 +41,8 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync android
 
-      - name: Initialise EAS project
-        run: eas init --id $(eas project:create --non-interactive --json | jq -r '.id') --non-interactive
-        continue-on-error: true
+      - name: Link EAS project
+        run: eas init --id b90ccf39-af74-419b-871f-35fb072988a1 --non-interactive
 
       - name: Build Android APK with EAS
         run: eas build --platform android --profile preview --non-interactive
