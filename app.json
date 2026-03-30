@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "backgroundColor": "#021a16",
     "platforms": ["android"],
+    "entryPoint": "./index.js",
     "android": {
       "package": "app.chins.social",
       "versionCode": 1,
