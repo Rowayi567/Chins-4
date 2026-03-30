@@ -23,30 +23,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build web app
-        run: npm run build
-
       - name: Setup EAS
         uses: expo/expo-github-action@v8
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Install Capacitor CLI
-        run: npm install -g @capacitor/cli
-
-      - name: Add Android platform
-        run: npx cap add android
-
-      - name: Sync Capacitor
-        run: npx cap sync android
-
-      - name: Link EAS project
-        run: eas init --id b90ccf39-af74-419b-871f-35fb072988a1 --non-interactive --force
-
       - name: Build Android APK with EAS
         run: eas build --platform android --profile preview --non-interactive
-
-
-      - name: Notify build complete
-        run: echo "Build complete! Check expo.dev for your APK download link."
