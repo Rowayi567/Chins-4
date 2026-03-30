@@ -41,9 +41,13 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync android
 
+      - name: Initialise EAS project
+        run: eas init --id $(eas project:create --non-interactive --json | jq -r '.id') --non-interactive
+        continue-on-error: true
 
       - name: Build Android APK with EAS
         run: eas build --platform android --profile preview --non-interactive
+
 
       - name: Notify build complete
         run: echo "Build complete! Check expo.dev for your APK download link."
