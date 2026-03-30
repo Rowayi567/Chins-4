@@ -35,8 +35,12 @@ jobs:
       - name: Install Capacitor CLI
         run: npm install -g @capacitor/cli
 
+      - name: Add Android platform
+        run: npx cap add android
+
       - name: Sync Capacitor
         run: npx cap sync android
+
 
       - name: Build Android APK with EAS
         run: eas build --platform android --profile preview --non-interactive
