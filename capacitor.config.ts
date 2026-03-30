@@ -1,0 +1,19 @@
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'app.chins.social',
+  appName: 'chins',
+  webDir: 'dist',
+  server: {
+    androidScheme: 'https'
+  },
+  android: {
+    allowMixedContent: true,
+    backgroundColor: '#021a16',
+  },
+  ios: {
+    backgroundColor: '#021a16',
+  }
+};
+
+export default config;
