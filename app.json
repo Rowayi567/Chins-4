@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "chins",
+    "slug": "chins",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "backgroundColor": "#021a16",
+    "android": {
+      "package": "app.chins.social",
+      "adaptiveIcon": {
+        "backgroundColor": "#054a43"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b90ccf39-af74-419b-871f-35fb072988a1"
+      }
+    }
+  }
+}
