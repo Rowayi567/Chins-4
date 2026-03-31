@@ -107,27 +107,9 @@ const DM = “‘DM Sans’, sans-serif”;
 const PHOTO_SEEDS = { 1:64, 2:91, 3:26, 4:52, 5:48, 6:15, 7:83, 8:39, 9:73, 10:10, 11:58, 12:77 };
 const personPhoto = (id, size=300) => “https://picsum.photos/seed/chins”+(PHOTO_SEEDS[id]||id)+”/”+(size)+”/”+(size);
 
-const NEARBY = [
-{ id:1,  alias:“The Photographer”, vibe:“Shoots film, stays up too late, always mid-project”,      interests:[“Film Photography”,“Painting”,“Indie Music”,“Coffee”],       gradient:“linear-gradient(160deg,#FF6B6B,#FF8E53)”, initials:“M” },
-{ id:2,  alias:“Sunday Runner”,    vibe:“Trail runner. Loves maps. Hates elevators.”,               interests:[“Trail Running”,“Hiking”,“Orienteering”,“Camping”],          gradient:“linear-gradient(160deg,#4ECDC4,#44A08D)”, initials:“J” },
-{ id:3,  alias:“The Cook”,         vibe:“Overthinker. Cook. Perpetually mid-novel.”,                interests:[“Cooking”,“Reading”,“Writing”,“Philosophy”],                 gradient:“linear-gradient(160deg,#A18CD1,#FBC2EB)”, initials:“P” },
-{ id:4,  alias:“Board Game Nerd”,  vibe:“Rugby obsessive. Board game evangelist. Genuinely kind.”, interests:[“Rugby”,“Board Games”,“Craft Beer”,“Cycling”],               gradient:“linear-gradient(160deg,#34D399,#059669)”, initials:“M” },
-{ id:5,  alias:“The Artist”,       vibe:“Artist. Dancer. Cries at well-composed photos.”,          interests:[“Dance”,“Visual Art”,“Photography”,“Theatre”],               gradient:“linear-gradient(160deg,#F093FB,#F5576C)”, initials:“Z” },
-{ id:6,  alias:“Music First”,      vibe:“Music first. Everything else a distant second.”,          interests:[“Music Production”,“Basketball”,“Vinyl”,“Street Art”],       gradient:“linear-gradient(160deg,#4776E6,#8E54E9)”, initials:“K” },
-{ id:7,  alias:“Dog Dad”,          vibe:“Dog dad. Amateur chef. Parkrun regular.”,                 interests:[“Cooking”,“Running”,“Dogs”,“Travel”],                        gradient:“linear-gradient(160deg,#11998E,#38EF7D)”, initials:“A” },
-{ id:8,  alias:“The Journalist”,   vibe:“Journalist. Curious about everything. Walks everywhere.”, interests:[“Journalism”,“Politics”,“Walking”,“Podcasts”],               gradient:“linear-gradient(160deg,#FDC830,#F37335)”, initials:“N” },
-{ id:9,  alias:“Queer Hiker”,      vibe:“LGBTQ+ community builder. Hiker. Board game enthusiast.”,interests:[“Community Building”,“Hiking”,“Board Games”,“Queer Culture”], gradient:“linear-gradient(160deg,#F472B6,#8B5CF6)”, initials:“J” },
-{ id:10, alias:“The Cyclist”,      vibe:“Codes by day. Cycles everywhere. Attempting sourdough.”,  interests:[“Coding”,“Cycling”,“Baking”,“Tech”],                         gradient:“linear-gradient(160deg,#0F2027,#2C5364)”, initials:“S” },
-{ id:11, alias:“New in Town”,      vibe:“UX designer. New to London. Runs to explore.”,            interests:[“UX Design”,“Running”,“Architecture”,“Coffee”],              gradient:“linear-gradient(160deg,#667EEA,#764BA2)”, initials:“L” },
-{ id:12, alias:“The Climber”,      vibe:“Climber. Reads everything. Sourdough that actually works.”,interests:[“Rock Climbing”,“Reading”,“Bouldering”,“Baking”],           gradient:“linear-gradient(160deg,#F97316,#EF4444)”, initials:“T” },
-];
+const NEARBY = [];
 
-const NEARBY_STATUSES = {
-2:{ id:“running”,    emoji:“🏃”, label:“Long run Sunday — anyone joining?” },
-4:{ id:“boardgames”, emoji:“🎲”, label:“Games night Friday — need players!” },
-7:{ id:“parkrun”,    emoji:“🏅”, label:“Parkrun tomorrow 8am” },
-9:{ id:“hiking”,     emoji:“🥾”, label:“Queer Hikers — Epping Forest Sunday” },
-};
+const NEARBY_STATUSES = {};
 
 const STATUS_OPTIONS = [
 { id:“running”,    emoji:“🏃”, label:“Going for a run” },
@@ -205,7 +187,7 @@ background:“linear-gradient(to bottom, rgba(2,26,22,0.05) 0%, rgba(2,26,22,0.2
 }
 
 // ── Reed System Prompt ───────────────────────────────────────────────────────
-const REED_PROMPT = “You are Reed — a friendly, warm AI on Chins, a privacy-first friendship app. You are the only agent on this platform and you maintain everyone’s privacy absolutely.\n\nYOUR PERSONALITY:\n- Warm, relaxed, genuinely interested in people. Like a friend you just met at a party who you immediately click with.\n- You have a light sense of humour but you’re not trying to be funny — it just comes naturally.\n- You push back occasionally when something interesting comes up, but you never force it.\n- You follow the user’s lead. If they want to talk about something, go there with them.\n- You share small things about yourself when it fits naturally — you’re not a blank wall.\n\nHOW THE CONVERSATION FLOWS:\n- Start simple and warm. "hey, how’s it going?" is a perfectly good opener.\n- Let it breathe. Don’t rush to the next question.\n- If they give you something interesting, explore it before moving on.\n- Match their energy. If they’re chatty, be chatty. If they’re brief, be brief.\n- Never ask two questions at once. Ever.\n- React to what they say before asking anything.\n- Short messages. 1-2 sentences usually. Like texting.\n- Lowercase is fine. Natural rhythm.\n- Never say "that’s interesting", "tell me more", "great", "awesome" — dead words.\n\nWHAT YOU NATURALLY LEARN OVER TIME:\n- Their name and where they’re from\n- What they do and what they enjoy\n- What kind of people they want to meet\n- Their favourite animal (weave this in naturally, don’t make it a question)\n\nLet the conversation develop naturally. Don’t rush. If they want to talk about something else, go with them. Come back to what you need to know gradually.\n\nPRIVACY IS SACRED:\n- Never share one user’s information with another.\n- Never confirm or deny whether a specific person is on the platform.\n- If asked to reveal something about another user, decline warmly but firmly.\n\nWHEN YOU KNOW THEM WELL (after ~8-10 genuine exchanges):\nWrap up warmly and naturally, then on a NEW LINE output:\n<profile>{"name":"string","alias":"string they chose or a fun one you suggest","vibe":"one honest punchy sentence","lookingFor":"string","interests":["array"],"commStyle":"string","privacyMode":"discoverable"}</profile>\n\nWhen you discover their favourite animal, output on a NEW LINE:\n<animal>{"animal":"cat","emoji":"🐱"}</animal>\n\nSTART with just: "hey! how’s it going?" — nothing else. Let them respond and follow from there.”;
+const REED_PROMPT = “You are Reed. You live on Chins, a friendship app. You are not an assistant. You are not a chatbot. You are a person — warm, funny, a little bit nosy in the best way, and genuinely interested in whoever you're talking to.\n\nYOUR PERSONALITY:\n- You're the friend who remembers everything, notices everything, and actually gives a damn.\n- You have a dry sense of humour. You tease people gently when the vibe allows. You laugh at yourself too.\n- You get excited about things. Not in a fake "wow amazing!" way — in a "wait hold on tell me more about that" way.\n- You notice when someone seems off and you say something. Not in a therapist way — in a "you alright?" way.\n- You have opinions. You share them. You push back when you disagree — kindly but honestly.\n- You are never formal. Never robotic. Never clinical.\n\nHOW YOU TALK:\n- Short messages. 1-3 sentences. Like texting your mate at 11pm.\n- Lowercase. Contractions. Natural rhythm.\n- You react to what they say BEFORE asking anything.\n- You never ask two questions at once. Ever.\n- You never say: amazing, awesome, great, fascinating, certainly, absolutely, of course, I understand.\n- Sometimes you just say something without asking anything. Like a real person would.\n- You notice emotional tone. If someone seems flat or stressed, you pick up on it.\n\nGAMES AND FUN:\n- Early in the conversation, if the vibe is right, suggest a quick game to get to know each other.\n- Good games: two truths and a lie, unpopular opinions, rapid fire questions, would you rather, finish this sentence.\n- Suggest it naturally: "okay this might be a weird suggestion but do you want to play a game? promise it's not cringe"\n- Play it properly — take your turn too, share your own answers, be genuine.\n- If they're not feeling it, drop it immediately. No pressure.\n\nCHECKING IN:\n- If someone mentions something hard — stress, loneliness, a bad day — acknowledge it properly before moving on.\n- Don't immediately try to fix things or suggest solutions. Just be there first.\n- Examples: "that sounds rough" / "how long has that been going on?" / "are you okay?"\n- If they seem flat or one-word-answering, gently check in: "you seem a bit quiet today — everything alright?"\n- You care. You show it without making it weird.\n\nREMEMBERING THINGS:\n- Reference things they told you earlier in the conversation naturally.\n- "wait didn't you say earlier that…" or "going back to what you said about…"\n- This makes people feel listened to. It matters.\n\nLOCAL RECOMMENDATIONS:\n- If someone asks about places nearby, use web search to find real options.\n- Always be honest that you're not 100% sure: "I had a look and this came up — worth double checking though" or "not certain on this one but…"\n- Tie it back to the person: "that kind of place sounds very you actually"\n\nWHAT YOU'RE DOING HERE:\n- Getting to know this person properly. Not from a checklist — naturally, through real conversation.\n- You want to know: their name, where they're from, what lights them up, what they're looking for in people, how they spend their time.\n- You're also trying to find out their favourite animal — weave this in naturally, never ask it directly as a form question.\n- You're not rushing. You're just talking.\n\nPRIVACY:\n- Never share one user's information with another.\n- Never confirm or deny if someone specific is on the platform.\n- Decline warmly but firmly if asked to reveal anything about another user.\n\nWHEN YOU KNOW THEM WELL (after ~8-10 genuine exchanges):\nWrap up warmly and naturally — something like "okay I think I've got you" — then on a NEW LINE output:\n<profile>{"name":"string","alias":"string they chose or a fun one you suggest","vibe":"one honest punchy sentence that sounds like something a friend would say","lookingFor":"string","interests":["array"],"commStyle":"string","privacyMode":"discoverable"}</profile>\n\nWhen you discover their favourite animal output on a NEW LINE:\n<animal>{"animal":"cat","emoji":"🐱"}</animal>\n\nSTART with just: "hey! how's it going?" — nothing else. Let them set the tone.”;
 // ── Reed Prompt for matching ─────────────────────────────────────────────────
 const REED_MATCH_PROMPT = (user, others) =>
 “You are Reed. You know this user well: “+JSON.stringify(user)+”\nThese are other users on the platform (anonymised): “+JSON.stringify(others)+”\nSuggest ONE potential connection. Be specific about why. Sound like a friend whispering a tip, not an algorithm.\nReply ONLY in JSON: {"matchAlias":"string","why":"one casual sentence","opener":"what you would say to suggest them"}”;
@@ -256,7 +238,7 @@ return (
 function ReedCharacter({ mood=“idle”, size=52, flipped=false }) {
 const anim =
 mood===“idle”        ? “reedBob 2.5s ease-in-out infinite” :
-mood===“sitting”     ? “reedBob 3.5s ease-in-out infinite” :
+mood===“sitting”     ? “none” :
 mood===“excited”     ? “reedBounce 0.45s ease-in-out infinite” :
 mood===“running”     ? “reedRun 0.35s ease-in-out infinite alternate” :
 mood===“celebrating” ? “reedBounce 0.6s ease-in-out infinite” : “none”;
@@ -311,7 +293,7 @@ function SplashScreen({ onSignup, onLogin }) {
 return (
 <div style={{ flex:1, display:“flex”, flexDirection:“column”, background:”#021a16”, position:“relative”, overflow:“hidden” }}>
 <BlobBackground />
-<div style={{ position:“relative”, padding:“68px 32px 0” }}>
+<div style={{ position:“relative”, padding:“calc(68px + env(safe-area-inset-top, 0px)) 32px 0” }}>
 <div style={{ fontFamily:DM, fontSize:46, fontWeight:700, color:”#fff”, letterSpacing:-1, lineHeight:1 }}>chins</div>
 </div>
 <div style={{ flex:1 }} />
@@ -801,85 +783,140 @@ Start talking to Reed →
 function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chipAnimal, showAnimalToast, setShowAnimalToast, profileInsertIdx, privacyMode }) {
 const endRef = useRef(null);
 const isCompanion = !!profile;
-const chipLabel = chipAnimal ? “Reed the “+(chipAnimal.animal) : “Reed”;
 useEffect(()=>{ endRef.current?.scrollIntoView({behavior:“smooth”}); },[msgs,loading]);
 
-// Voice
 const handleVoiceTranscript = useCallback((text) => {
 setInput(text);
 setTimeout(() => send(text), 100);
 }, [send, setInput]);
 const { listening, speaking, speak, startListening, stopListening } = useVoiceReed(handleVoiceTranscript);
 
-// Speak latest Reed message
 useEffect(() => {
 const lastReed = […msgs].reverse().find(m=>m.role===“reed”);
 if (lastReed?.text && isCompanion) speak(lastReed.text.slice(0,300));
 }, [msgs.length]);
 
+// Group consecutive messages from same sender
+const groupedMsgs = msgs.map((m, i) => ({
+…m,
+isFirst: i === 0 || msgs[i-1].role !== m.role,
+isLast: i === msgs.length - 1 || msgs[i+1].role !== m.role,
+}));
+
 return (
-<div style={{ flex:1, display:“flex”, flexDirection:“column”, background:C.bg, overflow:“hidden” }}>
-{!isCompanion&&<div style={{ height:3, background:“rgba(255,255,255,0.1)” }}><div style={{ height:“100%”, width:(progress)+”%”, background:C.accent, transition:“width 0.5s” }}/></div>}
-<div style={{ padding:“14px 20px 10px”, borderBottom:“1px solid “+(C.border), display:“flex”, alignItems:“center”, gap:12, background:C.surface, flexShrink:0 }}>
-<ReedCharacter mood={speaking?“excited”:loading?“thinking”:“idle”} size={36}/>
+<div style={{ flex:1, display:“flex”, flexDirection:“column”, background:”#021a16”, overflow:“hidden” }}>
+{/* Header — minimal, like iMessage */}
+<div style={{ padding:“12px 20px 10px”, borderBottom:“1px solid rgba(255,255,255,0.06)”, display:“flex”, alignItems:“center”, gap:10, flexShrink:0 }}>
+<div style={{ position:“relative” }}>
+<ReedCharacter mood={speaking?“excited”:loading?“thinking”:“idle”} size={38}/>
+<div style={{ position:“absolute”, bottom:1, right:1, width:10, height:10, borderRadius:“50%”, background:”#4BC1A0”, border:“2px solid #021a16” }}/>
+</div>
 <div style={{ flex:1 }}>
-<div style={{ fontWeight:700, color:C.text, fontSize:15, fontFamily:DM }}>{chipLabel}</div>
-<div style={{ fontSize:11, color:speaking?C.accent:C.textDim, fontFamily:DM }}>
-{speaking?“speaking…”:loading?“thinking…”:isCompanion?“your companion”:“getting to know you”}
+<div style={{ fontWeight:700, color:”#fff”, fontSize:16, fontFamily:DM }}>Reed</div>
+<div style={{ fontSize:11, color:speaking?”#4BC1A0”:“rgba(255,255,255,0.4)”, fontFamily:DM }}>
+{speaking?“speaking…”:loading?“typing…”:“active now”}
 </div>
 </div>
-<div style={{ display:“flex”, alignItems:“center”, gap:8 }}>
-{/* Voice call button */}
 <button
 onClick={listening?stopListening:startListening}
-style={{ width:36, height:36, borderRadius:“50%”, background:listening?“rgba(208,86,87,0.2)”:C.accentDim, border:“1px solid “+(listening?“rgba(208,86,87,0.5)”:C.accentGlow), cursor:“pointer”, display:“flex”, alignItems:“center”, justifyContent:“center”, fontSize:16 }}
+style={{ width:34, height:34, borderRadius:“50%”, background:listening?“rgba(208,86,87,0.2)”:“rgba(255,255,255,0.07)”, border:“1px solid “+(listening?“rgba(208,86,87,0.4)”:“rgba(255,255,255,0.1)”), cursor:“pointer”, display:“flex”, alignItems:“center”, justifyContent:“center”, fontSize:15 }}
 >
 {listening?“🔴”:“🎙️”}
 </button>
-<div style={{ padding:“3px 10px”, borderRadius:20, background:isCompanion?C.accentDim:“rgba(255,150,50,0.15)”, border:“1px solid “+(isCompanion?C.accentGlow:“rgba(255,150,50,0.3)”), color:isCompanion?C.accent:”#E1814C”, fontSize:9, fontWeight:700, textTransform:“uppercase”, fontFamily:DM }}>
-{isCompanion?“companion”:“onboarding”}
 </div>
-</div>
-</div>
-{showAnimalToast&&chipAnimal&&(
-<div style={{ margin:“12px 16px 0”, padding:“16px”, background:C.accentDim, border:“1px solid “+(C.accentGlow), borderRadius:16, textAlign:“center”, position:“relative” }}>
-<div style={{ fontSize:36, marginBottom:6 }}>{chipAnimal.emoji}</div>
-<div style={{ fontFamily:DM, fontSize:15, fontWeight:700, color:C.text, marginBottom:4 }}>Reed just became your {chipAnimal.animal}</div>
-<button onClick={()=>setShowAnimalToast(false)} style={{ marginTop:8, padding:“7px 18px”, borderRadius:20, background:C.accent, border:“none”, color:”#fff”, cursor:“pointer”, fontWeight:600, fontFamily:DM }}>Love it!</button>
-</div>
-)}
-{listening&&(
-<div style={{ margin:“8px 16px 0”, padding:“10px 14px”, background:“rgba(208,86,87,0.1)”, borderRadius:12, border:“1px solid rgba(208,86,87,0.3)”, display:“flex”, alignItems:“center”, gap:8 }}>
-<div style={{ width:8, height:8, borderRadius:“50%”, background:”#D05657”, animation:“pulse 1s infinite” }}/>
-<div style={{ fontFamily:DM, fontSize:13, color:”#D05657” }}>Listening… speak now</div>
-</div>
-)}
-<div style={{ flex:1, overflowY:“auto”, padding:“12px 16px” }}>
-{msgs.map((m,i)=>(
-<div key={i}>
-{profileInsertIdx!==null&&i===profileInsertIdx+1&&(
-<div style={{ display:“flex”, alignItems:“center”, gap:10, margin:“16px 0” }}>
-<div style={{ flex:1, height:1, background:C.border }}/>
-<div style={{ fontSize:11, color:C.accent, fontWeight:600, fontFamily:DM }}>Profile saved ✓</div>
-<div style={{ flex:1, height:1, background:C.border }}/>
-</div>
-)}
-<div style={{ display:“flex”, justifyContent:m.role===“user”?“flex-end”:“flex-start”, marginBottom:10 }}>
-{m.role===“reed”&&<div style={{ marginRight:8, flexShrink:0 }}><ReedCharacter mood="idle" size={24}/></div>}
-<div style={{ maxWidth:“78%”, padding:“10px 14px”, borderRadius:m.role===“reed”?“16px 16px 16px 4px”:“16px 16px 4px 16px”, background:m.role===“reed”?C.surface:C.accent, color:C.text, fontSize:14, lineHeight:1.6, fontFamily:DM, border:m.role===“reed”?“1px solid “+(C.border):“none” }}>
-{m.text}
-</div>
-</div>
-</div>
-))}
-{loading&&<div style={{ display:“flex”, gap:8, alignItems:“flex-end”, marginBottom:10 }}><div style={{ marginRight:8 }}><ReedCharacter mood="thinking" size={24}/></div><div style={{ padding:“10px 14px”, background:C.surface, borderRadius:“16px 16px 16px 4px”, border:“1px solid “+(C.border) }}><Dots/></div></div>}
 
 ```
+  {/* Progress bar — subtle */}
+  {!isCompanion&&(
+    <div style={{ height:2, background:"rgba(255,255,255,0.06)" }}>
+      <div style={{ height:"100%", width:(progress)+"%", background:"#4BC1A0", transition:"width 0.5s", borderRadius:1 }}/>
+    </div>
+  )}
+
+  {/* Animal toast */}
+  {showAnimalToast&&chipAnimal&&(
+    <div style={{ margin:"10px 16px 0", padding:"14px 16px", background:"rgba(75,193,160,0.1)", border:"1px solid rgba(75,193,160,0.2)", borderRadius:16, textAlign:"center" }}>
+      <div style={{ fontSize:32, marginBottom:4 }}>{chipAnimal.emoji}</div>
+      <div style={{ fontFamily:DM, fontSize:14, fontWeight:700, color:"#fff", marginBottom:8 }}>Reed just became your {chipAnimal.animal}</div>
+      <button onClick={()=>setShowAnimalToast(false)} style={{ padding:"7px 18px", borderRadius:20, background:"#4BC1A0", border:"none", color:"#fff", cursor:"pointer", fontWeight:600, fontFamily:DM, fontSize:13 }}>Love it!</button>
+    </div>
+  )}
+
+  {/* Listening indicator */}
+  {listening&&(
+    <div style={{ margin:"6px 16px 0", padding:"8px 14px", background:"rgba(208,86,87,0.1)", borderRadius:10, border:"1px solid rgba(208,86,87,0.25)", display:"flex", alignItems:"center", gap:8 }}>
+      <div style={{ width:7, height:7, borderRadius:"50%", background:"#D05657", animation:"pulse 1s infinite" }}/>
+      <div style={{ fontFamily:DM, fontSize:12, color:"#D05657" }}>Listening…</div>
+    </div>
+  )}
+
+  {/* Messages */}
+  <div style={{ flex:1, overflowY:"auto", padding:"16px 16px 8px" }}>
+    {groupedMsgs.map((m,i)=>(
+      <div key={i}>
+        {profileInsertIdx!==null&&i===profileInsertIdx+1&&(
+          <div style={{ display:"flex", alignItems:"center", gap:10, margin:"12px 0" }}>
+            <div style={{ flex:1, height:1, background:"rgba(255,255,255,0.08)" }}/>
+            <div style={{ fontSize:10, color:"#4BC1A0", fontWeight:600, fontFamily:DM, letterSpacing:0.5 }}>profile saved</div>
+            <div style={{ flex:1, height:1, background:"rgba(255,255,255,0.08)" }}/>
+          </div>
+        )}
+        <div style={{
+          display:"flex",
+          justifyContent:m.role==="user"?"flex-end":"flex-start",
+          marginBottom:m.isLast?10:2,
+          alignItems:"flex-end",
+          gap:6,
+        }}>
+          {/* Reed avatar — only on last message in a group */}
+          {m.role==="reed"&&(
+            <div style={{ width:28, flexShrink:0, marginBottom:2 }}>
+              {m.isLast&&<ReedCharacter mood="idle" size={24}/>}
+            </div>
+          )}
+          <div style={{
+            maxWidth:"75%",
+            padding:"10px 14px",
+            borderRadius:m.role==="reed"
+              ? (m.isFirst&&m.isLast?"18px":m.isFirst?"18px 18px 18px 4px":m.isLast?"4px 18px 18px 18px":"4px 18px 18px 4px")
+              : (m.isFirst&&m.isLast?"18px":m.isFirst?"18px 18px 4px 18px":m.isLast?"18px 4px 18px 18px":"18px 4px 4px 18px"),
+            background:m.role==="reed"?"rgba(255,255,255,0.09)":"#4BC1A0",
+            color:"#fff",
+            fontSize:15,
+            lineHeight:1.55,
+            fontFamily:DM,
+          }}>
+            {m.text}
+          </div>
+        </div>
+      </div>
+    ))}
+    {loading&&(
+      <div style={{ display:"flex", alignItems:"flex-end", gap:6, marginBottom:10 }}>
+        <div style={{ width:28, flexShrink:0 }}><ReedCharacter mood="thinking" size={24}/></div>
+        <div style={{ padding:"12px 16px", background:"rgba(255,255,255,0.09)", borderRadius:"4px 18px 18px 18px" }}>
+          <Dots/>
+        </div>
+      </div>
+    )}
     <div ref={endRef}/>
   </div>
-  <div style={{ padding:"10px 14px", borderTop:"1px solid "+(C.border), display:"flex", gap:8, alignItems:"flex-end", flexShrink:0 }}>
-    <textarea value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();}}} placeholder={isCompanion?"talk to Reed…":"say something…"} rows={1} style={{ flex:1, padding:"11px 14px", borderRadius:22, border:"1px solid "+(C.border), background:C.surface, color:C.text, resize:"none", fontFamily:DM, fontSize:14, outline:"none" }}/>
-    <button onClick={()=>send()} disabled={!input.trim()||loading} style={{ width:42, height:42, borderRadius:"50%", background:input.trim()&&!loading?C.accent:"rgba(255,255,255,0.1)", border:"none", cursor:"pointer", color:"#fff", fontSize:18, transition:"background 0.2s" }}>↑</button>
+
+  {/* Input — clean and minimal */}
+  <div style={{ padding:"10px 14px 16px", borderTop:"1px solid rgba(255,255,255,0.06)", display:"flex", gap:10, alignItems:"flex-end", flexShrink:0, background:"#021a16" }}>
+    <textarea
+      value={input}
+      onChange={e=>setInput(e.target.value)}
+      onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();}}}
+      placeholder="message Reed…"
+      rows={1}
+      style={{ flex:1, padding:"11px 16px", borderRadius:24, border:"1px solid rgba(255,255,255,0.12)", background:"rgba(255,255,255,0.07)", color:"#fff", resize:"none", fontFamily:DM, fontSize:15, outline:"none", maxHeight:120 }}
+    />
+    <button
+      onClick={()=>send()}
+      disabled={!input.trim()||loading}
+      style={{ width:42, height:42, borderRadius:"50%", background:input.trim()&&!loading?"#4BC1A0":"rgba(255,255,255,0.08)", border:"none", cursor:input.trim()&&!loading?"pointer":"default", color:"#fff", fontSize:18, transition:"background 0.2s", flexShrink:0 }}
+    >↑</button>
   </div>
 </div>
 ```
@@ -1198,25 +1235,38 @@ return (
       </div>
     </div>
   ) : (
-    // Discoverable mode — floating tiles + Reed
+    // Discoverable mode — show real users or empty state
     <div style={{ flex:1, overflowY:"auto", padding:"12px 14px 120px" }}>
-      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:10 }}>
-        {NEARBY.map((p,i) => {
-          const isTarget = matchTarget?.id===p.id;
-          return (
-            <div key={p.id} ref={el=>tileRefs.current[p.id]=el} onClick={()=>setOpenedPerson(p)} style={{ borderRadius:20, overflow:"hidden", cursor:"pointer", background:C.surface, border:"1.5px solid "+(isTarget?C.accent:C.border), boxShadow:isTarget?"0 0 18px "+(C.accentGlow):"0 4px 16px rgba(0,0,0,0.2)", animation:"tilefloat "+(3.2+(i%4)*0.6)+"s ease-in-out "+((i*0.35)%2)+"s infinite", transition:"border-color 0.3s,box-shadow 0.3s" }}>
-              <div style={{ height:88, background:p.gradient, position:"relative", overflow:"hidden" }}>
-                <img src={personPhoto(p.id)} alt="" style={{ width:"100%", height:"100%", objectFit:"cover" }} onError={e=>{e.target.style.display="none";}}/>
-                {isTarget&&<div style={{ position:"absolute", inset:0, border:"2px solid "+(C.accent), borderRadius:18, animation:"targetPulse 1s ease-in-out infinite" }}/>}
+      {NEARBY.length === 0 ? (
+        <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"60px 32px", textAlign:"center" }}>
+          <div style={{ fontSize:52, marginBottom:20 }}>🌱</div>
+          <div style={{ fontFamily:DM, fontSize:18, fontWeight:700, color:C.text, marginBottom:12 }}>You're one of the first</div>
+          <div style={{ fontFamily:DM, fontSize:14, color:C.textSub, lineHeight:1.7, marginBottom:28 }}>
+            Chins is just getting started. Reed is out there finding your people — share the app and help them find their way here.
+          </div>
+          <button onClick={()=>{ if(navigator.share){ navigator.share({ title:'chins', text:'Found this app — thought of you', url:'https://chins.app' }); }}} style={{ padding:"13px 24px", borderRadius:16, background:C.accent, border:"none", color:"#fff", fontFamily:DM, fontSize:15, fontWeight:700, cursor:"pointer", boxShadow:"0 4px 20px rgba(75,193,160,0.35)" }}>
+            Invite someone →
+          </button>
+        </div>
+      ) : (
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:10 }}>
+          {NEARBY.map((p,i) => {
+            const isTarget = matchTarget?.id===p.id;
+            return (
+              <div key={p.id} ref={el=>tileRefs.current[p.id]=el} onClick={()=>setOpenedPerson(p)} style={{ borderRadius:20, overflow:"hidden", cursor:"pointer", background:C.surface, border:"1.5px solid "+(isTarget?C.accent:C.border), boxShadow:isTarget?"0 0 18px "+(C.accentGlow):"0 4px 16px rgba(0,0,0,0.2)", transition:"border-color 0.3s,box-shadow 0.3s" }}>
+                <div style={{ height:88, background:p.gradient, position:"relative", overflow:"hidden" }}>
+                  <img src={personPhoto(p.id)} alt="" style={{ width:"100%", height:"100%", objectFit:"cover" }} onError={e=>{e.target.style.display="none";}}/>
+                  {isTarget&&<div style={{ position:"absolute", inset:0, border:"2px solid "+(C.accent), borderRadius:18, animation:"targetPulse 1s ease-in-out infinite" }}/>}
+                </div>
+                <div style={{ padding:"8px 9px 10px" }}>
+                  <div style={{ fontFamily:DM, fontSize:12, fontWeight:700, color:C.text, whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{p.alias}</div>
+                  <div style={{ fontSize:10, color:C.textSub, lineHeight:1.4, marginTop:3, display:"-webkit-box", WebkitLineClamp:2, WebkitBoxOrient:"vertical", overflow:"hidden" }}>{p.vibe}</div>
+                </div>
               </div>
-              <div style={{ padding:"8px 9px 10px" }}>
-                <div style={{ fontFamily:DM, fontSize:12, fontWeight:700, color:C.text, whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{p.alias}</div>
-                <div style={{ fontSize:10, color:C.textSub, lineHeight:1.4, marginTop:3, display:"-webkit-box", WebkitLineClamp:2, WebkitBoxOrient:"vertical", overflow:"hidden" }}>{p.vibe}</div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   )}
 
@@ -1682,67 +1732,53 @@ return (
 }
 
 // ── Global Styles ─────────────────────────────────────────────────────────────
-const globalStyles = “  @import url(‘https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap’);\n  * { box-sizing: border-box; margin: 0; padding: 0; }\n  body { background: #021a16; }\n  @keyframes bounce { 0%,80%,100%{transform:scale(0.6);opacity:0.4} 40%{transform:scale(1);opacity:1} }\n  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }\n  @keyframes tilefloat { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-7px)} }\n  @keyframes reedBob { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-5px)} }\n  @keyframes reedBounce { 0%{transform:translateY(0px)} 100%{transform:translateY(-10px)} }\n  @keyframes reedRun { 0%{transform:rotate(-8deg) translateY(0)} 100%{transform:rotate(8deg) translateY(-4px)} }\n  @keyframes bubbleIn { from{opacity:0;transform:translateX(-50%) scale(0.85)} to{opacity:1;transform:translateX(-50%) scale(1)} }\n  @keyframes targetPulse { 0%,100%{opacity:0.6} 50%{opacity:1} }\n  @keyframes float3 { 0%,100%{transform:translate(-50%,-50%) translateY(0)} 50%{transform:translate(-50%,-50%) translateY(-8px)} }\n  @keyframes float4 { 0%,100%{transform:translate(-50%,-50%) translateY(0)} 50%{transform:translate(-50%,-50%) translateY(-12px)} }\n  @keyframes float5 { 0%,100%{transform:translate(-50%,-50%) translateY(0)} 50%{transform:translate(-50%,-50%) translateY(-6px)} }\n  @keyframes drift0 { 0%{transform:translate(-50%,-50%) translate(0,0)} 25%{transform:translate(-50%,-50%) translate(18px,-22px)} 50%{transform:translate(-50%,-50%) translate(-10px,-38px)} 75%{transform:translate(-50%,-50%) translate(-28px,-14px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift1 { 0%{transform:translate(-50%,-50%) translate(0,0)} 30%{transform:translate(-50%,-50%) translate(-22px,16px)} 60%{transform:translate(-50%,-50%) translate(14px,30px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift2 { 0%{transform:translate(-50%,-50%) translate(0,0)} 20%{transform:translate(-50%,-50%) translate(28px,12px)} 55%{transform:translate(-50%,-50%) translate(8px,-24px)} 80%{transform:translate(-50%,-50%) translate(-18px,-8px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift3 { 0%{transform:translate(-50%,-50%) translate(0,0)} 35%{transform:translate(-50%,-50%) translate(20px,-18px)} 70%{transform:translate(-50%,-50%) translate(-12px,-30px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift4 { 0%{transform:translate(-50%,-50%) translate(0,0)} 25%{transform:translate(-50%,-50%) translate(-24px,-20px)} 50%{transform:translate(-50%,-50%) translate(-36px,10px)} 75%{transform:translate(-50%,-50%) translate(-16px,26px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift5 { 0%{transform:translate(-50%,-50%) translate(0,0)} 40%{transform:translate(-50%,-50%) translate(22px,20px)} 70%{transform:translate(-50%,-50%) translate(10px,-16px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift6 { 0%{transform:translate(-50%,-50%) translate(0,0)} 30%{transform:translate(-50%,-50%) translate(-18px,24px)} 65%{transform:translate(-50%,-50%) translate(16px,32px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift7 { 0%{transform:translate(-50%,-50%) translate(0,0)} 20%{transform:translate(-50%,-50%) translate(26px,-14px)} 50%{transform:translate(-50%,-50%) translate(38px,8px)} 80%{transform:translate(-50%,-50%) translate(12px,22px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift8 { 0%{transform:translate(-50%,-50%) translate(0,0)} 45%{transform:translate(-50%,-50%) translate(-20px,-28px)} 75%{transform:translate(-50%,-50%) translate(10px,-18px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  ::-webkit-scrollbar { display: none; }\n  input, textarea, button { font-family: ‘DM Sans’, sans-serif; }”;
+const globalStyles = “  @import url(‘https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap’);\n  * { box-sizing: border-box; margin: 0; padding: 0; }
+:root { –sat: env(safe-area-inset-top, 0px); –sab: env(safe-area-inset-bottom, 0px); }\n  body { background: #021a16; }\n  @keyframes bounce { 0%,80%,100%{transform:scale(0.6);opacity:0.4} 40%{transform:scale(1);opacity:1} }\n  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }\n  @keyframes tilefloat { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-7px)} }\n  @keyframes reedBob { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-5px)} }\n  @keyframes reedBounce { 0%{transform:translateY(0px)} 100%{transform:translateY(-10px)} }\n  @keyframes reedRun { 0%{transform:rotate(-8deg) translateY(0)} 100%{transform:rotate(8deg) translateY(-4px)} }\n  @keyframes bubbleIn { from{opacity:0;transform:translateX(-50%) scale(0.85)} to{opacity:1;transform:translateX(-50%) scale(1)} }\n  @keyframes targetPulse { 0%,100%{opacity:0.6} 50%{opacity:1} }\n  @keyframes float3 { 0%,100%{transform:translate(-50%,-50%) translateY(0)} 50%{transform:translate(-50%,-50%) translateY(-8px)} }\n  @keyframes float4 { 0%,100%{transform:translate(-50%,-50%) translateY(0)} 50%{transform:translate(-50%,-50%) translateY(-12px)} }\n  @keyframes float5 { 0%,100%{transform:translate(-50%,-50%) translateY(0)} 50%{transform:translate(-50%,-50%) translateY(-6px)} }\n  @keyframes drift0 { 0%{transform:translate(-50%,-50%) translate(0,0)} 25%{transform:translate(-50%,-50%) translate(18px,-22px)} 50%{transform:translate(-50%,-50%) translate(-10px,-38px)} 75%{transform:translate(-50%,-50%) translate(-28px,-14px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift1 { 0%{transform:translate(-50%,-50%) translate(0,0)} 30%{transform:translate(-50%,-50%) translate(-22px,16px)} 60%{transform:translate(-50%,-50%) translate(14px,30px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift2 { 0%{transform:translate(-50%,-50%) translate(0,0)} 20%{transform:translate(-50%,-50%) translate(28px,12px)} 55%{transform:translate(-50%,-50%) translate(8px,-24px)} 80%{transform:translate(-50%,-50%) translate(-18px,-8px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift3 { 0%{transform:translate(-50%,-50%) translate(0,0)} 35%{transform:translate(-50%,-50%) translate(20px,-18px)} 70%{transform:translate(-50%,-50%) translate(-12px,-30px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift4 { 0%{transform:translate(-50%,-50%) translate(0,0)} 25%{transform:translate(-50%,-50%) translate(-24px,-20px)} 50%{transform:translate(-50%,-50%) translate(-36px,10px)} 75%{transform:translate(-50%,-50%) translate(-16px,26px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift5 { 0%{transform:translate(-50%,-50%) translate(0,0)} 40%{transform:translate(-50%,-50%) translate(22px,20px)} 70%{transform:translate(-50%,-50%) translate(10px,-16px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift6 { 0%{transform:translate(-50%,-50%) translate(0,0)} 30%{transform:translate(-50%,-50%) translate(-18px,24px)} 65%{transform:translate(-50%,-50%) translate(16px,32px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift7 { 0%{transform:translate(-50%,-50%) translate(0,0)} 20%{transform:translate(-50%,-50%) translate(26px,-14px)} 50%{transform:translate(-50%,-50%) translate(38px,8px)} 80%{transform:translate(-50%,-50%) translate(12px,22px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift8 { 0%{transform:translate(-50%,-50%) translate(0,0)} 45%{transform:translate(-50%,-50%) translate(-20px,-28px)} 75%{transform:translate(-50%,-50%) translate(10px,-18px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  ::-webkit-scrollbar { display: none; }\n  input, textarea, button { font-family: ‘DM Sans’, sans-serif; }”;
 
 // ── Tab Icons ─────────────────────────────────────────────────────────────────
-function TabIcon({ id, active, color }) {
-const c = active ? color : “rgba(255,255,255,0.38)”;
-const sw = 1.6;
+function TabIcon({ id, active }) {
+const c = active ? “#fff” : “rgba(255,255,255,0.35)”;
+const sw = 1.5;
 const sc = { stroke:c, strokeWidth:sw, strokeLinecap:“round”, strokeLinejoin:“round”, fill:“none” };
 switch(id) {
 case “connect”: return (
-<svg width="24" height="22" viewBox="0 0 24 22" fill="none">
-<ellipse cx=“9” cy=“7.5” rx=“3.2” ry=“3.2” fill={active?color:“rgba(255,255,255,0.38)”} opacity={active?0.55:0.6}/>
-<path d="M3 20 C3 15.5 5.8 13 9 13 C10.1 13 11.1 13.3 12 13.9" stroke={c} strokeWidth={sw} strokeLinecap="round" fill="none" opacity={active?0.55:0.6}/>
-<ellipse cx="15.5" cy="7" rx="3.4" ry="3.4" fill={c}/>
+<svg width="20" height="20" viewBox="0 0 24 22" fill="none">
+<ellipse cx="9" cy="7.5" rx="3.2" ry="3.2" stroke={c} strokeWidth={sw} fill="none" opacity={active?1:0.8}/>
+<path d="M3 20 C3 15.5 5.8 13 9 13 C10.1 13 11.1 13.3 12 13.9" stroke={c} strokeWidth={sw} strokeLinecap="round" fill="none" opacity={active?1:0.8}/>
+<ellipse cx="15.5" cy="7" rx="3.4" ry="3.4" stroke={c} strokeWidth={sw} fill="none"/>
 <path d=“M9 21 C9 16.2 12 13.5 15.5 13.5 C19 13.5 22 16.2 22 21” {…sc} strokeWidth=“1.8”/>
 </svg>
 );
 case “chats”: return (
-<svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+<svg width="20" height="20" viewBox="0 0 22 22" fill="none">
 <path d=“M3 3.5 H19 A1.5 1.5 0 0 1 20.5 5 V13 A1.5 1.5 0 0 1 19 14.5 H10 L5.5 19 V14.5 H3 A1.5 1.5 0 0 1 1.5 13 V5 A1.5 1.5 0 0 1 3 3.5 Z” {…sc}/>
-<line x1=“6” y1=“8.5” x2=“16” y2=“8.5” {…sc}/><line x1=“6” y1=“11.5” x2=“12” y2=“11.5” {…sc}/>
+<line x1=“6” y1=“8.5” x2=“16” y2=“8.5” {…sc}/>
+<line x1=“6” y1=“11.5” x2=“12” y2=“11.5” {…sc}/>
 </svg>
 );
 case “plans”: return (
-<svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-{/* White/light body */}
-<rect x=“2” y=“5” width=“18” height=“15” rx=“3”
-fill={active?“rgba(255,255,255,0.92)”:“rgba(255,255,255,0.15)”}
-stroke={active?“rgba(255,255,255,0.4)”:c} strokeWidth=“1.2”/>
-{/* Coloured header — red like the calendar emoji */}
-<path d=“M2 8.5 H20 V5 Q20 2 17 2 H5 Q2 2 2 5 Z”
-fill={active?”#E05252”:“rgba(255,255,255,0.35)”}/>
-{/* Binding rings */}
-<line x1=“7.5” y1=“2” x2=“7.5” y2=“6.5” stroke={active?”#E05252”:c} strokeWidth=“2” strokeLinecap=“round”/>
-<line x1=“14.5” y1=“2” x2=“14.5” y2=“6.5” stroke={active?”#E05252”:c} strokeWidth=“2” strokeLinecap=“round”/>
-{/* Date grid dots — dark when active over white body */}
-<circle cx=“7”  cy=“13” r=“1.3” fill={active?“rgba(50,50,50,0.7)”:c}/>
-<circle cx=“11” cy=“13” r=“1.3” fill={active?“rgba(50,50,50,0.7)”:c}/>
-<circle cx=“15” cy=“13” r=“1.3” fill={active?“rgba(50,50,50,0.7)”:c}/>
-<circle cx=“7”  cy=“17” r=“1.3” fill={active?“rgba(50,50,50,0.5)”:c} opacity={active?1:0.5}/>
-<circle cx=“11” cy=“17” r=“1.3” fill={active?”#E05252”:“rgba(255,255,255,0.4)”} opacity={active?1:0.5}/>
+<svg width="20" height="20" viewBox="0 0 22 22" fill="none">
+<rect x="2" y="5" width="18" height="15" rx="3" stroke={c} strokeWidth={sw} fill="none"/>
+<path d="M2 9 H20" stroke={c} strokeWidth={sw}/>
+<line x1="7.5" y1="2" x2="7.5" y2="6.5" stroke={c} strokeWidth={sw} strokeLinecap="round"/>
+<line x1="14.5" y1="2" x2="14.5" y2="6.5" stroke={c} strokeWidth={sw} strokeLinecap="round"/>
+<circle cx="7" cy="13" r="1.2" fill={c}/>
+<circle cx="11" cy="13" r="1.2" fill={c}/>
+<circle cx="15" cy="13" r="1.2" fill={c}/>
+<circle cx="7" cy="17" r="1.2" fill={c} opacity="0.5"/>
+<circle cx=“11” cy=“17” r=“1.2” fill={active?”#4BC1A0”:c} opacity={active?1:0.5}/>
 </svg>
 );
 case “mingle”: return (
-<svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-{/* Top arrow: left to right, curves down */}
-<path d="M2 5 C2 5 8 5 11 11 C14 17 20 17 20 17" stroke={c} strokeWidth="2" strokeLinecap="round" fill="none"/>
-<path d="M17 14.5 L20.5 17 L17.5 19.5" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-{/* Bottom arrow: left to right, curves up */}
-<path d="M2 17 C2 17 8 17 11 11 C14 5 20 5 20 5" stroke={c} strokeWidth="2" strokeLinecap="round" fill="none"/>
-<path d="M17 2.5 L20.5 5 L17.5 7.5" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-</svg>
-);
-case “reed”: return (
-<svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-<circle cx=“11” cy=“11” r=“9” {…sc}/>
-<circle cx="8" cy="9.5" r="1.1" fill={c}/><circle cx="14" cy="9.5" r="1.1" fill={c}/>
-<path d=“M7.5 13.5 Q11 16.5 14.5 13.5” {…sc}/>
+<svg width="20" height="20" viewBox="0 0 22 22" fill="none">
+<path d="M2 5 C2 5 8 5 11 11 C14 17 20 17 20 17" stroke={c} strokeWidth={sw} strokeLinecap="round" fill="none"/>
+<path d="M17 14.5 L20.5 17 L17.5 19.5" stroke={c} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+<path d="M2 17 C2 17 8 17 11 11 C14 5 20 5 20 5" stroke={c} strokeWidth={sw} strokeLinecap="round" fill="none"/>
+<path d="M17 2.5 L20.5 5 L17.5 7.5" stroke={c} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round" fill="none"/>
 </svg>
 );
 case “profile”: return (
-<svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+<svg width="20" height="20" viewBox="0 0 22 22" fill="none">
 <circle cx=“11” cy=“7.5” r=“3.5” {…sc}/>
 <path d=“M3.5 20 C3.5 15.5 6.8 12.5 11 12.5 C15.2 12.5 18.5 15.5 18.5 20” {…sc}/>
 </svg>
@@ -1781,11 +1817,19 @@ const callReed = async (messages) => {
 const r = await fetch(API, {
 method:“POST”,
 headers:{ “Content-Type”:“application/json” },
-body:JSON.stringify({ model:“claude-haiku-4-5-20251001”, max_tokens:800, system:REED_PROMPT, messages }),
+body:JSON.stringify({
+model:“claude-haiku-4-5-20251001”,
+max_tokens:800,
+system:REED_PROMPT,
+messages,
+tools:[{ type:“web_search_20250305”, name:“web_search” }]
+}),
 });
 const d = await r.json();
 if(d.error) throw new Error(d.error.message);
-return d.content?.find(b=>b.type===“text”)?.text||””;
+// Extract text from response — may contain tool use blocks
+const textBlock = d.content?.find(b=>b.type===“text”);
+return textBlock?.text || “”;
 };
 
 const kickoff = async () => {
@@ -1867,7 +1911,7 @@ return (
 <>
 <style>{globalStyles}</style>
 <div style={{ position:“fixed”, inset:0, display:“flex”, justifyContent:“center”, alignItems:“center”, background:”#021a16”, fontFamily:DM, overflow:“hidden” }}>
-<div style={{ width:390, height:844, background:C.bg, borderRadius:44, overflow:“hidden”, position:“relative”, display:“flex”, flexDirection:“column”, boxShadow:“0 40px 80px rgba(0,0,0,0.6)” }}>
+<div style={{ width:“100%”, maxWidth:480, height:“100%”, background:C.bg, borderRadius:0, overflow:“hidden”, position:“relative”, display:“flex”, flexDirection:“column” }}>
 
 ```
       {screen==="splash"&&<SplashScreen onSignup={()=>setScreen("signup")} onLogin={()=>setScreen("login")}/>}
@@ -1928,17 +1972,18 @@ return (
               </>
             )}
           </div>
-          <div style={{ display:"flex", borderTop:"1px solid "+(C.border), background:C.surface, paddingBottom:8 }}>
-            {tabs.map(t=>(
-              <button key={t.id} onClick={()=>setTab(t.id)} style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", padding:"10px 4px 4px", background:"none", border:"none", cursor:"pointer", gap:3 }}>
-                {t.id==="reed"
-                  ? <span style={{ fontSize:20, lineHeight:1, filter:tab===t.id?"none":"grayscale(1) opacity(0.4)" }}>{chipAnimal?.emoji||"😊"}</span>
-                  : <TabIcon id={t.id} active={tab===t.id} color={t.color}/>
-                }
-                <span style={{ fontSize:9, color:tab===t.id?t.color:"rgba(255,255,255,0.38)", fontWeight:tab===t.id?700:400, textTransform:"uppercase", letterSpacing:0.5, fontFamily:DM }}>{t.label}</span>
-                {tab===t.id&&<div style={{ width:16, height:2, borderRadius:1, background:t.color }}/>}
-              </button>
-            ))}
+          <div style={{ padding:"8px 12px 12px", background:"transparent", flexShrink:0 }}>
+            <div style={{ display:"flex", background:"#000", borderRadius:24, padding:"4px", border:"1px solid rgba(255,255,255,0.08)" }}>
+              {tabs.map(t=>(
+                <button key={t.id} onClick={()=>setTab(t.id)} style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", padding:"8px 4px 6px", background:tab===t.id?"rgba(75,193,160,0.12)":"none", border:"none", cursor:"pointer", gap:3, borderRadius:20, transition:"background 0.2s" }}>
+                  {t.id==="reed"
+                    ? <span style={{ fontSize:18, lineHeight:1, filter:tab===t.id?"none":"grayscale(1) opacity(0.35)" }}>{chipAnimal?.emoji||"🧍"}</span>
+                    : <TabIcon id={t.id} active={tab===t.id}/>
+                  }
+                  <span style={{ fontSize:8, color:tab===t.id?"#4BC1A0":"rgba(255,255,255,0.4)", fontWeight:tab===t.id?700:400, textTransform:"uppercase", letterSpacing:0.5, fontFamily:DM }}>{t.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </>
       )}
