@@ -36,6 +36,15 @@ headers: sb.authHeaders(token)
 });
 },
 
+async resetPassword(email) {
+const r = await fetch(SUPABASE_URL + ‘/auth/v1/recover’, {
+method: ‘POST’,
+headers: sb.headers,
+body: JSON.stringify({ email })
+});
+return r.ok;
+},
+
 async upsertProfile(token, userId, data) {
 const r = await fetch(SUPABASE_URL + ‘/rest/v1/profiles?id=eq.’ + userId, {
 method: ‘PATCH’,
@@ -320,7 +329,10 @@ function LoginScreen({ onComplete, onBack }) {
 const [email, setEmail] = useState(””); const [password, setPassword] = useState(””);
 const [showPw, setShowPw] = useState(false); const [loading, setLoading] = useState(false);
 const [errors, setErrors] = useState({});
+const [resetSent, setResetSent] = useState(false);
+const [resetMode, setResetMode] = useState(false);
 const fStyle = (err, val) => ({ width:“100%”, padding:“15px 16px”, borderRadius:14, border:“1.5px solid “+(err?”#D05657”:val?C.accent:“rgba(255,255,255,0.14)”), background:val?“rgba(75,193,160,0.06)”:“rgba(255,255,255,0.05)”, color:”#fff”, fontFamily:DM, fontSize:15, outline:“none”, boxSizing:“border-box” });
+
 const handleLogin = async () => {
 const e={};
 if (!email.trim()||!/^[^\s@]+@[^\s@]+.[^\s@]+$/.test(email)) e.email=“Valid email required”;
@@ -337,6 +349,32 @@ setErrors({ email: “Something went wrong. Please try again.” });
 }
 setLoading(false);
 };
+
+const handleReset = async () => {
+if (!email.trim()||!/^[^\s@]+@[^\s@]+.[^\s@]+$/.test(email)) {
+setErrors({ email: “Please enter your email address” }); return;
+}
+setLoading(true);
+await sb.resetPassword(email.trim());
+setResetSent(true);
+setLoading(false);
+};
+
+if (resetSent) return (
+<div style={{ flex:1, display:“flex”, flexDirection:“column”, background:”#021a16”, position:“relative”, overflow:“hidden” }}>
+<BlobBackground />
+<div style={{ flex:1, display:“flex”, flexDirection:“column”, alignItems:“center”, justifyContent:“center”, padding:“40px 32px”, position:“relative”, textAlign:“center” }}>
+<div style={{ fontSize:56, marginBottom:20 }}>📬</div>
+<div style={{ fontFamily:DM, fontSize:22, fontWeight:700, color:”#fff”, marginBottom:12 }}>Check your email</div>
+<div style={{ fontFamily:DM, fontSize:15, color:“rgba(255,255,255,0.55)”, lineHeight:1.7, marginBottom:36 }}>
+We’ve sent a password reset link to <strong style={{color:”#fff”}}>{email}</strong>. Check your inbox and follow the link to reset your password.
+</div>
+<button onClick={()=>{setResetSent(false);setResetMode(false);}} style={{ padding:“14px 32px”, borderRadius:16, background:C.accent, border:“none”, color:”#fff”, fontFamily:DM, fontSize:15, fontWeight:700, cursor:“pointer” }}>
+Back to sign in
+</button>
+</div>
+</div>
+);
 return (
 <div style={{ flex:1, display:“flex”, flexDirection:“column”, background:”#021a16”, position:“relative”, overflow:“hidden” }}>
 <BlobBackground />
@@ -354,10 +392,11 @@ Back
 <input type=“email” value={email} onChange={e=>{setEmail(e.target.value);setErrors(x=>({…x,email:””}))}} placeholder=“you@example.com” style={fStyle(errors.email,email)}/>
 {errors.email&&<div style={{ fontSize:12,color:”#E1814C”,marginTop:5,fontFamily:DM }}>{errors.email}</div>}
 </div>
+{!resetMode&&(
 <div>
 <div style={{ display:“flex”, justifyContent:“space-between”, marginBottom:8 }}>
 <div style={{ fontSize:13, fontWeight:500, color:“rgba(255,255,255,0.48)”, fontFamily:DM }}>Password</div>
-<span style={{ fontSize:13, color:C.accent, cursor:“pointer”, fontFamily:DM }}>Forgot?</span>
+<span onClick={()=>setResetMode(true)} style={{ fontSize:13, color:C.accent, cursor:“pointer”, fontFamily:DM }}>Forgot?</span>
 </div>
 <div style={{ position:“relative” }}>
 <input type={showPw?“text”:“password”} value={password} onChange={e=>{setPassword(e.target.value);setErrors(x=>({…x,password:””}))}} placeholder=”••••••••” style={{…fStyle(errors.password,password),paddingRight:48}}/>
@@ -365,14 +404,33 @@ Back
 </div>
 {errors.password&&<div style={{ fontSize:12,color:”#E1814C”,marginTop:5,fontFamily:DM }}>{errors.password}</div>}
 </div>
+)}
+{resetMode&&(
+<div style={{ padding:“12px 16px”, background:“rgba(75,193,160,0.08)”, borderRadius:12, border:“1px solid rgba(75,193,160,0.2)” }}>
+<div style={{ fontFamily:DM, fontSize:13, color:“rgba(255,255,255,0.6)”, lineHeight:1.6 }}>Enter your email above and we’ll send you a link to reset your password.</div>
+</div>
+)}
 </div>
 <div style={{ padding:“20px 28px 44px”, position:“relative” }}>
+{resetMode ? (
+<>
+<button onClick={handleReset} disabled={loading} style={{ width:“100%”, padding:“17px”, borderRadius:16, border:“none”, background:loading?“rgba(75,193,160,0.5)”:C.accent, color:”#fff”, fontFamily:DM, fontSize:16, fontWeight:700, cursor:“pointer”, boxShadow:“0 6px 24px rgba(75,193,160,0.35)”, marginBottom:14 }}>
+{loading?“Sending…”:“Send reset link →”}
+</button>
+<div style={{ textAlign:“center”, fontSize:14, color:“rgba(255,255,255,0.3)”, fontFamily:DM }}>
+<span onClick={()=>setResetMode(false)} style={{ color:C.accent, cursor:“pointer”, fontWeight:600 }}>Back to sign in</span>
+</div>
+</>
+) : (
+<>
 <button onClick={handleLogin} disabled={loading} style={{ width:“100%”, padding:“17px”, borderRadius:16, border:“none”, background:loading?“rgba(75,193,160,0.5)”:C.accent, color:”#fff”, fontFamily:DM, fontSize:16, fontWeight:700, cursor:“pointer”, boxShadow:“0 6px 24px rgba(75,193,160,0.35)”, marginBottom:14 }}>
 {loading?“Signing in…”:“Sign in →”}
 </button>
 <div style={{ textAlign:“center”, fontSize:14, color:“rgba(255,255,255,0.3)”, fontFamily:DM }}>
 New here? <span onClick={onBack} style={{ color:C.accent, cursor:“pointer”, fontWeight:600 }}>Create an account</span>
 </div>
+</>
+)}
 </div>
 </div>
 );
@@ -423,6 +481,8 @@ if(!form.password.trim()||form.password.length<8) e.password=“Password must be
 setErrors(e); return !Object.keys(e).length;
 };
 
+const [emailSent, setEmailSent] = useState(false);
+
 const handleSignup = async () => {
 if(step===1){ if(v1()) setStep(2); return; }
 if(!v2()) return;
@@ -436,12 +496,34 @@ dob: form.dob,
 mobile: form.mobile,
 });
 if(data.error){ setErrors({ email: data.error.message || “Signup failed. Please try again.” }); setLoading(false); return; }
-onComplete(form);
+// Show email verification screen
+setEmailSent(true);
 } catch(err) {
 setErrors({ email: “Something went wrong. Please try again.” });
 }
 setLoading(false);
 };
+
+// Email verification sent screen
+if (emailSent) return (
+<div style={{ flex:1, display:“flex”, flexDirection:“column”, background:”#021a16”, position:“relative”, overflow:“hidden” }}>
+<BlobBackground />
+<div style={{ flex:1, display:“flex”, flexDirection:“column”, alignItems:“center”, justifyContent:“center”, padding:“40px 32px”, position:“relative”, textAlign:“center” }}>
+<div style={{ fontSize:56, marginBottom:20 }}>📬</div>
+<div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:”#fff”, letterSpacing:-0.4, marginBottom:14 }}>Check your email</div>
+<div style={{ fontFamily:DM, fontSize:15, color:“rgba(255,255,255,0.55)”, lineHeight:1.7, marginBottom:12 }}>
+We’ve sent a verification link to
+</div>
+<div style={{ fontFamily:DM, fontSize:16, fontWeight:700, color:”#4BC1A0”, marginBottom:24 }}>{form.email}</div>
+<div style={{ fontFamily:DM, fontSize:14, color:“rgba(255,255,255,0.4)”, lineHeight:1.7, marginBottom:36 }}>
+Click the link in the email to verify your account and get started. Check your spam folder if you can’t find it.
+</div>
+<button onClick={onBack} style={{ padding:“14px 32px”, borderRadius:16, background:“rgba(255,255,255,0.08)”, border:“1px solid rgba(255,255,255,0.15)”, color:“rgba(255,255,255,0.7)”, fontFamily:DM, fontSize:15, cursor:“pointer” }}>
+Back to sign in
+</button>
+</div>
+</div>
+);
 
 // Hard block screen for under-18s
 if (ageBlocked) return (
@@ -520,6 +602,25 @@ style={{…fStyle(“dob”),colorScheme:“dark”}}
 <input type={showPw?“text”:“password”} value={form.password} onChange={e=>set(“password”,e.target.value)} placeholder=“At least 8 characters” style={fStyle(“password”)}/>
 <button onClick={()=>setShowPw(!showPw)} style={{ position:“absolute”,right:14,top:38,background:“none”,border:“none”,color:“rgba(255,255,255,0.4)”,cursor:“pointer”,fontSize:13,fontFamily:DM }}>{showPw?“Hide”:“Show”}</button>
 {errors.password&&<div style={err}>{errors.password}</div>}
+{form.password.length > 0 && (() => {
+const pw = form.password;
+const hasUpper = /[A-Z]/.test(pw);
+const hasNumber = /[0-9]/.test(pw);
+const hasSpecial = /[^A-Za-z0-9]/.test(pw);
+const score = (pw.length >= 8 ? 1 : 0) + (pw.length >= 12 ? 1 : 0) + (hasUpper ? 1 : 0) + (hasNumber ? 1 : 0) + (hasSpecial ? 1 : 0);
+const label = score <= 1 ? “Weak” : score <= 3 ? “Fair” : “Strong”;
+const color = score <= 1 ? “#E05252” : score <= 3 ? “#E1814C” : “#4BC1A0”;
+return (
+<div style={{ marginTop:8 }}>
+<div style={{ display:“flex”, gap:4, marginBottom:4 }}>
+{[1,2,3,4,5].map(i=>(
+<div key={i} style={{ flex:1, height:3, borderRadius:2, background:i<=score?color:“rgba(255,255,255,0.1)”, transition:“background 0.3s” }}/>
+))}
+</div>
+<div style={{ fontSize:11, color, fontFamily:DM }}>{label} password{score<=1?” — try adding numbers or symbols”:score<=3?” — add a symbol to strengthen it”:””}</div>
+</div>
+);
+})()}
 </div>
 <div style={{ padding:“13px 16px”,background:“rgba(255,255,255,0.04)”,borderRadius:14,border:“1px solid rgba(255,255,255,0.07)” }}>
 <div style={{ fontSize:12,color:“rgba(255,255,255,0.38)”,lineHeight:1.6,fontFamily:DM }}>By continuing you agree to our <span style={{ color:C.accent,cursor:“pointer” }}>Terms</span> and <span style={{ color:C.accent,cursor:“pointer” }}>Privacy Policy</span>.</div>
@@ -1967,7 +2068,16 @@ return (
                   userPhoto={userPhoto}
                   onPhotoUpload={setUserPhoto}
                   onLogout={async()=>{ if(authToken) await sb.signOut(authToken); resetAuth(); }}
-                  onDeleteAccount={async()=>{ if(authToken) await sb.signOut(authToken); resetAuth(); }}
+                  onDeleteAccount={async()=>{
+                    try {
+                      await fetch('/api/delete-account', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ userId, token: authToken })
+                      });
+                    } catch(e) {}
+                    resetAuth();
+                  }}
                 />
               </>
             )}
