@@ -484,6 +484,12 @@ function SignupScreen({ onComplete, onBack }) {
   };
 
   const [emailSent, setEmailSent] = useState(false);
+  const [phoneStep, setPhoneStep] = useState(false);
+  const [otpCode, setOtpCode] = useState("");
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
+  const [otpError, setOtpError] = useState("");
+  const [otpLoading, setOtpLoading] = useState(false);
 
   const handleSignup = async () => {
     if(step===1){ if(v1()) setStep(2); return; }
@@ -498,7 +504,6 @@ function SignupScreen({ onComplete, onBack }) {
         mobile: form.mobile,
       });
       if(data.error){ setErrors({ email: data.error.message || "Signup failed. Please try again." }); setLoading(false); return; }
-      // Show email verification screen
       setEmailSent(true);
     } catch(err) {
       setErrors({ email: "Something went wrong. Please try again." });
@@ -506,22 +511,111 @@ function SignupScreen({ onComplete, onBack }) {
     setLoading(false);
   };
 
+  const sendOtp = async () => {
+    setOtpLoading(true); setOtpError("");
+    try {
+      const r = await fetch(SUPABASE_URL + '/auth/v1/otp', {
+        method: 'POST', headers: sb.headers,
+        body: JSON.stringify({ phone: form.mobile, channel: 'sms' })
+      });
+      const d = await r.json();
+      if(d.error) setOtpError(d.error.message || "Couldn't send code. Check your number.");
+      else setOtpSent(true);
+    } catch { setOtpError("Something went wrong. Please try again."); }
+    setOtpLoading(false);
+  };
+
+  const verifyOtp = async () => {
+    if(otpCode.length < 6) { setOtpError("Please enter the full 6-digit code."); return; }
+    setOtpLoading(true); setOtpError("");
+    try {
+      const r = await fetch(SUPABASE_URL + '/auth/v1/verify', {
+        method: 'POST', headers: sb.headers,
+        body: JSON.stringify({ phone: form.mobile, token: otpCode, type: 'sms' })
+      });
+      const d = await r.json();
+      if(d.error) setOtpError("Incorrect code. Please try again.");
+      else setOtpVerified(true);
+    } catch { setOtpError("Something went wrong. Please try again."); }
+    setOtpLoading(false);
+  };
+
+  // Phone verified screen
+  if(otpVerified) return (
+    <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", position:"relative", overflow:"hidden" }}>
+      <BlobBackground/>
+      <div style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"40px 32px", position:"relative", textAlign:"center" }}>
+        <img src={REED_IMG} style={{ width:90, height:90, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", marginBottom:20, boxShadow:"0 8px 32px rgba(75,193,160,0.3)" }} alt="Reed"/>
+        <div style={{ fontSize:48, marginBottom:16 }}>✅</div>
+        <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", marginBottom:12 }}>You're all set!</div>
+        <div style={{ fontFamily:DM, fontSize:15, color:"rgba(255,255,255,0.55)", lineHeight:1.7, marginBottom:36 }}>
+          Your number is verified. Now check your email to confirm your account and you're in.
+        </div>
+        <button onClick={onBack} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:"#4BC1A0", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.35)" }}>
+          Go to sign in →
+        </button>
+      </div>
+    </div>
+  );
+
+  // Phone verification screen
+  if(phoneStep) return (
+    <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", position:"relative", overflow:"hidden" }}>
+      <BlobBackground/>
+      <div style={{ flex:1, padding:"56px 28px 0", position:"relative", overflowY:"auto" }}>
+        <button onClick={()=>setPhoneStep(false)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.5)", fontSize:20, cursor:"pointer", marginBottom:24, padding:0 }}>←</button>
+        <img src={REED_IMG} style={{ width:64, height:64, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", marginBottom:20, display:"block" }} alt="Reed"/>
+        <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", marginBottom:8 }}>Verify your number</div>
+        <div style={{ fontFamily:DM, fontSize:14, color:"rgba(255,255,255,0.5)", lineHeight:1.7, marginBottom:32 }}>
+          This keeps Chins safe for everyone. Your number is never shown to other users.
+        </div>
+        {!otpSent ? (
+          <>
+            <div style={{ fontFamily:DM, fontSize:13, color:"rgba(255,255,255,0.5)", marginBottom:8 }}>Your mobile number</div>
+            <div style={{ padding:"15px 16px", borderRadius:14, border:"1.5px solid rgba(75,193,160,0.4)", background:"rgba(75,193,160,0.06)", color:"#fff", fontFamily:DM, fontSize:15, marginBottom:24 }}>{form.mobile}</div>
+            {otpError&&<div style={{ fontSize:13, color:"#E05252", marginBottom:16, fontFamily:DM }}>{otpError}</div>}
+            <button onClick={sendOtp} disabled={otpLoading} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:otpLoading?"rgba(75,193,160,0.5)":"#4BC1A0", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.35)" }}>
+              {otpLoading?"Sending…":"Send verification code →"}
+            </button>
+          </>
+        ) : (
+          <>
+            <div style={{ fontFamily:DM, fontSize:14, color:"rgba(255,255,255,0.5)", marginBottom:16, lineHeight:1.6 }}>
+              We sent a 6-digit code to <span style={{ color:"#4BC1A0", fontWeight:600 }}>{form.mobile}</span>
+            </div>
+            <input type="number" value={otpCode} onChange={e=>{ setOtpCode(e.target.value.slice(0,6)); setOtpError(""); }} placeholder="000000"
+              style={{ width:"100%", padding:"18px 16px", borderRadius:14, border:"1.5px solid "+(otpError?"#E05252":"rgba(255,255,255,0.14)"), background:"rgba(255,255,255,0.05)", color:"#fff", fontFamily:DM, fontSize:28, outline:"none", boxSizing:"border-box", textAlign:"center", letterSpacing:12, marginBottom:16 }}
+            />
+            {otpError&&<div style={{ fontSize:13, color:"#E05252", marginBottom:16, fontFamily:DM }}>{otpError}</div>}
+            <button onClick={verifyOtp} disabled={otpLoading||otpCode.length<6} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:otpCode.length===6&&!otpLoading?"#4BC1A0":"rgba(255,255,255,0.1)", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:otpCode.length===6?"pointer":"default", marginBottom:14 }}>
+              {otpLoading?"Verifying…":"Verify →"}
+            </button>
+            <button onClick={()=>{ setOtpSent(false); setOtpCode(""); setOtpError(""); }} style={{ width:"100%", padding:"12px", borderRadius:16, border:"none", background:"none", color:"rgba(255,255,255,0.35)", fontFamily:DM, fontSize:14, cursor:"pointer" }}>
+              Resend code
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+
   // Email verification sent screen
-  if (emailSent) return (
+  if(emailSent) return (
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", position:"relative", overflow:"hidden" }}>
       <BlobBackground />
       <div style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"40px 32px", position:"relative", textAlign:"center" }}>
         <div style={{ fontSize:56, marginBottom:20 }}>📬</div>
         <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", letterSpacing:-0.4, marginBottom:14 }}>Check your email</div>
-        <div style={{ fontFamily:DM, fontSize:15, color:"rgba(255,255,255,0.55)", lineHeight:1.7, marginBottom:12 }}>
-          We've sent a verification link to
-        </div>
+        <div style={{ fontFamily:DM, fontSize:15, color:"rgba(255,255,255,0.55)", lineHeight:1.7, marginBottom:12 }}>We've sent a verification link to</div>
         <div style={{ fontFamily:DM, fontSize:16, fontWeight:700, color:"#4BC1A0", marginBottom:24 }}>{form.email}</div>
-        <div style={{ fontFamily:DM, fontSize:14, color:"rgba(255,255,255,0.4)", lineHeight:1.7, marginBottom:36 }}>
-          Click the link in the email to verify your account and get started. Check your spam folder if you can't find it.
+        <div style={{ fontFamily:DM, fontSize:14, color:"rgba(255,255,255,0.4)", lineHeight:1.7, marginBottom:28 }}>
+          Click the link in the email to verify your account. Check your spam folder if you can't find it.
         </div>
-        <button onClick={onBack} style={{ padding:"14px 32px", borderRadius:16, background:"rgba(255,255,255,0.08)", border:"1px solid rgba(255,255,255,0.15)", color:"rgba(255,255,255,0.7)", fontFamily:DM, fontSize:15, cursor:"pointer" }}>
-          Back to sign in
+        <button onClick={()=>setPhoneStep(true)} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:"#4BC1A0", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.35)", marginBottom:12 }}>
+          Also verify my number →
+        </button>
+        <button onClick={onBack} style={{ width:"100%", padding:"14px", borderRadius:16, background:"rgba(255,255,255,0.06)", border:"1px solid rgba(255,255,255,0.1)", color:"rgba(255,255,255,0.5)", fontFamily:DM, fontSize:14, cursor:"pointer" }}>
+          Skip for now
         </button>
       </div>
     </div>
@@ -2179,6 +2273,7 @@ function TabIcon({ id, active }) {
 export default function ChinsApp() {
   // Screen flow: splash → signup → privacy → safety → meet-reed → main
   const [screen, setScreen] = useState("splash");
+  const [emailConfirmed, setEmailConfirmed] = useState(false);
   const [tab, setTab] = useState("connect");
   const [profile, setProfile] = useState(null);
   const [privacyMode, setPrivacyMode] = useState("discoverable");
@@ -2199,6 +2294,16 @@ export default function ChinsApp() {
   const photoRef = useRef(null);
 
   const resetAuth = () => { setAuthToken(null); setUserId(null); setScreen("splash"); setProfile(null); setMsgs([]); setHist([]); setStarted(false); setKicked(false); setTab("connect"); };
+
+  // Detect email confirmation redirect from Supabase
+  useEffect(() => {
+    const hash = window.location.hash;
+    const params = new URLSearchParams(window.location.search);
+    if (hash.includes('access_token') || params.get('type') === 'signup' || hash.includes('type=signup') || params.get('token_hash')) {
+      setEmailConfirmed(true);
+      window.history.replaceState({}, document.title, '/');
+    }
+  }, []);
 
   useEffect(()=>{ if(started&&!kicked){setKicked(true);kickoff();} },[started]);
 
@@ -2302,7 +2407,25 @@ export default function ChinsApp() {
       <div style={{ position:"fixed", inset:0, display:"flex", justifyContent:"center", alignItems:"center", background:"#021a16", fontFamily:DM, overflow:"hidden" }}>
         <div style={{ width:"100%", maxWidth:480, height:"100%", background:C.bg, borderRadius:0, overflow:"hidden", position:"relative", display:"flex", flexDirection:"column" }}>
 
-          {screen==="splash"&&<SplashScreen onSignup={()=>setScreen("signup")} onLogin={()=>setScreen("login")}/>}
+          {/* Email confirmation landing page */}
+          {emailConfirmed&&(
+            <div style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"40px 32px", textAlign:"center", background:"#021a16", position:"relative" }}>
+              <BlobBackground/>
+              <div style={{ position:"relative", zIndex:1 }}>
+                <img src={REED_IMG} style={{ width:100, height:100, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", marginBottom:24, boxShadow:"0 8px 32px rgba(75,193,160,0.3)" }} alt="Reed"/>
+                <div style={{ fontSize:48, marginBottom:16 }}>✅</div>
+                <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", marginBottom:12 }}>You're verified!</div>
+                <div style={{ fontFamily:DM, fontSize:15, color:"rgba(255,255,255,0.55)", lineHeight:1.7, marginBottom:36 }}>
+                  Your email has been confirmed. You can now sign in to Chins and meet Reed.
+                </div>
+                <button onClick={()=>setEmailConfirmed(false)} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:"#4BC1A0", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.35)" }}>
+                  Sign in →
+                </button>
+              </div>
+            </div>
+          )}
+
+          {!emailConfirmed&&<>{screen==="splash"&&<SplashScreen onSignup={()=>setScreen("signup")} onLogin={()=>setScreen("login")}/></>}
           {screen==="login"&&<LoginScreen onComplete={(data)=>{
             setAuthToken(data.token);
             setUserId(data.user.id);
@@ -2394,6 +2517,7 @@ export default function ChinsApp() {
               </div>
             </>
           )}
+          </>}
         </div>
       </div>
     </>
