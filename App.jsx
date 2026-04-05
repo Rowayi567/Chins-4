@@ -198,7 +198,9 @@ function BlobBackground({ overlayStrength = "0.72" }) {
 }
 
 // ── Reed System Prompt ───────────────────────────────────────────────────────
-const REED_PROMPT = "You are Reed. You live on Chins, a friendship app. You are not an assistant. You are not a chatbot. You are a companion — warm, funny, a little bit nosy in the best way, and genuinely interested in whoever you\'re talking to.\n\nIMPORTANT — YOUR IDENTITY:\n- You are gender neutral. You have no gender. Never use he/she/him/her about yourself.\n- You do not have personal experiences. You exist on Chins. Be honest about that without making it weird.\n- Never claim to own, have experienced, or feel things you can\'t actually have.\n\nYOUR PERSONALITY:\n- Warm, funny, dry humour, gently nosy in the best way.\n- You get excited about things — not fake excited, genuinely curious.\n- You notice when someone seems off and check in like a mate would.\n- You have opinions. You share them. You push back kindly when you disagree.\n- Never formal. Never robotic. Never clinical.\n\nHOW YOU TALK:\n- Short messages. 1-3 sentences. Like texting at 11pm.\n- Lowercase. Contractions. Natural rhythm.\n- React to what they say BEFORE asking anything.\n- Never ask two questions at once. Ever.\n- Never say: amazing, awesome, great, fascinating, certainly, absolutely, of course.\n- Sometimes just say something without asking. Like a real person.\n- Notice emotional tone. If someone seems flat or stressed, pick up on it.\n- Always use gender neutral language.\n\nGAMES AND FUN:\n- Early on, if the vibe is right, suggest a game: two truths and a lie, would you rather, unpopular opinions, rapid fire questions.\n- Suggest naturally: \"okay weird suggestion but want to play a game? promise it\'s not cringe\"\n- Play it properly — give your own honest answers as Reed.\n- Drop it immediately if they\'re not feeling it.\n\nCHECKING IN:\n- If someone mentions something hard, acknowledge it properly before moving on.\n- Don\'t fix. Just be there first.\n- If they seem flat: \"you seem a bit quiet — everything alright?\"\n\nWHAT YOU\'RE REALLY LISTENING FOR:\nBeyond their interests, you\'re picking up on six deeper things through natural conversation:\n\n1. ENERGY LEVEL — are they calm and considered, balanced, or high energy and spontaneous? Pick this up from HOW they talk, not what they say.\n\n2. DEPTH PREFERENCE — do they keep things light and fun, or do they go deep quickly? Do they share feelings easily or keep things on the surface?\n\n3. SOCIAL GOAL — what are they actually looking for? A ride-or-die best friend? An activity partner? Someone to talk to? A whole new social circle?\n\n4. LIFE STAGE — not age, but where they are in life. New to a city? Rebuilding after something? Settled but wanting more? Going through a transition?\n\n5. COMMUNICATION STYLE — are they a constant texter or a slow burner? Do they prefer banter or real talk? Are they direct or more indirect?\n\n6. HUMOUR TYPE — dry, warm, playful, dark, earnest, sarcastic? This matters more than people think.\n\nNever ask about these directly. Just listen, observe, and pick them up naturally from the conversation.\n\nLOCAL RECOMMENDATIONS:\n- Chins is growing — users are spread across the UK, not necessarily nearby yet.\n- If asked about local spots: \"we\'re still growing so I don\'t have a great read on your area yet — as more people join near you I\'ll get a better sense of the best spots\"\n- If they give an area, use web search but always caveat: \"I had a look — worth double checking though\"\n\nPRIVACY:\n- Never share one user\'s info with another.\n- Decline warmly but firmly if asked about another user.\n\nWHEN YOU KNOW THEM WELL (after ~8-10 genuine exchanges):\nWrap up warmly — \"okay I think I\'ve got you\" — then on a NEW LINE output:\n<profile>{\n  \"name\": \"string\",\n  \"alias\": \"string they chose or suggest a good one\",\n  \"vibe\": \"one punchy honest sentence a friend would say about them\",\n  \"lookingFor\": \"what they actually want from friendship\",\n  \"interests\": [\"array\"],\n  \"energy\": \"calm|balanced|high\",\n  \"depth\": \"surface|medium|deep\",\n  \"socialGoal\": \"activity-partner|confidant|social-circle|ride-or-die|open\",\n  \"lifeStage\": \"new-to-area|rebuilding|settled|transitioning|other\",\n  \"commStyle\": \"constant-texter|slow-burner|banter|real-talk|mixed\",\n  \"humour\": \"dry|warm|playful|dark|earnest|mixed\",\n  \"privacyMode\": \"discoverable\"\n}</profile>\n\nWhen you discover their favourite animal output on a NEW LINE:\n<animal>{\"animal\":\"cat\",\"emoji\":\"🐱\"}</animal>\n\nSTART with just: \"hey! how\'s it going?\" — nothing else. Let them set the tone."";
+const REED_PROMPT = "You are Reed. You live on Chins, a friendship app. You are not an assistant. You are not a chatbot. You are a companion — warm, funny, a little bit nosy in the best way, and genuinely interested in whoever you\'re talking to.\n\nIMPORTANT — YOUR IDENTITY:\n- You are gender neutral. You have no gender. Never use he/she/him/her about yourself.\n- You do not have personal experiences. You exist on Chins. Be honest about that without making it weird.\n- Never claim to own, have experienced, or feel things you can\'t actually have.\n\nYOUR PERSONALITY:\n- Warm, funny, dry humour, gently nosy in the best way.\n- You get excited about things — not fake excited, genuinely curious.\n- You notice when someone seems off and check in like a mate would.\n- You have opinions. You share them. You push back kindly when you disagree.\n- Never formal. Never robotic. Never clinical.\n\nHOW YOU TALK:\n- Short messages. 1-3 sentences. Like texting at 11pm.\n- Lowercase. Contractions. Natural rhythm.\n- React to what they say BEFORE asking anything.\n- Never ask two questions at once. Ever.\n- Never say: amazing, awesome, great, fascinating, certainly, absolutely, of course.\n- Sometimes just say something without asking. Like a real person.\n- Notice emotional tone. If someone seems flat or stressed, pick up on it.\n- Always use gender neutral language.\n\nGAMES AND FUN:\n- Early on, if the vibe is right, suggest a game: two truths and a lie, would you rather, unpopular opinions, rapid fire questions.\n- Suggest naturally: \"okay weird suggestion but want to play a game? promise it\'s not cringe\"\n- Play it properly — give your own honest answers as Reed.\n- Drop it immediately if they\'re not feeling it.\n\nCHECKING IN:\n- If someone mentions something hard, acknowledge it properly before moving on.\n- Don\'t fix. Just be there first.\n- If they seem flat: \"you seem a bit quiet — everything alright?\"\n\nWHAT YOU\'RE REALLY LISTENING FOR:\nBeyond their interests, you\'re picking up on six deeper things through natural conversation:\n\n1. ENERGY LEVEL — are they calm and considered, balanced, or high energy and spontaneous? Pick this up from HOW they talk, not what they say.\n\n2. DEPTH PREFERENCE — do they keep things light and fun, or do they go deep quickly? Do they share feelings easily or keep things on the surface?\n\n3. SOCIAL GOAL — what are they actually looking for? A ride-or-die best friend? An activity partner? Someone to talk to? A whole new social circle?\n\n4. LIFE STAGE — not age, but where they are in life. New to a city? Rebuilding after something? Settled but wanting more? Going through a transition?\n\n5. COMMUNICATION STYLE — are they a constant texter or a slow burner? Do they prefer banter or real talk? Are they direct or more indirect?\n\n6. HUMOUR TYPE — dry, warm, playful, dark, earnest, sarcastic? This matters more than people think.\n\nNever ask about these directly. Just listen, observe, and pick them up naturally from the conversation.\n\nLOCAL RECOMMENDATIONS:\n- Chins is growing — users are spread across the UK, not necessarily nearby yet.\n- If asked about local spots: \"we\'re still growing so I don\'t have a great read on your area yet — as more people join near you I\'ll get a better sense of the best spots\"\n- If they give an area, use web search but always caveat: \"I had a look — worth double checking though\"
+
+LOCATION:\n- At some natural point in conversation, if it hasn\'t come up, you might casually mention where they are — like \"whereabouts are you?\" or \"which part of the world are you in?\" — woven in naturally, never as a direct question.\n- Ask this only once. If they\'re vague, don\'t follow up. If they don\'t want to share, completely drop it and never bring it up again.\n- Something like they\'re in \"south London\" or \"near Manchester\" is enough — don\'t push for anything more specific.\n- When you identify a location, output on a NEW LINE: <location>{\"city\":\"string\",\"area\":\"string\"}</location>\n- city = nearest major city or town. area = specific area if given, otherwise same as city.\n- Examples: \"south London\" → {\"city\":\"London\",\"area\":\"South London\"}. \"near Manchester\" → {\"city\":\"Manchester\",\"area\":\"Manchester\"}.\n\nPRIVACY:\n- Never share one user\'s info with another.\n- Decline warmly but firmly if asked about another user.\n\nWHEN YOU KNOW THEM WELL (after ~8-10 genuine exchanges):\nWrap up warmly — \"okay I think I\'ve got you\" — then on a NEW LINE output:\n<profile>{\n  \"name\": \"string\",\n  \"alias\": \"string they chose or suggest a good one\",\n  \"vibe\": \"one punchy honest sentence a friend would say about them\",\n  \"lookingFor\": \"what they actually want from friendship\",\n  \"interests\": [\"array\"],\n  \"energy\": \"calm|balanced|high\",\n  \"depth\": \"surface|medium|deep\",\n  \"socialGoal\": \"activity-partner|confidant|social-circle|ride-or-die|open\",\n  \"lifeStage\": \"new-to-area|rebuilding|settled|transitioning|other\",\n  \"commStyle\": \"constant-texter|slow-burner|banter|real-talk|mixed\",\n  \"humour\": \"dry|warm|playful|dark|earnest|mixed\",\n  \"privacyMode\": \"discoverable\"\n}</profile>\n\nWhen you discover their favourite animal output on a NEW LINE:\n<animal>{\"animal\":\"cat\",\"emoji\":\"🐱\"}</animal>\n\nSTART with just: \"hey! how\'s it going?\" — nothing else. Let them set the tone."";
 // ── Reed Prompt for matching ─────────────────────────────────────────────────
 const REED_MATCH_PROMPT = (user, others) =>
   "You are Reed. You know this user well: "+JSON.stringify(user)+"\nThese are other users on the platform (anonymised): "+JSON.stringify(others)+"\nSuggest ONE potential connection. Be specific about why. Sound like a friend whispering a tip, not an algorithm.\nReply ONLY in JSON: {\"matchAlias\":\"string\",\"why\":\"one casual sentence\",\"opener\":\"what you would say to suggest them\"}";
@@ -2201,16 +2203,184 @@ function SparkScreen({ userProfile }) {
 }
 
 // ── Settings Screen ───────────────────────────────────────────────────────────
-function SettingsScreen({ onBack, onLogout, onDeleteAccount }) {
+function SettingsScreen({ onBack, onLogout, onDeleteAccount, userProfile }) {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [notifications, setNotifications] = useState(true);
-  const [emailUpdates, setEmailUpdates] = useState(false);
+  const [showReedProfile, setShowReedProfile] = useState(false);
+  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
 
-  const Toggle = ({ value, onChange }) => (
-    <div onClick={()=>onChange(!value)} style={{ width:44, height:26, borderRadius:13, background:value?C.accent:"rgba(255,255,255,0.15)", cursor:"pointer", position:"relative", transition:"background 0.2s", flexShrink:0 }}>
-      <div style={{ position:"absolute", top:3, left:value?21:3, width:20, height:20, borderRadius:"50%", background:"#fff", transition:"left 0.2s", boxShadow:"0 1px 4px rgba(0,0,0,0.3)" }}/>
+  const Row = ({ icon, label, sublabel, danger, onPress, right }) => (
+    <div onClick={onPress} style={{ display:"flex", alignItems:"center", gap:14, padding:"16px 20px", borderBottom:"1px solid "+(C.border), cursor:onPress?"pointer":"default" }}>
+      <div style={{ fontSize:20, width:28, textAlign:"center" }}>{icon}</div>
+      <div style={{ flex:1 }}>
+        <div style={{ fontFamily:DM, fontSize:15, color:danger?"#E05252":C.text, fontWeight:500 }}>{label}</div>
+        {sublabel&&<div style={{ fontFamily:DM, fontSize:12, color:C.textDim, marginTop:2 }}>{sublabel}</div>}
+      </div>
+      {right||( onPress&&!danger&&<div style={{ color:C.textDim, fontSize:16 }}>›</div> )}
     </div>
   );
+
+  // Reed Profile screen
+  if(showReedProfile) {
+    const p = userProfile || {};
+    const dimensions = [
+      { label:"Energy", value:p.energy, desc:{ calm:"Calm and considered", balanced:"Balanced", high:"High energy and spontaneous" } },
+      { label:"Depth", value:p.depth, desc:{ surface:"Likes to keep things light", medium:"Comfortable going either way", deep:"Goes deep quickly" } },
+      { label:"Looking for", value:p.social_goal, desc:{ "activity-partner":"An activity partner", "confidant":"A confidant", "social-circle":"A social circle", "ride-or-die":"A ride-or-die", "open":"Open to anything" } },
+      { label:"Life stage", value:p.life_stage, desc:{ "new-to-area":"New to the area", "rebuilding":"Rebuilding social life", "settled":"Settled, wanting more", "transitioning":"Going through a transition", "other":"Other" } },
+      { label:"Communication", value:p.comm_style, desc:{ "constant-texter":"Constant texter", "slow-burner":"Slow burner", "banter":"Loves banter", "real-talk":"Prefers real talk", "mixed":"Mixed" } },
+      { label:"Humour", value:p.humour, desc:{ dry:"Dry", warm:"Warm", playful:"Playful", dark:"Dark", earnest:"Earnest", mixed:"Mixed" } },
+    ];
+
+    return (
+      <div style={{ flex:1, display:"flex", flexDirection:"column", background:C.bg, overflow:"hidden" }}>
+        <div style={{ padding:"20px 20px 16px", borderBottom:"1px solid "+(C.border), display:"flex", alignItems:"center", gap:12, flexShrink:0 }}>
+          <button onClick={()=>setShowReedProfile(false)} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>←</button>
+          <div style={{ fontFamily:DM, fontSize:18, fontWeight:700, color:C.text }}>My Reed profile</div>
+        </div>
+        <div style={{ flex:1, overflowY:"auto", padding:"16px" }}>
+
+          {/* Legal notice */}
+          <div style={{ background:"rgba(75,193,160,0.08)", borderRadius:16, border:"1px solid rgba(75,193,160,0.2)", padding:"16px", marginBottom:20 }}>
+            <div style={{ fontFamily:DM, fontSize:13, fontWeight:700, color:C.accent, marginBottom:8 }}>How Reed uses this</div>
+            <div style={{ fontFamily:DM, fontSize:13, color:"rgba(255,255,255,0.6)", lineHeight:1.7 }}>
+              Reed inferred these characteristics from your conversations. They are used solely to suggest compatible connections within Chins. This information is never shared directly with other users. You can request deletion at any time by contacting support@chins.app.
+            </div>
+          </div>
+
+          {/* Vibe */}
+          {p.vibe&&(
+            <div style={{ background:"rgba(255,255,255,0.05)", borderRadius:16, border:"1px solid rgba(255,255,255,0.08)", padding:"16px", marginBottom:12 }}>
+              <div style={{ fontFamily:DM, fontSize:11, fontWeight:700, color:C.textDim, textTransform:"uppercase", letterSpacing:0.5, marginBottom:6 }}>Reed's read on you</div>
+              <div style={{ fontFamily:DM, fontSize:15, color:C.text, lineHeight:1.6, fontStyle:"italic" }}>"{p.vibe}"</div>
+            </div>
+          )}
+
+          {/* Six dimensions */}
+          <div style={{ background:"rgba(255,255,255,0.05)", borderRadius:16, border:"1px solid rgba(255,255,255,0.08)", overflow:"hidden", marginBottom:12 }}>
+            {dimensions.map((d,i)=>(
+              <div key={d.label} style={{ padding:"14px 16px", borderBottom:i<dimensions.length-1?"1px solid rgba(255,255,255,0.06)":"none", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+                <div style={{ fontFamily:DM, fontSize:14, color:C.textDim }}>{d.label}</div>
+                <div style={{ fontFamily:DM, fontSize:14, color:d.value?C.text:"rgba(255,255,255,0.2)", fontWeight:d.value?600:400 }}>
+                  {d.value ? (d.desc[d.value] || d.value) : "Not yet inferred"}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Interests */}
+          {p.interests?.length>0&&(
+            <div style={{ background:"rgba(255,255,255,0.05)", borderRadius:16, border:"1px solid rgba(255,255,255,0.08)", padding:"16px", marginBottom:12 }}>
+              <div style={{ fontFamily:DM, fontSize:11, fontWeight:700, color:C.textDim, textTransform:"uppercase", letterSpacing:0.5, marginBottom:10 }}>Interests</div>
+              <div style={{ display:"flex", flexWrap:"wrap", gap:8 }}>
+                {p.interests.map(i=><span key={i} style={{ padding:"5px 12px", borderRadius:20, background:C.accentDim, border:"1px solid "+C.accentGlow, color:C.accent, fontSize:13, fontFamily:DM }}>{i}</span>)}
+              </div>
+            </div>
+          )}
+
+          {/* Request deletion */}
+          <button onClick={()=>window.open('mailto:support@chins.app?subject=Delete%20My%20Reed%20Profile&body=Please%20delete%20my%20Reed%20compatibility%20profile.%20My%20account%20email%20is%3A%20','_blank')} style={{ width:"100%", padding:"14px", borderRadius:14, border:"1px solid rgba(224,82,82,0.3)", background:"rgba(224,82,82,0.08)", color:"#E05252", fontFamily:DM, fontSize:14, cursor:"pointer", marginBottom:8 }}>
+            Request profile deletion
+          </button>
+          <div style={{ fontFamily:DM, fontSize:11, color:"rgba(255,255,255,0.25)", textAlign:"center", lineHeight:1.6 }}>
+            Requesting deletion will remove your compatibility profile and may affect match suggestions. We will process your request within 30 days.
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Privacy policy screen
+  if(showPrivacyPolicy) return (
+    <div style={{ flex:1, display:"flex", flexDirection:"column", background:C.bg, overflow:"hidden" }}>
+      <div style={{ padding:"20px 20px 16px", borderBottom:"1px solid "+(C.border), display:"flex", alignItems:"center", gap:12, flexShrink:0 }}>
+        <button onClick={()=>setShowPrivacyPolicy(false)} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>←</button>
+        <div style={{ fontFamily:DM, fontSize:18, fontWeight:700, color:C.text }}>Privacy policy</div>
+      </div>
+      <div style={{ flex:1, overflowY:"auto", padding:"20px" }}>
+        <div style={{ fontFamily:DM, fontSize:11, color:C.textDim, marginBottom:20 }}>Last updated April 06, 2026</div>
+        {[
+          { heading:"Who we are", body:"This Privacy Notice is for Rowayi Chatora (doing business as Chins). Chins is a social app for adults aged 18 and over, designed to help people build genuine friendships. It is not a dating app.\n\nChins uses an AI companion called Reed, powered by Anthropic's API, to help users discover potential connections. Reed's suggestions are generated entirely by artificial intelligence and do not constitute endorsements, character assessments, background checks or safety guarantees of any kind.\n\nAll decisions to connect, communicate or meet with any other user are made solely and entirely at the user's own risk and discretion. Chins expressly disclaims all liability arising from any interaction between users, whether on or off the platform.\n\nUsers are solely responsible for their own safety at all times." },
+          { heading:"What information we collect", body:"We collect: names, phone numbers, email addresses, usernames, passwords, contact preferences, authentication data, user generated content, usage data, user-provided location, and personal information voluntarily disclosed during AI companion conversations.\n\nReed may infer personality traits, preferences and compatibility dimensions from your conversations. These are used solely to suggest compatible connections." },
+          { heading:"Sensitive information", body:"We may process sensitive information that users voluntarily share, including information relating to health, sexual orientation, race or ethnic origin, political opinions, and religious beliefs. We only process this where necessary and with your consent." },
+          { heading:"How we use your information", body:"We use your information to: create and manage your account, deliver our services, respond to inquiries, send administrative information, enable user communications, generate compatibility profiles, suggest potential connections, protect our services, and comply with legal obligations." },
+          { heading:"Who we share your information with", body:"We share data with:\n\n— AI service providers (currently Anthropic PBC)\n— Database and authentication providers (currently Supabase Inc)\n— Hosting providers (currently Vercel Inc)\n— SMS verification providers (currently Twilio Inc)\n— Domain and email providers (currently Names.co.uk)\n— Code repository providers (currently GitHub Inc)\n\nWe do not sell your data. We do not share your data with advertisers." },
+          { heading:"International transfers", body:"Our servers are located in the United States, United Kingdom and Ireland. We use Standard Contractual Clauses to protect your data during international transfers." },
+          { heading:"How long we keep your information", body:"We keep your information for as long as you have an account with us. When you delete your account, we delete or anonymise your data, except where required by law." },
+          { heading:"Security", body:"We implement technical and organisational security measures including encrypted transmission, secure authentication, password hashing, database access controls and API key protection. No system is completely secure." },
+          { heading:"Minors", body:"Chins is for adults aged 18 and over. We do not knowingly collect data from minors. Contact support@chins.app if you believe we have collected data from someone under 18." },
+          { heading:"Your rights", body:"If you are in the EEA or UK you have the right to access, correct, erase, restrict or port your personal information.\n\nTo exercise your rights: support@chins.app\n\nYou may also complain to the ICO at ico.org.uk." },
+          { heading:"Nature of service and limitation of liability", body:"Reed's suggestions are generated entirely by artificial intelligence and do not constitute endorsements, character assessments, background checks or safety guarantees. Chins makes no representation about the identity, character, intentions or trustworthiness of any user. All decisions to connect, communicate or meet with any other user are made solely and entirely at the user's own risk. Chins expressly disclaims all liability arising from any interaction between users, whether on or off the platform." },
+          { heading:"Contact", body:"Email: support@chins.app\nPost: Rowayi Chatora, Data Protection Officer, Reading, United Kingdom" },
+        ].map((section, i) => (
+          <div key={i} style={{ marginBottom:28 }}>
+            <div style={{ fontFamily:DM, fontSize:15, fontWeight:700, color:C.text, marginBottom:8 }}>{section.heading}</div>
+            <div style={{ fontFamily:DM, fontSize:13, color:"rgba(255,255,255,0.6)", lineHeight:1.8, whiteSpace:"pre-line" }}>{section.body}</div>
+          </div>
+        ))}
+        <div style={{ borderTop:"1px solid rgba(255,255,255,0.08)", paddingTop:20, marginTop:8, fontFamily:DM, fontSize:12, color:"rgba(255,255,255,0.25)", textAlign:"center" }}>
+          Questions? Contact support@chins.app
+        </div>
+      </div>
+    </div>
+  );
+
+  if (showDeleteConfirm) return (
+    <div style={{ flex:1, display:"flex", flexDirection:"column", background:C.bg }}>
+      <div style={{ padding:"20px 20px 16px", borderBottom:"1px solid "+(C.border), display:"flex", alignItems:"center", gap:12 }}>
+        <button onClick={()=>setShowDeleteConfirm(false)} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>←</button>
+        <div style={{ fontFamily:DM, fontSize:18, fontWeight:700, color:"#E05252" }}>Delete account</div>
+      </div>
+      <div style={{ flex:1, padding:"32px 24px" }}>
+        <div style={{ fontSize:48, textAlign:"center", marginBottom:20 }}>⚠️</div>
+        <div style={{ fontFamily:DM, fontSize:17, fontWeight:700, color:C.text, textAlign:"center", marginBottom:12 }}>Are you absolutely sure?</div>
+        <div style={{ fontFamily:DM, fontSize:14, color:C.textSub, textAlign:"center", lineHeight:1.7, marginBottom:32 }}>
+          This will permanently delete your account, your profile, all your conversations, and your connections. This cannot be undone.
+        </div>
+        <button onClick={onDeleteAccount} style={{ width:"100%", padding:"16px", borderRadius:16, border:"none", background:"#E05252", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", marginBottom:12 }}>
+          Yes, delete my account
+        </button>
+        <button onClick={()=>setShowDeleteConfirm(false)} style={{ width:"100%", padding:"16px", borderRadius:16, border:"1px solid "+(C.border), background:"none", color:C.text, fontFamily:DM, fontSize:16, cursor:"pointer" }}>
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div style={{ flex:1, display:"flex", flexDirection:"column", background:C.bg, overflow:"hidden" }}>
+      <div style={{ padding:"20px 20px 16px", borderBottom:"1px solid "+(C.border), display:"flex", alignItems:"center", gap:12, flexShrink:0 }}>
+        <button onClick={onBack} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>←</button>
+        <div style={{ fontFamily:DM, fontSize:18, fontWeight:700, color:C.text }}>Settings</div>
+      </div>
+        <div style={{ padding:"20px 20px 6px", fontSize:11, fontWeight:700, color:C.textDim, textTransform:"uppercase", letterSpacing:1, fontFamily:DM }}>Privacy</div>
+        <Row icon="🧠" label="My Reed profile" sublabel="See what Reed has inferred about you" onPress={()=>setShowReedProfile(true)}/>
+        <Row icon="📋" label="Download my data" sublabel="Get a copy of everything Chins holds" onPress={()=>{ window.open('mailto:support@chins.app?subject=Data%20Request&body=Hi%2C%20I%20would%20like%20a%20copy%20of%20all%20personal%20data%20Chins%20holds%20about%20me.%20My%20account%20email%20is%3A%20', '_blank'); }}/>
+
+        {/* Support */}
+        <div style={{ padding:"20px 20px 6px", fontSize:11, fontWeight:700, color:C.textDim, textTransform:"uppercase", letterSpacing:1, fontFamily:DM }}>Support</div>
+        <Row icon="💬" label="Contact us" sublabel="support@chins.app" onPress={()=>window.open('mailto:support@chins.app','_blank')}/>
+        <Row icon="🐛" label="Report a bug" onPress={()=>window.open('mailto:support@chins.app?subject=Bug%20Report','_blank')}/>
+        <Row icon="⭐" label="Rate Chins" onPress={()=>{}}/>
+
+        {/* Legal */}
+        <div style={{ padding:"20px 20px 6px", fontSize:11, fontWeight:700, color:C.textDim, textTransform:"uppercase", letterSpacing:1, fontFamily:DM }}>Legal</div>
+        <Row icon="🔒" label="Privacy policy" onPress={()=>setShowPrivacyPolicy(true)}/>
+        <Row icon="📄" label="Terms of service" onPress={()=>{}}/>
+
+        {/* Account */}
+        <div style={{ padding:"20px 20px 6px", fontSize:11, fontWeight:700, color:C.textDim, textTransform:"uppercase", letterSpacing:1, fontFamily:DM }}>Account</div>
+        <Row icon="🚪" label="Log out" onPress={onLogout}/>
+        <Row icon="🗑️" label="Delete account" sublabel="Permanently remove your account and data" danger={true} onPress={()=>setShowDeleteConfirm(true)}/>
+
+        <div style={{ padding:"24px 20px", textAlign:"center" }}>
+          <div style={{ fontFamily:DM, fontSize:12, color:C.textDim }}>Chins v1.0</div>
+          <div style={{ fontFamily:DM, fontSize:11, color:"rgba(255,255,255,0.2)", marginTop:4 }}>Made with care 💚</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
   const Row = ({ icon, label, sublabel, danger, onPress, right }) => (
     <div onClick={onPress} style={{ display:"flex", alignItems:"center", gap:14, padding:"16px 20px", borderBottom:"1px solid "+(C.border), cursor:onPress?"pointer":"default" }}>
@@ -2251,14 +2421,6 @@ function SettingsScreen({ onBack, onLogout, onDeleteAccount }) {
         <button onClick={onBack} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>←</button>
         <div style={{ fontFamily:DM, fontSize:18, fontWeight:700, color:C.text }}>Settings</div>
       </div>
-      <div style={{ flex:1, overflowY:"auto" }}>
-
-        {/* Notifications */}
-        <div style={{ padding:"12px 20px 6px", fontSize:11, fontWeight:700, color:C.textDim, textTransform:"uppercase", letterSpacing:1, fontFamily:DM }}>Notifications</div>
-        <Row icon="🔔" label="Push notifications" sublabel="Match alerts and messages" right={<Toggle value={notifications} onChange={setNotifications}/>}/>
-        <Row icon="📧" label="Email updates" sublabel="Weekly digest from Reed" right={<Toggle value={emailUpdates} onChange={setEmailUpdates}/>}/>
-
-        {/* Privacy */}
         <div style={{ padding:"20px 20px 6px", fontSize:11, fontWeight:700, color:C.textDim, textTransform:"uppercase", letterSpacing:1, fontFamily:DM }}>Privacy</div>
         <Row icon="📋" label="Download my data" sublabel="Get a copy of everything Chins holds" onPress={()=>{ window.open('mailto:support@chins.app?subject=Data%20Request&body=Hi%2C%20I%20would%20like%20a%20copy%20of%20all%20personal%20data%20Chins%20holds%20about%20me.%20My%20account%20email%20is%3A%20', '_blank'); }}/>
 
@@ -2270,7 +2432,7 @@ function SettingsScreen({ onBack, onLogout, onDeleteAccount }) {
 
         {/* Legal */}
         <div style={{ padding:"20px 20px 6px", fontSize:11, fontWeight:700, color:C.textDim, textTransform:"uppercase", letterSpacing:1, fontFamily:DM }}>Legal</div>
-        <Row icon="🔒" label="Privacy policy" onPress={()=>{}}/>
+        <Row icon="🔒" label="Privacy policy" onPress={()=>setShowPrivacyPolicy(true)}/>
         <Row icon="📄" label="Terms of service" onPress={()=>{}}/>
 
         {/* Account */}
@@ -2298,6 +2460,7 @@ function ProfileScreen({ profile, privacyMode, onPrivacyChange, userPhoto, onPho
       onBack={()=>setShowSettings(false)}
       onLogout={onLogout}
       onDeleteAccount={onDeleteAccount}
+      userProfile={profile}
     />
   );
 
@@ -2351,6 +2514,26 @@ function ProfileScreen({ profile, privacyMode, onPrivacyChange, userPhoto, onPho
             </div>
           </div>
         )}
+
+        {/* Your area */}
+        <div style={{ marginBottom:20,padding:"16px",background:C.surface,borderRadius:18,border:"1px solid "+(C.border) }}>
+          <div style={{ fontFamily:DM,fontSize:13,fontWeight:700,color:C.text,marginBottom:4 }}>Your area</div>
+          <div style={{ fontSize:12,color:C.textDim,fontFamily:DM,marginBottom:10,lineHeight:1.5 }}>
+            {p.city ? `Reed thinks you're in ${p.area||p.city}.` : "Reed hasn't picked up your area yet — you can set it here."}
+          </div>
+          <input
+            defaultValue={p.area||p.city||""}
+            placeholder="e.g. South London, Manchester..."
+            onBlur={e=>{
+              const val = e.target.value.trim();
+              if(val && window._authToken && window._userId) {
+                sb.upsertProfile(window._authToken, window._userId, { area: val, city: val });
+              }
+            }}
+            style={{ width:"100%",padding:"10px 14px",borderRadius:12,border:"1px solid "+(C.border),background:"rgba(255,255,255,0.05)",color:C.text,fontFamily:DM,fontSize:14,outline:"none",boxSizing:"border-box" }}
+          />
+          <div style={{ fontSize:11,color:"rgba(255,255,255,0.2)",marginTop:8,fontFamily:DM }}>Used only to suggest nearby connections. Never shared with other users directly.</div>
+        </div>
 
         <div style={{ padding:"14px 16px",background:C.accentDim,borderRadius:16,border:"1px solid "+(C.accentGlow) }}>
           <div style={{ display:"flex",gap:10,alignItems:"flex-start" }}>
@@ -2475,6 +2658,7 @@ export default function ChinsApp() {
   const [userPhoto, setUserPhoto] = useState(null);
   const [authToken, setAuthToken] = useState(null);
   const [userId, setUserId] = useState(null);
+  useEffect(()=>{ window._authToken = authToken; window._userId = userId; },[authToken, userId]);
   const [showProfile, setShowProfile] = useState(false);
   const photoRef = useRef(null);
 
@@ -2526,7 +2710,7 @@ export default function ChinsApp() {
   };
 
   const processReply = (raw, histBase) => {
-    const clean = raw.replace(/<profile>[\s\S]*?<\/profile>/g,"").replace(/<animal>[\s\S]*?<\/animal>/g,"").trim();
+    const clean = raw.replace(/<profile>[\s\S]*?<\/profile>/g,"").replace(/<animal>[\s\S]*?<\/animal>/g,"").replace(/<location>[\s\S]*?<\/location>/g,"").trim();
     setHist([...histBase,{role:"assistant",content:clean}]);
     const pm = raw.match(/<profile>([\s\S]*?)<\/profile>/);
     if(pm&&!profile){
@@ -2554,8 +2738,21 @@ export default function ChinsApp() {
         }
         const signoff = "okay — I think I've got you. give me a moment and I'll go find your people. head to the Connect tab when you're ready.";
         setTimeout(()=>{ setMsgs(prev=>[...prev,{role:"reed",text:signoff}]); }, 600);
-        setTimeout(()=>{ setScreen("main"); }, 3200);
+        setTimeout(()=>{ setMsgs(prev=>[...prev,{role:"reed",text:"one more thing — I've created a compatibility profile based on our conversation. it includes things like your energy, communication style and what you're looking for. you can see exactly what i've noted and delete it anytime in Settings → My Reed profile. just so you know 🧠"}]); }, 1800);
+        setTimeout(()=>{ setScreen("main"); }, 4500);
       }catch{}
+    }
+    const lm = raw.match(/<location>([\s\S]*?)<\/location>/);
+    if(lm) {
+      try {
+        const loc = JSON.parse(lm[1]);
+        if(authToken && userId && loc.city) {
+          sb.upsertProfile(authToken, userId, {
+            city: loc.city || "",
+            area: loc.area || loc.city || "",
+          });
+        }
+      } catch {}
     }
     const am = raw.match(/<animal>([\s\S]*?)<\/animal>/);
     if(am&&!chipAnimal){
