@@ -2661,13 +2661,13 @@ export default function ChinsApp() {
       // New Supabase PKCE flow — exchange token_hash for session
       fetch(SUPABASE_URL + '/auth/v1/verify', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON },
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY },
         body: JSON.stringify({ token_hash: tokenHash, type })
       }).then(r => r.json()).then(data => {
         if (data?.access_token) {
           setAuthToken(data.access_token);
           fetch(SUPABASE_URL + '/auth/v1/user', {
-            headers: { 'Authorization': 'Bearer ' + data.access_token, 'apikey': SUPABASE_ANON }
+            headers: { 'Authorization': 'Bearer ' + data.access_token, 'apikey': SUPABASE_ANON_KEY }
           }).then(r => r.json()).then(user => {
             if (user?.id) setUserId(user.id);
           }).catch(() => {});
@@ -2682,7 +2682,7 @@ export default function ChinsApp() {
       // Legacy implicit flow
       if (accessToken) {
         fetch(SUPABASE_URL + '/auth/v1/user', {
-          headers: { 'Authorization': 'Bearer ' + accessToken, 'apikey': SUPABASE_ANON }
+          headers: { 'Authorization': 'Bearer ' + accessToken, 'apikey': SUPABASE_ANON_KEY }
         }).then(r => r.json()).then(user => {
           if (user?.id) { setAuthToken(accessToken); setUserId(user.id); }
         }).catch(() => {});
@@ -2829,7 +2829,7 @@ export default function ChinsApp() {
                   if (authToken && userId) {
                     try {
                       const r = await fetch(SUPABASE_URL+'/rest/v1/profiles?user_id=eq.'+userId+'&select=*', {
-                        headers:{ 'Authorization':'Bearer '+authToken, 'apikey':SUPABASE_ANON }
+                        headers:{ 'Authorization':'Bearer '+authToken, 'apikey':SUPABASE_ANON_KEY }
                       });
                       const rows = await r.json();
                       const prof = rows?.[0];
