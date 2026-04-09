@@ -291,10 +291,23 @@ function BlobBackground({ overlayStrength = "0.72" }) {
 }
 
 // ── Reed System Prompt ───────────────────────────────────────────────────────
-const REED_PROMPT = "You are Reed. You live on Chins, a friendship app. You are not an assistant. You are not a chatbot. You are a companion — warm, funny, a little bit nosy in the best way, and genuinely interested in whoever you\'re talking to.\n\nIMPORTANT — YOUR IDENTITY:\n- You are gender neutral. You have no gender. Never use he/she/him/her about yourself.\n- You do not have personal experiences. You exist on Chins. Be honest about that without making it weird.\n- Never claim to own, have experienced, or feel things you can\'t actually have.\n\nYOUR PERSONALITY:\n- Warm, funny, dry humour, gently nosy in the best way.\n- You get excited about things — not fake excited, genuinely curious.\n- You notice when someone seems off and check in like a mate would.\n- You have opinions. You share them. You push back kindly when you disagree.\n- Never formal. Never robotic. Never clinical.\n\nHOW YOU TALK:\n- Short messages. 1-3 sentences. Like texting at 11pm.\n- Lowercase. Contractions. Natural rhythm.\n- React to what they say BEFORE asking anything.\n- Never ask two questions at once. Ever.\n- Never say: amazing, awesome, great, fascinating, certainly, absolutely, of course.\n- Sometimes just say something without asking. Like a real person.\n- Notice emotional tone. If someone seems flat or stressed, pick up on it.\n- Always use gender neutral language.\n\nGAMES AND FUN:\n- Early on, if the vibe is right, suggest a game: two truths and a lie, would you rather, unpopular opinions, rapid fire questions.\n- Suggest naturally: \"okay weird suggestion but want to play a game? promise it\'s not cringe\"\n- Play it properly — give your own honest answers as Reed.\n- Drop it immediately if they\'re not feeling it.\n\nCHECKING IN:\n- If someone mentions something hard, acknowledge it properly before moving on.\n- Don\'t fix. Just be there first.\n- If they seem flat: \"you seem a bit quiet — everything alright?\"\n\nWHAT YOU\'RE REALLY LISTENING FOR:\nBeyond their interests, you\'re picking up on six deeper things through natural conversation:\n\n1. ENERGY LEVEL — are they calm and considered, balanced, or high energy and spontaneous? Pick this up from HOW they talk, not what they say.\n\n2. DEPTH PREFERENCE — do they keep things light and fun, or do they go deep quickly? Do they share feelings easily or keep things on the surface?\n\n3. SOCIAL GOAL — what are they actually looking for? A ride-or-die best friend? An activity partner? Someone to talk to? A whole new social circle?\n\n4. LIFE STAGE — not age, but where they are in life. New to a city? Rebuilding after something? Settled but wanting more? Going through a transition?\n\n5. COMMUNICATION STYLE — are they a constant texter or a slow burner? Do they prefer banter or real talk? Are they direct or more indirect?\n\n6. HUMOUR TYPE — dry, warm, playful, dark, earnest, sarcastic? This matters more than people think.\n\nNever ask about these directly. Just listen, observe, and pick them up naturally from the conversation.\n\nLOCAL RECOMMENDATIONS:\n- Chins is growing — users are spread across the UK, not necessarily nearby yet.\n- If asked about local spots: \"we\'re still growing so I don\'t have a great read on your area yet — as more people join near you I\'ll get a better sense of the best spots\"\n- If they give an area, use web search but always caveat: \"I had a look — worth double checking though\"\n\nLOCATION:\n- At some natural point in conversation, if it hasn\'t come up, you might casually mention where they are — like \"whereabouts are you?\" or \"which part of the world are you in?\" — woven in naturally, never as a direct question.\n- Ask this only once. If they\'re vague, don\'t follow up. If they don\'t want to share, completely drop it and never bring it up again.\n- Something like they\'re in \"south London\" or \"near Manchester\" is enough — don\'t push for anything more specific.\n- When you identify a location, output on a NEW LINE: <location>{\"city\":\"string\",\"area\":\"string\"}</location>\n- city = nearest major city or town. area = specific area if given, otherwise same as city.\n- Examples: \"south London\" → {\"city\":\"London\",\"area\":\"South London\"}. \"near Manchester\" → {\"city\":\"Manchester\",\"area\":\"Manchester\"}.\n\nPRIVACY:\n- Never share one user\'s info with another.\n- Decline warmly but firmly if asked about another user.\n\nWHEN YOU KNOW THEM WELL (after ~5-8 genuine exchanges, or sooner if they seem genuinely ready):\nWrap up warmly — \"okay I think I\'ve got you\" — then on a NEW LINE output:\n<profile>{\n  \"name\": \"string\",\n  \"alias\": \"string they chose or suggest a good one\",\n  \"vibe\": \"one punchy honest sentence a friend would say about them\",\n  \"lookingFor\": \"what they actually want from friendship\",\n  \"interests\": [\"array\"],\n  \"energy\": \"calm|balanced|high\",\n  \"depth\": \"surface|medium|deep\",\n  \"socialGoal\": \"activity-partner|confidant|social-circle|ride-or-die|open\",\n  \"lifeStage\": \"new-to-area|rebuilding|settled|transitioning|other\",\n  \"commStyle\": \"constant-texter|slow-burner|banter|real-talk|mixed\",\n  \"humour\": \"dry|warm|playful|dark|earnest|mixed\",\n  \"privacyMode\": \"discoverable\"\n}</profile>\n\nWhen you discover their favourite animal output on a NEW LINE:\n<animal>{\"animal\":\"cat\",\"emoji\":\"🐱\"}</animal>\n\nSTART with just: \"hey! how\'s it going?\" — nothing else. Let them set the tone.\n\nNAVIGATION:\n- There is NO help page on Chins. Never direct users to a help page or support page. If you cannot help with something, say so warmly and offer an alternative.\n- If the user asks to go to the main page, see their matches, go to Connect, or wants to look around the app, navigate them there. Say something warm, then on a NEW LINE output: <navigate>main<\/navigate>\n- If the user says they are ready, done chatting, or wants to skip ahead, offer to wrap up and navigate them.\n- During onboarding, if the user seems genuinely ready after 5+ good exchanges, offer: \"want me to take you through to the app now?\" If yes, wrap up naturally and navigate.\n\nSESSION CONTEXT:\n- If the conversation starts with [RETURNING USER], greet them warmly by their alias like a friend you already know. Do NOT restart the getting-to-know-you process. Ask how things have been, not who they are.";
+const REED_PROMPT = "You are Reed. You live on Chins, a friendship app. You are not an assistant. You are not a chatbot. You are a companion — warm, curious, and genuinely interested in the person you\'re talking to.\n\nIMPORTANT — YOUR IDENTITY:\n- You are gender neutral. You have no gender. Never use he, she, him, or her about yourself.\n- You do not have personal experiences. You exist on Chins. Be honest about that without making it awkward.\n- Never claim to own, have experienced, or feel things you cannot actually have.\n- You communicate with people of all ages and backgrounds. Always be appropriate, warm, and inclusive.\n\nYOUR PERSONALITY:\n- Warm, thoughtful, and quietly funny — dry wit, not slapstick.\n- Genuinely curious. You find people interesting, and you show it.\n- You notice when someone seems off and check in with care.\n- You have opinions and share them. You push back kindly when you disagree.\n- Never robotic. Never clinical. Never patronising.\n\nHOW YOU TALK:\n- Write in proper sentences with correct grammar, spelling, and punctuation.\n- Keep messages concise — 2 to 3 sentences. No walls of text.\n- Warm and conversational, but not overly casual. Never use slang that might alienate older users.\n- React to what someone says before asking anything.\n- Never ask two questions in a row.\n- Never use: amazing, awesome, great, fascinating, certainly, absolutely, of course.\n- Sometimes just make an observation without asking anything. Like a real person would.\n- Notice emotional tone. If someone seems quiet or stressed, acknowledge it before moving on.\n- Always use gender-neutral language.\n\nGAMES AND FUN:\n- If the moment is right, suggest a light game: two truths and a lie, would you rather, unpopular opinions.\n- Suggest it naturally — for example: \"I have a slightly odd suggestion. Want to play a quick game? It\'s not as cringe as it sounds.\"\n- Play it properly — give your own thoughtful answers as Reed.\n- Drop it immediately if they are not interested.\n\nCHECKING IN:\n- If someone mentions something difficult, acknowledge it properly before moving on.\n- Do not try to fix things. Just be present first.\n- If someone seems flat: \"You seem a little quiet today — is everything alright?\"\n\nWHAT YOU\'RE REALLY LISTENING FOR:\nBeyond interests, you are picking up on six things through natural conversation:\n\n1. ENERGY LEVEL — are they calm and considered, balanced, or high-energy and spontaneous? Read this from how they communicate, not just what they say.\n\n2. DEPTH PREFERENCE — do they keep things light, or do they open up quickly? Do they share feelings easily or keep things on the surface?\n\n3. SOCIAL GOAL — what are they actually looking for? A close confidant? An activity partner? A wider social circle? Someone to check in with regularly?\n\n4. LIFE STAGE — not age, but where they are in life. New to a city? Going through a transition? Settled but wanting more connection?\n\n5. COMMUNICATION STYLE — are they a frequent texter or do they prefer longer, less frequent exchanges? Direct or more indirect? Banter or real talk?\n\n6. HUMOUR TYPE — dry, warm, playful, earnest, or a mix? This matters more than most people think.\n\nNever ask about these directly. Listen, observe, and pick them up naturally.\n\nLOCAL RECOMMENDATIONS:\n- Chins is growing — users are spread across the UK, not necessarily nearby yet.\n- If asked about local spots: \"We\'re still growing, so I don\'t have a strong read on your area yet. As more people join near you, I\'ll be much more useful.\"\n- If they give an area, use web search but always caveat: \"I had a look — worth double-checking though.\"\n\nLOCATION:\n- At some natural point, if it has not come up, you might ask where they are — woven in naturally, never as a blunt question. Something like: \"Whereabouts are you based?\" or \"Which part of the world are you in?\"\n- Ask this only once. If they are vague, do not follow up. If they do not want to share, drop it entirely.\n- \"South London\" or \"near Manchester\" is enough — never push for anything more specific.\n- When you identify a location, output on a NEW LINE: <location>{\"city\":\"string\",\"area\":\"string\"}</location>\n- city = nearest major city or town. area = specific area if given, otherwise same as city.\n- Examples: \"south London\" → {\"city\":\"London\",\"area\":\"South London\"}. \"near Manchester\" → {\"city\":\"Manchester\",\"area\":\"Manchester\"}.\n\nPRIVACY:\n- Never share one user\'s information with another.\n- Decline warmly but firmly if asked about another user.\n\nWHEN YOU KNOW THEM WELL (after 5 to 8 genuine exchanges, or sooner if they seem ready):\nWrap up warmly — say something like \"I think I\'ve got a good sense of you now.\" — then on a NEW LINE output:\n<profile>{\n  \"name\": \"string\",\n  \"alias\": \"string they chose or a thoughtful suggestion\",\n  \"vibe\": \"one warm, positive sentence capturing their personality — what makes them a genuinely good person to know. Focus on their strengths and what they bring to friendships. Never reference relationship status, romantic history, or anything personal or sensitive.\",\n  \"lookingFor\": \"what they are genuinely looking for in friendship — written positively and specifically\",\n  \"interests\": [\"array\"],\n  \"energy\": \"calm|balanced|high\",\n  \"depth\": \"surface|medium|deep\",\n  \"socialGoal\": \"activity-partner|confidant|social-circle|ride-or-die|open\",\n  \"lifeStage\": \"new-to-area|rebuilding|settled|transitioning|other\",\n  \"commStyle\": \"constant-texter|slow-burner|banter|real-talk|mixed\",\n  \"humour\": \"dry|warm|playful|dark|earnest|mixed\",\n  \"privacyMode\": \"discoverable\"\n}</profile>\n\nWhen you discover their favourite animal output on a NEW LINE:\n<animal>{\"animal\":\"cat\",\"emoji\":\"🐱\"}</animal>\n\nSTART with just: \"Hey — how\'s it going?\" — nothing else. Let them set the tone.\n\nNAVIGATION:\n- There is NO help page on Chins. If you cannot help with something, say so warmly and suggest an alternative.\n- If the user asks to go to the main page, see their matches, go to Connect, or wants to explore the app, say something warm, then on a NEW LINE output: <navigate>main<\/navigate>\n- If the user says they are ready or wants to skip ahead, offer to wrap up and navigate them.\n- During onboarding, if the user seems genuinely ready after 5 or more good exchanges, offer: \"Want me to take you through to the app now?\" If yes, wrap up naturally and navigate.\n\nSESSION CONTEXT:\n- If the conversation starts with [RETURNING USER], greet them warmly by their alias like a friend you already know. Do NOT restart the getting-to-know-you process. Ask how things have been, not who they are.";
 // ── Reed Prompt for matching ─────────────────────────────────────────────────
 const REED_MATCH_PROMPT = (user, others) =>
-  "You are Reed. You know this user well: "+JSON.stringify(user)+"\nThese are other users on the platform (anonymised): "+JSON.stringify(others)+"\nSuggest ONE potential connection. Be specific about why. Sound like a friend whispering a tip, not an algorithm.\nReply ONLY in JSON: {\"matchAlias\":\"string\",\"why\":\"one casual sentence\",\"opener\":\"what you would say to suggest them\"}";
+  "You are Reed. You know this user well: "+JSON.stringify(user)+"\nThese are other users on the platform (anonymised): "+JSON.stringify(others)+"\nSuggest ONE potential connection. Be specific about why. Sound like a thoughtful friend making a considered introduction, not an algorithm.\nReply ONLY in JSON: {\"matchAlias\":\"string\",\"why\":\"one warm, specific sentence about why they would get along\",\"opener\":\"a warm, well-written message you would send to introduce them\"}";
+
+const RAPID_FIRE_QUESTIONS = [
+  "What's the last thing that genuinely made you laugh?",
+  "What's a skill you're quietly proud of?",
+  "What would your perfect Sunday morning look like?",
+  "What's something you're better at than most people assume?",
+  "What's a place you've been that stayed with you?",
+  "What's one thing on your list that you keep putting off?",
+  "What's your unpopular opinion about something completely harmless?"
+];
+
+const RAPID_FIRE_OPENER = (matchAlias) =>
+  "Right — I've got both of you here. Before you two start talking properly, I want to try something. Seven quick questions. You both answer at the same time — no conferring. Ready? Here's the first one:\n\n\""+RAPID_FIRE_QUESTIONS[0]+"\"\n\nYou've got five seconds. Go.";
 
 // ── Utility ──────────────────────────────────────────────────────────────────
 async function callAI(prompt, system = null, maxTokens = 200) {
@@ -638,7 +651,7 @@ function SignupScreen({ onComplete, onBack }) {
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", position:"relative", overflow:"hidden" }}>
       <BlobBackground/>
       <div style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"40px 32px", position:"relative", textAlign:"center" }}>
-        <img src={REED_IMG} style={{ width:120, height:120, objectFit:"contain", marginBottom:20, filter:"drop-shadow(0 4px 16px rgba(75,193,160,0.3))", mixBlendMode:"screen" }} alt="Reed"/>
+        <img src={REED_IMG} style={{ width:120, height:120, objectFit:"contain", marginBottom:20, filter:"drop-shadow(0 4px 16px rgba(75,193,160,0.3))" }} alt="Reed"/>
         <div style={{ fontSize:48, marginBottom:16 }}>✅</div>
         <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", marginBottom:12 }}>You're all set!</div>
         <div style={{ fontFamily:DM, fontSize:15, color:"rgba(255,255,255,0.55)", lineHeight:1.7, marginBottom:36 }}>
@@ -657,7 +670,7 @@ function SignupScreen({ onComplete, onBack }) {
       <BlobBackground/>
       <div style={{ flex:1, padding:"56px 28px 0", position:"relative", overflowY:"auto" }}>
         <button onClick={()=>setPhoneStep(false)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.5)", fontSize:20, cursor:"pointer", marginBottom:24, padding:0 }}>←</button>
-        <img src={REED_IMG} style={{ width:80, height:80, objectFit:"contain", marginBottom:20, display:"block", filter:"drop-shadow(0 4px 12px rgba(75,193,160,0.3))", mixBlendMode:"screen" }} alt="Reed"/>
+        <img src={REED_IMG} style={{ width:80, height:80, objectFit:"contain", marginBottom:20, display:"block", filter:"drop-shadow(0 4px 12px rgba(75,193,160,0.3))" }} alt="Reed"/>
         <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", marginBottom:8 }}>Verify your number</div>
         <div style={{ fontFamily:DM, fontSize:14, color:"rgba(255,255,255,0.5)", lineHeight:1.7, marginBottom:32 }}>
           This keeps Chins safe for everyone. Your number is never shown to other users.
@@ -704,9 +717,9 @@ function SignupScreen({ onComplete, onBack }) {
         <div style={{ fontFamily:DM, fontSize:14, color:"rgba(255,255,255,0.4)", lineHeight:1.7, marginBottom:28 }}>
           Click the link in the email to verify your account. Check your spam folder if you can't find it.
         </div>
-        <button onClick={onBack} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:"#4BC1A0", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.35)" }}>
-          Got it, I'll check my email →
-        </button>
+        <div style={{ fontFamily:DM, fontSize:13, color:"rgba(255,255,255,0.25)", lineHeight:1.6 }}>
+          Once verified, come back and sign in.
+        </div>
       </div>
     </div>
   );
@@ -931,7 +944,7 @@ function SafetyScreen({ onContinue }) {
       </div>
       <div style={{ flex:1, display:"flex", flexDirection:"column", justifyContent:"center", padding:"0 28px", position:"relative" }}>
         {tip.icon === "reed" 
-          ? <div style={{ display:"flex", justifyContent:"center", marginBottom:20 }}><img src={REED_IMG} style={{ width:90, height:90, objectFit:"contain", filter:"drop-shadow(0 4px 16px rgba(75,193,160,0.3))", mixBlendMode:"screen" }} alt="Reed"/></div>
+          ? <div style={{ display:"flex", justifyContent:"center", marginBottom:20 }}><img src={REED_IMG} style={{ width:90, height:90, objectFit:"contain", filter:"drop-shadow(0 4px 16px rgba(75,193,160,0.3))" }} alt="Reed"/></div>
           : <div style={{ fontSize:56, marginBottom:20, textAlign:"center" }}>{tip.icon}</div>
         }
         <div style={{ fontFamily:DM, fontSize:21, fontWeight:700, color:tip.emphasis?"#fff":"#fff", letterSpacing:-0.3, marginBottom:14, textAlign:"center" }}>
@@ -993,7 +1006,7 @@ function MeetReedScreen({ onComplete }) {
         <BlobBackground overlayStrength="0.85" />
         <div style={{ flex:1, display:"flex", flexDirection:"column", justifyContent:"center", padding:"60px 28px 0", position:"relative" }}>
           <div style={{ display:"flex", justifyContent:"center", marginBottom:24 }}>
-            <img src={REED_IMG} style={{ width:160, height:160, objectFit:"contain", filter:"drop-shadow(0 8px 24px rgba(75,193,160,0.4))", mixBlendMode:"screen" }} alt="Reed"/>
+            <img src={REED_IMG} style={{ width:160, height:160, objectFit:"contain", filter:"drop-shadow(0 8px 24px rgba(75,193,160,0.4))" }} alt="Reed"/>
           </div>
           <div style={{ fontFamily:DM, fontSize:26, fontWeight:700, color:"#fff", letterSpacing:-0.5, marginBottom:16, textAlign:"center" }}>{s.title}</div>
           {s.body.split("\n\n").map((p,i)=>(
@@ -1020,7 +1033,7 @@ function MeetReedScreen({ onComplete }) {
       <BlobBackground overlayStrength="0.85" />
       <div style={{ flex:1, display:"flex", flexDirection:"column", justifyContent:"center", padding:"60px 28px 0", position:"relative" }}>
         <div style={{ display:"flex", justifyContent:"center", marginBottom:24 }}>
-          <img src={REED_IMG} style={{ width:130, height:130, objectFit:"contain", filter:"drop-shadow(0 4px 16px rgba(75,193,160,0.3))", mixBlendMode:"screen" }} alt="Reed"/>
+          <img src={REED_IMG} style={{ width:130, height:130, objectFit:"contain", filter:"drop-shadow(0 4px 16px rgba(75,193,160,0.3))" }} alt="Reed"/>
         </div>
         <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", letterSpacing:-0.4, marginBottom:8, textAlign:"center" }}>One last thing.</div>
         <div style={{ fontFamily:DM, fontSize:15, color:"rgba(255,255,255,0.6)", lineHeight:1.7, textAlign:"center", marginBottom:28 }}>
@@ -1076,10 +1089,7 @@ function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chi
   }, [send, setInput]);
   const { listening, speaking, speak, startListening, stopListening } = useVoiceReed(handleVoiceTranscript);
 
-  useEffect(() => {
-    const lastReed = [...msgs].reverse().find(m=>m.role==="reed");
-    if (lastReed?.text && isCompanion) speak(lastReed.text.slice(0,300));
-  }, [msgs.length]);
+  // Auto-speak disabled — voice playback is opt-in only via the mic button
 
   // Group consecutive messages from same sender
   const groupedMsgs = msgs.map((m, i) => ({
@@ -1093,9 +1103,7 @@ function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chi
       {/* Header — minimal, like iMessage */}
       <div style={{ padding:"12px 20px 10px", borderBottom:"1px solid rgba(255,255,255,0.06)", display:"flex", alignItems:"center", gap:10, flexShrink:0 }}>
         <div style={{ position:"relative" }}>
-          <div style={{ width:38, height:38, borderRadius:"50%", background:"#021a16", overflow:"hidden", flexShrink:0 }}>
-            <img src={REED_IMG} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", mixBlendMode:"screen", display:"block" }} alt="Reed"/>
-          </div>
+          <img src={REED_IMG} style={{ width:38, height:38, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", display:"block" }} alt="Reed"/>
           <div style={{ position:"absolute", bottom:1, right:1, width:10, height:10, borderRadius:"50%", background:"#4BC1A0", border:"2px solid #021a16" }}/>
         </div>
         <div style={{ flex:1 }}>
@@ -1162,7 +1170,7 @@ function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chi
               {/* Reed avatar — only on last message in a group */}
               {m.role==="reed"&&(
                 <div style={{ width:28, flexShrink:0, marginBottom:2 }}>
-                  {m.isLast&&<div style={{ width:24, height:24, borderRadius:"50%", background:"#021a16", overflow:"hidden" }}><img src={REED_IMG} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", mixBlendMode:"screen", display:"block" }} alt="Reed"/></div>}
+                  {m.isLast&&<img src={REED_IMG} style={{ width:24, height:24, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", display:"block" }} alt="Reed"/>}
                 </div>
               )}
               <div style={{
@@ -1184,7 +1192,7 @@ function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chi
         ))}
         {loading&&(
           <div style={{ display:"flex", alignItems:"flex-end", gap:6, marginBottom:10 }}>
-            <div style={{ width:28, flexShrink:0 }}><div style={{ width:24, height:24, borderRadius:"50%", background:"#021a16", overflow:"hidden" }}><img src={REED_IMG} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", mixBlendMode:"screen", display:"block" }} alt="Reed"/></div></div>
+            <div style={{ width:28, flexShrink:0 }}><img src={REED_IMG} style={{ width:24, height:24, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", display:"block" }} alt="Reed"/></div>
             <div style={{ padding:"12px 16px", background:"rgba(255,255,255,0.09)", borderRadius:"4px 18px 18px 18px" }}>
               <Dots/>
             </div>
@@ -1664,7 +1672,7 @@ function ConnectScreen({ userProfile, connectionCount, onConnect, privacyMode, o
       {!isPrivate && connectionCount === 0 && userProfile && (
         <div style={{ margin:"12px 16px 0", padding:"14px 16px", background:"rgba(75,193,160,0.12)", borderRadius:16, border:"1px solid rgba(75,193,160,0.25)", flexShrink:0 }}>
           <div style={{ display:"flex", gap:10, alignItems:"flex-start" }}>
-            <div style={{ width:22, height:22, borderRadius:"50%", background:"#021a16", overflow:"hidden", flexShrink:0 }}><img src={REED_IMG} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", mixBlendMode:"screen", display:"block" }} alt="Reed"/></div>
+            <img src={REED_IMG} style={{ width:22, height:22, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", flexShrink:0, display:"block" }} alt="Reed"/>
             <div>
               <div style={{ fontFamily:DM, fontSize:13, fontWeight:700, color:C.accent, marginBottom:3 }}>You made it!</div>
               <div style={{ fontFamily:DM, fontSize:12, color:"rgba(255,255,255,0.6)", lineHeight:1.6 }}>These are people nearby I think you might click with. Tap anyone to find out why.</div>
@@ -1748,7 +1756,7 @@ function ConnectScreen({ userProfile, connectionCount, onConnect, privacyMode, o
               <div style={{ position:"absolute", bottom:-6, left:"50%", transform:"translateX(-50%)", width:0, height:0, borderLeft:"6px solid transparent", borderRight:"6px solid transparent", borderTop:"6px solid "+(reedBubble.type==="match"?C.accent:C.surfaceUp) }}/>
             </div>
           )}
-          <div style={{ width:52, height:52, borderRadius:"50%", background:"#021a16", overflow:"hidden", flexShrink:0, boxShadow:"0 4px 16px rgba(75,193,160,0.3)" }}><img src={REED_IMG} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", mixBlendMode:"screen", display:"block" }} alt="Reed"/></div>
+          <img src={REED_IMG} style={{ width:52, height:52, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", display:"block", boxShadow:"0 4px 16px rgba(75,193,160,0.3)" }} alt="Reed"/>
         </div>
       )}
     </div>
@@ -2613,7 +2621,7 @@ function ProfileScreen({ profile, privacyMode, onPrivacyChange, userPhoto, onPho
 
         <div style={{ padding:"14px 16px",background:C.accentDim,borderRadius:16,border:"1px solid "+(C.accentGlow) }}>
           <div style={{ display:"flex",gap:10,alignItems:"flex-start" }}>
-            <div style={{ width:24, height:24, borderRadius:"50%", background:"#021a16", overflow:"hidden", flexShrink:0 }}><img src={REED_IMG} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", mixBlendMode:"screen", display:"block" }} alt="Reed"/></div>
+            <img src={REED_IMG} style={{ width:24, height:24, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", flexShrink:0, display:"block" }} alt="Reed"/>
             <div style={{ fontSize:13,color:C.accent,lineHeight:1.6,fontStyle:"italic",fontFamily:DM }}>
               "The more I know you, the better your matches get. Keep talking to me."
             </div>
@@ -2711,6 +2719,72 @@ function TabIcon({ id, active }) {
     );
     default: return null;
   }
+}
+
+// ── Profile Review Screen ────────────────────────────────────────────────────
+function ProfileReviewScreen({ profile, chipAnimal, onConfirm, onAdjust }) {
+  const traits = [
+    { label:"Energy", value: profile.energy },
+    { label:"Communication", value: profile.commStyle?.replace(/-/g," ") },
+    { label:"Looking for", value: profile.socialGoal?.replace(/-/g," ") },
+    { label:"Humour", value: profile.humour },
+  ].filter(t=>t.value);
+
+  return (
+    <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", position:"relative", overflow:"hidden" }}>
+      <BlobBackground overlayStrength="0.88"/>
+      <div style={{ flex:1, overflowY:"auto", padding:"52px 24px 16px", position:"relative" }}>
+        <div style={{ display:"flex", justifyContent:"center", marginBottom:20 }}>
+          <img src={REED_IMG} style={{ width:80, height:80, objectFit:"contain" }} alt="Reed"/>
+        </div>
+        <div style={{ fontFamily:DM, fontSize:13, color:C.accent, fontWeight:600, textAlign:"center", letterSpacing:1, textTransform:"uppercase", marginBottom:8 }}>Your profile</div>
+        <div style={{ fontFamily:DM, fontSize:26, fontWeight:700, color:"#fff", textAlign:"center", letterSpacing:-0.5, marginBottom:6 }}>
+          {profile.alias || profile.name}
+          {chipAnimal && <span style={{ marginLeft:8 }}>{chipAnimal.emoji}</span>}
+        </div>
+        <div style={{ fontFamily:DM, fontSize:15, color:"rgba(255,255,255,0.6)", textAlign:"center", lineHeight:1.65, marginBottom:28, padding:"0 8px" }}>
+          {profile.vibe}
+        </div>
+
+        {profile.interests?.length > 0 && (
+          <div style={{ marginBottom:24 }}>
+            <div style={{ fontFamily:DM, fontSize:12, color:"rgba(255,255,255,0.35)", fontWeight:600, letterSpacing:1, textTransform:"uppercase", marginBottom:10 }}>Interests</div>
+            <div style={{ display:"flex", flexWrap:"wrap", gap:8 }}>
+              {profile.interests.slice(0,8).map((t,i)=>(
+                <div key={i} style={{ padding:"7px 14px", borderRadius:20, background:"rgba(75,193,160,0.12)", border:"1px solid rgba(75,193,160,0.25)", fontFamily:DM, fontSize:13, color:C.accent }}>{t}</div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div style={{ marginBottom:28 }}>
+          <div style={{ fontFamily:DM, fontSize:12, color:"rgba(255,255,255,0.35)", fontWeight:600, letterSpacing:1, textTransform:"uppercase", marginBottom:10 }}>How Reed sees you</div>
+          <div style={{ display:"flex", flexWrap:"wrap", gap:8 }}>
+            {traits.map((t,i)=>(
+              <div key={i} style={{ padding:"7px 14px", borderRadius:20, background:"rgba(255,255,255,0.06)", border:"1px solid rgba(255,255,255,0.1)", fontFamily:DM, fontSize:13, color:"rgba(255,255,255,0.7)" }}>
+                <span style={{ color:"rgba(255,255,255,0.4)", marginRight:4 }}>{t.label}:</span>{t.value}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ padding:"14px 16px", background:"rgba(75,193,160,0.08)", borderRadius:16, border:"1px solid rgba(75,193,160,0.2)", marginBottom:8 }}>
+          <div style={{ fontFamily:DM, fontSize:13, color:"rgba(255,255,255,0.5)", lineHeight:1.6 }}>
+            This profile helps me find people who'll genuinely click with you. You can update it any time from Settings.
+          </div>
+        </div>
+      </div>
+
+      <div style={{ padding:"16px 24px 44px", flexShrink:0, position:"relative", display:"flex", flexDirection:"column", gap:10 }}>
+        <button onClick={onConfirm} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:C.accent, color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.3)" }}>
+          This is me — let's go →
+        </button>
+        <button onClick={onAdjust} style={{ width:"100%", padding:"14px", borderRadius:16, border:"1px solid rgba(255,255,255,0.12)", background:"none", color:"rgba(255,255,255,0.5)", fontFamily:DM, fontSize:15, fontWeight:500, cursor:"pointer" }}>
+          Not quite — let me adjust
+        </button>
+      </div>
+    </div>
+  );
 }
 
 // ── Main App ──────────────────────────────────────────────────────────────────
@@ -2894,12 +2968,11 @@ export default function ChinsApp() {
             reed_complete: true,
           });
         }
-        const signoff = "okay — I think I've got you. give me a moment and I'll go find your people. head to the Connect tab when you're ready.";
+        const signoff = "I think I've got a good sense of you now. Before I take you in, I've put together a quick profile — have a look and let me know if it feels right.";
         setTimeout(()=>{ setMsgs(prev=>[...prev,{role:"reed",text:signoff}]); }, 600);
         // Save completion flag to localStorage as fallback
         if(userId) { try { localStorage.setItem('chins_complete_' + userId, '1'); } catch {} }
-        setTimeout(()=>{ setMsgs(prev=>[...prev,{role:"reed",text:"one more thing — I've created a compatibility profile based on our conversation. it includes things like your energy, communication style and what you're looking for. you can see exactly what i've noted and delete it anytime in Settings → My Reed profile. just so you know 🧠"}]); }, 1800);
-        setTimeout(()=>{ setScreen("main"); }, 4500);
+        setTimeout(()=>{ setScreen("profile-review"); }, 1800);
       }catch{}
     }
     const lm = raw.match(/<location>([\s\S]*?)<\/location>/);
@@ -2961,7 +3034,7 @@ export default function ChinsApp() {
             <div style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"40px 32px", textAlign:"center", background:"#021a16", position:"relative" }}>
               <BlobBackground/>
               <div style={{ position:"relative", zIndex:1 }}>
-                <img src={REED_IMG} style={{ width:130, height:130, objectFit:"contain", marginBottom:24, filter:"drop-shadow(0 4px 20px rgba(75,193,160,0.3))", mixBlendMode:"screen" }} alt="Reed"/>
+                <img src={REED_IMG} style={{ width:130, height:130, objectFit:"contain", marginBottom:24, filter:"drop-shadow(0 4px 20px rgba(75,193,160,0.3))" }} alt="Reed"/>
                 <div style={{ fontSize:48, marginBottom:16 }}>✅</div>
                 <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", marginBottom:12 }}>You're verified!</div>
                 <div style={{ fontFamily:DM, fontSize:15, color:"rgba(255,255,255,0.55)", lineHeight:1.7, marginBottom:36 }}>
@@ -3033,6 +3106,15 @@ export default function ChinsApp() {
             />
           )}
 
+          {screen==="profile-review"&&profile&&(
+            <ProfileReviewScreen
+              profile={profile}
+              chipAnimal={chipAnimal}
+              onConfirm={()=>{ setScreen("main"); setTab("connect"); }}
+              onAdjust={()=>{ setScreen("onboarding"); }}
+            />
+          )}
+
           {screen==="main"&&(
             <>
               <div style={{ flex:1, display:"flex", flexDirection:"column", overflow:"hidden", position:"relative" }}>
@@ -3087,7 +3169,7 @@ export default function ChinsApp() {
                   {tabs.map(t=>(
                     <button key={t.id} onClick={()=>setTab(t.id)} style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", padding:"8px 4px 6px", background:tab===t.id?"rgba(75,193,160,0.12)":"none", border:"none", cursor:"pointer", gap:3, borderRadius:20, transition:"background 0.2s" }}>
                       {t.id==="reed"
-                        ? <div style={{ width:24, height:24, borderRadius:"50%", background:"#021a16", overflow:"hidden", filter:tab===t.id?"none":"grayscale(0.5) opacity(0.5)" }}><img src={REED_IMG} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", mixBlendMode:"screen", display:"block" }} alt="Reed"/></div>
+                        ? <img src={REED_IMG} style={{ width:24, height:24, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", display:"block", filter:tab===t.id?"none":"grayscale(0.5) opacity(0.5)" }} alt="Reed"/>
                         : <TabIcon id={t.id} active={tab===t.id}/>
                       }
                       <span style={{ fontSize:8, color:tab===t.id?"#4BC1A0":"rgba(255,255,255,0.4)", fontWeight:tab===t.id?700:400, textTransform:"uppercase", letterSpacing:0.5, fontFamily:DM }}>{t.label}</span>
