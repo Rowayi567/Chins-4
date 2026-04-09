@@ -976,9 +976,7 @@ function MeetReedScreen({ onComplete }) {
   const screens = [
     {
       title:"Meet Reed.",
-      body:"Reed is your AI companion on Chins. Reed gets to know you through conversation and suggests potential connections on your behalf.
-
-The more honest you are with Reed, the better the suggestions. Reed keeps your conversations private and never shares them with other users.",
+      body:"Reed is your AI companion on Chins. Reed gets to know you through conversation and suggests potential connections on your behalf.\n\nThe more honest you are with Reed, the better the suggestions. Reed keeps your conversations private and never shares them with other users.",
       reedMood:"excited",
     },
     {
