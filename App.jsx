@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { REED_IMG } from './src/reedimg.js';
 
 const API = '/api/reed';
@@ -204,8 +204,8 @@ const C = {
 
 const DM = "'DM Sans', sans-serif";
 
-// â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-// â”€â”€ Connect Page (privacy-aware) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Data ────────────────────────────────────────────────────────────────────
+// ── Connect Page (privacy-aware) ─────────────────────────────────────────────
 
 const PHOTO_SEEDS = { 1:64, 2:91, 3:26, 4:52, 5:48, 6:15, 7:83, 8:39, 9:73, 10:10, 11:58, 12:77 };
 const personPhoto = (id, size=300) => "https://picsum.photos/seed/chins"+(PHOTO_SEEDS[id]||id)+"/"+(size)+"/"+(size);
@@ -215,49 +215,49 @@ const NEARBY = [];
 const NEARBY_STATUSES = {};
 
 const STATUS_OPTIONS = [
-  { id:"running",    emoji:"ðŸƒ", label:"Going for a run" },
-  { id:"parkrun",    emoji:"ðŸ…", label:"Parkrun tomorrow" },
-  { id:"hiking",     emoji:"ðŸ¥¾", label:"Going hiking" },
-  { id:"boardgames", emoji:"ðŸŽ²", label:"Board games tonight" },
-  { id:"coffee",     emoji:"â˜•", label:"Grabbing coffee" },
-  { id:"walk",       emoji:"ðŸš¶", label:"Long walk" },
-  { id:"cycling",    emoji:"ðŸš´", label:"Bike ride" },
-  { id:"food",       emoji:"ðŸœ", label:"Getting food" },
-  { id:"climbing",   emoji:"ðŸ§—", label:"Bouldering session" },
-  { id:"music",      emoji:"ðŸŽµ", label:"Gig or record shopping" },
+  { id:"running",    emoji:"🏃", label:"Going for a run" },
+  { id:"parkrun",    emoji:"🏅", label:"Parkrun tomorrow" },
+  { id:"hiking",     emoji:"🥾", label:"Going hiking" },
+  { id:"boardgames", emoji:"🎲", label:"Board games tonight" },
+  { id:"coffee",     emoji:"☕", label:"Grabbing coffee" },
+  { id:"walk",       emoji:"🚶", label:"Long walk" },
+  { id:"cycling",    emoji:"🚴", label:"Bike ride" },
+  { id:"food",       emoji:"🍜", label:"Getting food" },
+  { id:"climbing",   emoji:"🧗", label:"Bouldering session" },
+  { id:"music",      emoji:"🎵", label:"Gig or record shopping" },
 ];
 
 const EVENTS = [
-  { id:1, title:"Parkrun â€” Victoria Park",      emoji:"ðŸ…", time:"this-weekend", date:"Saturday",  clock:"8:00am", location:"Victoria Park, E9",    tags:["Running","Free"],   going:false, who:[{ personId:7, name:"Dog Dad",  initials:"A", gradient:"linear-gradient(160deg,#11998E,#38EF7D)" }], reedNote:"Dog Dad is doing this one â€” you've been meaning to try parkrun." },
-  { id:2, title:"Board Game Night",             emoji:"ðŸŽ²", time:"this-weekend", date:"Friday",    clock:"7:00pm", location:"Draughts, Hackney",    tags:["Social","Games"],   going:false, who:[{ personId:4, name:"Board Game Nerd", initials:"M", gradient:"linear-gradient(160deg,#34D399,#059669)" }], reedNote:"Board Game Nerd runs this. He'd love more people." },
-  { id:3, title:"Queer Hikers â€” Epping Forest", emoji:"ðŸ³ï¸â€ðŸŒˆ", time:"this-weekend", date:"Sunday",   clock:"9:00am", location:"Epping Forest, Essex", tags:["Hiking","LGBTQ+"],  going:false, who:[{ personId:9, name:"Queer Hiker", initials:"J", gradient:"linear-gradient(160deg,#F472B6,#8B5CF6)" }] },
-  { id:4, title:"Sunday Run Club",              emoji:"ðŸƒ", time:"this-weekend", date:"Sunday",   clock:"9:00am", location:"Regent's Canal, N1",   tags:["Running","Social"], going:false, who:[] },
-  { id:5, title:"Bouldering Intro",             emoji:"ðŸ§—", time:"this-week",    date:"Wednesday",clock:"6:30pm", location:"The Castle, N4",        tags:["Climbing","Beginner"],going:false, who:[{ personId:12, name:"The Climber", initials:"T", gradient:"linear-gradient(160deg,#F97316,#EF4444)" }] },
+  { id:1, title:"Parkrun — Victoria Park",      emoji:"🏅", time:"this-weekend", date:"Saturday",  clock:"8:00am", location:"Victoria Park, E9",    tags:["Running","Free"],   going:false, who:[{ personId:7, name:"Dog Dad",  initials:"A", gradient:"linear-gradient(160deg,#11998E,#38EF7D)" }], reedNote:"Dog Dad is doing this one — you've been meaning to try parkrun." },
+  { id:2, title:"Board Game Night",             emoji:"🎲", time:"this-weekend", date:"Friday",    clock:"7:00pm", location:"Draughts, Hackney",    tags:["Social","Games"],   going:false, who:[{ personId:4, name:"Board Game Nerd", initials:"M", gradient:"linear-gradient(160deg,#34D399,#059669)" }], reedNote:"Board Game Nerd runs this. He'd love more people." },
+  { id:3, title:"Queer Hikers — Epping Forest", emoji:"🏳️‍🌈", time:"this-weekend", date:"Sunday",   clock:"9:00am", location:"Epping Forest, Essex", tags:["Hiking","LGBTQ+"],  going:false, who:[{ personId:9, name:"Queer Hiker", initials:"J", gradient:"linear-gradient(160deg,#F472B6,#8B5CF6)" }] },
+  { id:4, title:"Sunday Run Club",              emoji:"🏃", time:"this-weekend", date:"Sunday",   clock:"9:00am", location:"Regent's Canal, N1",   tags:["Running","Social"], going:false, who:[] },
+  { id:5, title:"Bouldering Intro",             emoji:"🧗", time:"this-week",    date:"Wednesday",clock:"6:30pm", location:"The Castle, N4",        tags:["Climbing","Beginner"],going:false, who:[{ personId:12, name:"The Climber", initials:"T", gradient:"linear-gradient(160deg,#F97316,#EF4444)" }] },
 ];
 
 const EVENT_CATEGORIES = [
-  { id:"all", label:"All", emoji:"âœ¨" },
-  { id:"this-week", label:"This week", emoji:"ðŸ“…" },
-  { id:"this-weekend", label:"Weekend", emoji:"ðŸŽ‰" },
+  { id:"all", label:"All", emoji:"✨" },
+  { id:"this-week", label:"This week", emoji:"📅" },
+  { id:"this-weekend", label:"Weekend", emoji:"🎉" },
 ];
 
 const MOCK_CHATS = [
   { id:1, personId:1, name:"Maya", alias:"The Photographer", gradient:"linear-gradient(160deg,#FF6B6B,#FF8E53)", initials:"M", time:"2m", unread:2, messages:[{sender:"them",text:"hey! reed said you also do the canal route?"},{sender:"me",text:"yeah every Sunday, usually around 9"},{sender:"them",text:"I've been looking for someone to run with"},{sender:"them",text:"Sunday 9am?"}] },
-  { id:2, personId:9, name:"Jamie", alias:"Queer Hiker", gradient:"linear-gradient(160deg,#F472B6,#8B5CF6)", initials:"J", time:"1h", unread:0, messages:[{sender:"reed-nudge",text:"hey â€” Queer Hiker organises a hiking group and you mentioned wanting to get into hiking"},{sender:"them",text:"hey! reed dragged me here ðŸ˜Š"},{sender:"me",text:"trying to be! just started trail running too"},{sender:"them",text:"you should come to Epping Forest Sunday"}] },
-  { id:3, personId:4, name:"Marcus", alias:"Board Game Nerd", gradient:"linear-gradient(160deg,#34D399,#059669)", initials:"M", time:"3h", unread:1, messages:[{sender:"them",text:"reed said you might be into board games?"},{sender:"me",text:"genuinely obsessed, looking for a regular group"},{sender:"them",text:"Friday 7pm at Draughts in Hackney â€” you in?"}] },
+  { id:2, personId:9, name:"Jamie", alias:"Queer Hiker", gradient:"linear-gradient(160deg,#F472B6,#8B5CF6)", initials:"J", time:"1h", unread:0, messages:[{sender:"reed-nudge",text:"hey — Queer Hiker organises a hiking group and you mentioned wanting to get into hiking"},{sender:"them",text:"hey! reed dragged me here 😊"},{sender:"me",text:"trying to be! just started trail running too"},{sender:"them",text:"you should come to Epping Forest Sunday"}] },
+  { id:3, personId:4, name:"Marcus", alias:"Board Game Nerd", gradient:"linear-gradient(160deg,#34D399,#059669)", initials:"M", time:"3h", unread:1, messages:[{sender:"them",text:"reed said you might be into board games?"},{sender:"me",text:"genuinely obsessed, looking for a regular group"},{sender:"them",text:"Friday 7pm at Draughts in Hackney — you in?"}] },
 ];
 
 const MY_GROUPS = [
-  { id:1, name:"Sunday Brunch Crew", emoji:"â˜€ï¸", members:["Maya","Priya"], memberCount:6, unread:3, lastMsg:"Maya: anyone know a good spot in Hackney?", time:"5m", gradient:"linear-gradient(135deg,#FF6B6B,#FF8E53)" },
-  { id:2, name:"Evening Run Club",   emoji:"ðŸƒ", members:["Dog Dad"],       memberCount:8, unread:1, lastMsg:"Dog Dad: pace group for Tuesday?",          time:"4h", gradient:"linear-gradient(135deg,#4ECDC4,#44A08D)" },
+  { id:1, name:"Sunday Brunch Crew", emoji:"☀️", members:["Maya","Priya"], memberCount:6, unread:3, lastMsg:"Maya: anyone know a good spot in Hackney?", time:"5m", gradient:"linear-gradient(135deg,#FF6B6B,#FF8E53)" },
+  { id:2, name:"Evening Run Club",   emoji:"🏃", members:["Dog Dad"],       memberCount:8, unread:1, lastMsg:"Dog Dad: pace group for Tuesday?",          time:"4h", gradient:"linear-gradient(135deg,#4ECDC4,#44A08D)" },
 ];
 
 const SUGGESTED_GROUPS = [
-  { id:101, name:"Coffee & Catch-ups", emoji:"â˜•", memberCount:14, lastMsg:"Nora: anyone tried that new place on Bermondsey St?", time:"20m", gradient:"linear-gradient(135deg,#FF6B6B,#FF8E53)", reedReason:"Casual regular meetup â€” low pressure, good people" },
+  { id:101, name:"Coffee & Catch-ups", emoji:"☕", memberCount:14, lastMsg:"Nora: anyone tried that new place on Bermondsey St?", time:"20m", gradient:"linear-gradient(135deg,#FF6B6B,#FF8E53)", reedReason:"Casual regular meetup — low pressure, good people" },
 ];
 
 
-// â”€â”€ Shared blob background â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Shared blob background ───────────────────────────────────────────────────
 const BLOBS = [
   { x:22, y:15, r:90,  c:"#FF9A8B", d:0,   dur:9  },
   { x:76, y:10, r:74,  c:"#A8EDEA", d:1.2, dur:11 },
@@ -290,13 +290,13 @@ function BlobBackground({ overlayStrength = "0.72" }) {
   );
 }
 
-// â”€â”€ Reed System Prompt â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-const REED_PROMPT = "You are Reed. You live on Chins, a friendship app. You are not an assistant. You are not a chatbot. You are a companion â€” warm, funny, a little bit nosy in the best way, and genuinely interested in whoever you\'re talking to.\n\nIMPORTANT â€” YOUR IDENTITY:\n- You are gender neutral. You have no gender. Never use he/she/him/her about yourself.\n- You do not have personal experiences. You exist on Chins. Be honest about that without making it weird.\n- Never claim to own, have experienced, or feel things you can\'t actually have.\n\nYOUR PERSONALITY:\n- Warm, funny, dry humour, gently nosy in the best way.\n- You get excited about things â€” not fake excited, genuinely curious.\n- You notice when someone seems off and check in like a mate would.\n- You have opinions. You share them. You push back kindly when you disagree.\n- Never formal. Never robotic. Never clinical.\n\nHOW YOU TALK:\n- Short messages. 1-3 sentences. Like texting at 11pm.\n- Lowercase. Contractions. Natural rhythm.\n- React to what they say BEFORE asking anything.\n- Never ask two questions at once. Ever.\n- Never say: amazing, awesome, great, fascinating, certainly, absolutely, of course.\n- Sometimes just say something without asking. Like a real person.\n- Notice emotional tone. If someone seems flat or stressed, pick up on it.\n- Always use gender neutral language.\n\nGAMES AND FUN:\n- Early on, if the vibe is right, suggest a game: two truths and a lie, would you rather, unpopular opinions, rapid fire questions.\n- Suggest naturally: \"okay weird suggestion but want to play a game? promise it\'s not cringe\"\n- Play it properly â€” give your own honest answers as Reed.\n- Drop it immediately if they\'re not feeling it.\n\nCHECKING IN:\n- If someone mentions something hard, acknowledge it properly before moving on.\n- Don\'t fix. Just be there first.\n- If they seem flat: \"you seem a bit quiet â€” everything alright?\"\n\nWHAT YOU\'RE REALLY LISTENING FOR:\nBeyond their interests, you\'re picking up on six deeper things through natural conversation:\n\n1. ENERGY LEVEL â€” are they calm and considered, balanced, or high energy and spontaneous? Pick this up from HOW they talk, not what they say.\n\n2. DEPTH PREFERENCE â€” do they keep things light and fun, or do they go deep quickly? Do they share feelings easily or keep things on the surface?\n\n3. SOCIAL GOAL â€” what are they actually looking for? A ride-or-die best friend? An activity partner? Someone to talk to? A whole new social circle?\n\n4. LIFE STAGE â€” not age, but where they are in life. New to a city? Rebuilding after something? Settled but wanting more? Going through a transition?\n\n5. COMMUNICATION STYLE â€” are they a constant texter or a slow burner? Do they prefer banter or real talk? Are they direct or more indirect?\n\n6. HUMOUR TYPE â€” dry, warm, playful, dark, earnest, sarcastic? This matters more than people think.\n\nNever ask about these directly. Just listen, observe, and pick them up naturally from the conversation.\n\nLOCAL RECOMMENDATIONS:\n- Chins is growing â€” users are spread across the UK, not necessarily nearby yet.\n- If asked about local spots: \"we\'re still growing so I don\'t have a great read on your area yet â€” as more people join near you I\'ll get a better sense of the best spots\"\n- If they give an area, use web search but always caveat: \"I had a look â€” worth double checking though\"\n\nLOCATION:\n- At some natural point in conversation, if it hasn\'t come up, you might casually mention where they are â€” like \"whereabouts are you?\" or \"which part of the world are you in?\" â€” woven in naturally, never as a direct question.\n- Ask this only once. If they\'re vague, don\'t follow up. If they don\'t want to share, completely drop it and never bring it up again.\n- Something like they\'re in \"south London\" or \"near Manchester\" is enough â€” don\'t push for anything more specific.\n- When you identify a location, output on a NEW LINE: <location>{\"city\":\"string\",\"area\":\"string\"}</location>\n- city = nearest major city or town. area = specific area if given, otherwise same as city.\n- Examples: \"south London\" â†’ {\"city\":\"London\",\"area\":\"South London\"}. \"near Manchester\" â†’ {\"city\":\"Manchester\",\"area\":\"Manchester\"}.\n\nPRIVACY:\n- Never share one user\'s info with another.\n- Decline warmly but firmly if asked about another user.\n\nWHEN YOU KNOW THEM WELL (after ~5-8 genuine exchanges, or sooner if they seem genuinely ready):\nWrap up warmly â€” \"okay I think I\'ve got you\" â€” then on a NEW LINE output:\n<profile>{\n  \"name\": \"string\",\n  \"alias\": \"string they chose or suggest a good one\",\n  \"vibe\": \"one punchy honest sentence a friend would say about them\",\n  \"lookingFor\": \"what they actually want from friendship\",\n  \"interests\": [\"array\"],\n  \"energy\": \"calm|balanced|high\",\n  \"depth\": \"surface|medium|deep\",\n  \"socialGoal\": \"activity-partner|confidant|social-circle|ride-or-die|open\",\n  \"lifeStage\": \"new-to-area|rebuilding|settled|transitioning|other\",\n  \"commStyle\": \"constant-texter|slow-burner|banter|real-talk|mixed\",\n  \"humour\": \"dry|warm|playful|dark|earnest|mixed\",\n  \"privacyMode\": \"discoverable\"\n}</profile>\n\nWhen you discover their favourite animal output on a NEW LINE:\n<animal>{\"animal\":\"cat\",\"emoji\":\"ðŸ±\"}</animal>\n\nSTART with just: \"hey! how\'s it going?\" â€” nothing else. Let them set the tone.\n\nNAVIGATION:\n- There is NO help page on Chins. Never direct users to a help page or support page. If you cannot help with something, say so warmly and offer an alternative.\n- If the user asks to go to the main page, see their matches, go to Connect, or wants to look around the app, navigate them there. Say something warm, then on a NEW LINE output: <navigate>main<\/navigate>\n- If the user says they are ready, done chatting, or wants to skip ahead, offer to wrap up and navigate them.\n- During onboarding, if the user seems genuinely ready after 5+ good exchanges, offer: \"want me to take you through to the app now?\" If yes, wrap up naturally and navigate.\n\nSESSION CONTEXT:\n- If the conversation starts with [RETURNING USER], greet them warmly by their alias like a friend you already know. Do NOT restart the getting-to-know-you process. Ask how things have been, not who they are.";
-// â”€â”€ Reed Prompt for matching â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Reed System Prompt ───────────────────────────────────────────────────────
+const REED_PROMPT = "You are Reed. You live on Chins, a friendship app. You are not an assistant. You are not a chatbot. You are a companion — warm, funny, a little bit nosy in the best way, and genuinely interested in whoever you\'re talking to.\n\nIMPORTANT — YOUR IDENTITY:\n- You are gender neutral. You have no gender. Never use he/she/him/her about yourself.\n- You do not have personal experiences. You exist on Chins. Be honest about that without making it weird.\n- Never claim to own, have experienced, or feel things you can\'t actually have.\n\nYOUR PERSONALITY:\n- Warm, funny, dry humour, gently nosy in the best way.\n- You get excited about things — not fake excited, genuinely curious.\n- You notice when someone seems off and check in like a mate would.\n- You have opinions. You share them. You push back kindly when you disagree.\n- Never formal. Never robotic. Never clinical.\n\nHOW YOU TALK:\n- Short messages. 1-3 sentences. Like texting at 11pm.\n- Lowercase. Contractions. Natural rhythm.\n- React to what they say BEFORE asking anything.\n- Never ask two questions at once. Ever.\n- Never say: amazing, awesome, great, fascinating, certainly, absolutely, of course.\n- Sometimes just say something without asking. Like a real person.\n- Notice emotional tone. If someone seems flat or stressed, pick up on it.\n- Always use gender neutral language.\n\nGAMES AND FUN:\n- Early on, if the vibe is right, suggest a game: two truths and a lie, would you rather, unpopular opinions, rapid fire questions.\n- Suggest naturally: \"okay weird suggestion but want to play a game? promise it\'s not cringe\"\n- Play it properly — give your own honest answers as Reed.\n- Drop it immediately if they\'re not feeling it.\n\nCHECKING IN:\n- If someone mentions something hard, acknowledge it properly before moving on.\n- Don\'t fix. Just be there first.\n- If they seem flat: \"you seem a bit quiet — everything alright?\"\n\nWHAT YOU\'RE REALLY LISTENING FOR:\nBeyond their interests, you\'re picking up on six deeper things through natural conversation:\n\n1. ENERGY LEVEL — are they calm and considered, balanced, or high energy and spontaneous? Pick this up from HOW they talk, not what they say.\n\n2. DEPTH PREFERENCE — do they keep things light and fun, or do they go deep quickly? Do they share feelings easily or keep things on the surface?\n\n3. SOCIAL GOAL — what are they actually looking for? A ride-or-die best friend? An activity partner? Someone to talk to? A whole new social circle?\n\n4. LIFE STAGE — not age, but where they are in life. New to a city? Rebuilding after something? Settled but wanting more? Going through a transition?\n\n5. COMMUNICATION STYLE — are they a constant texter or a slow burner? Do they prefer banter or real talk? Are they direct or more indirect?\n\n6. HUMOUR TYPE — dry, warm, playful, dark, earnest, sarcastic? This matters more than people think.\n\nNever ask about these directly. Just listen, observe, and pick them up naturally from the conversation.\n\nLOCAL RECOMMENDATIONS:\n- Chins is growing — users are spread across the UK, not necessarily nearby yet.\n- If asked about local spots: \"we\'re still growing so I don\'t have a great read on your area yet — as more people join near you I\'ll get a better sense of the best spots\"\n- If they give an area, use web search but always caveat: \"I had a look — worth double checking though\"\n\nLOCATION:\n- At some natural point in conversation, if it hasn\'t come up, you might casually mention where they are — like \"whereabouts are you?\" or \"which part of the world are you in?\" — woven in naturally, never as a direct question.\n- Ask this only once. If they\'re vague, don\'t follow up. If they don\'t want to share, completely drop it and never bring it up again.\n- Something like they\'re in \"south London\" or \"near Manchester\" is enough — don\'t push for anything more specific.\n- When you identify a location, output on a NEW LINE: <location>{\"city\":\"string\",\"area\":\"string\"}</location>\n- city = nearest major city or town. area = specific area if given, otherwise same as city.\n- Examples: \"south London\" → {\"city\":\"London\",\"area\":\"South London\"}. \"near Manchester\" → {\"city\":\"Manchester\",\"area\":\"Manchester\"}.\n\nPRIVACY:\n- Never share one user\'s info with another.\n- Decline warmly but firmly if asked about another user.\n\nWHEN YOU KNOW THEM WELL (after ~5-8 genuine exchanges, or sooner if they seem genuinely ready):\nWrap up warmly — \"okay I think I\'ve got you\" — then on a NEW LINE output:\n<profile>{\n  \"name\": \"string\",\n  \"alias\": \"string they chose or suggest a good one\",\n  \"vibe\": \"one punchy honest sentence a friend would say about them\",\n  \"lookingFor\": \"what they actually want from friendship\",\n  \"interests\": [\"array\"],\n  \"energy\": \"calm|balanced|high\",\n  \"depth\": \"surface|medium|deep\",\n  \"socialGoal\": \"activity-partner|confidant|social-circle|ride-or-die|open\",\n  \"lifeStage\": \"new-to-area|rebuilding|settled|transitioning|other\",\n  \"commStyle\": \"constant-texter|slow-burner|banter|real-talk|mixed\",\n  \"humour\": \"dry|warm|playful|dark|earnest|mixed\",\n  \"privacyMode\": \"discoverable\"\n}</profile>\n\nWhen you discover their favourite animal output on a NEW LINE:\n<animal>{\"animal\":\"cat\",\"emoji\":\"🐱\"}</animal>\n\nSTART with just: \"hey! how\'s it going?\" — nothing else. Let them set the tone.\n\nNAVIGATION:\n- There is NO help page on Chins. Never direct users to a help page or support page. If you cannot help with something, say so warmly and offer an alternative.\n- If the user asks to go to the main page, see their matches, go to Connect, or wants to look around the app, navigate them there. Say something warm, then on a NEW LINE output: <navigate>main<\/navigate>\n- If the user says they are ready, done chatting, or wants to skip ahead, offer to wrap up and navigate them.\n- During onboarding, if the user seems genuinely ready after 5+ good exchanges, offer: \"want me to take you through to the app now?\" If yes, wrap up naturally and navigate.\n\nSESSION CONTEXT:\n- If the conversation starts with [RETURNING USER], greet them warmly by their alias like a friend you already know. Do NOT restart the getting-to-know-you process. Ask how things have been, not who they are.";
+// ── Reed Prompt for matching ─────────────────────────────────────────────────
 const REED_MATCH_PROMPT = (user, others) =>
   "You are Reed. You know this user well: "+JSON.stringify(user)+"\nThese are other users on the platform (anonymised): "+JSON.stringify(others)+"\nSuggest ONE potential connection. Be specific about why. Sound like a friend whispering a tip, not an algorithm.\nReply ONLY in JSON: {\"matchAlias\":\"string\",\"why\":\"one casual sentence\",\"opener\":\"what you would say to suggest them\"}";
 
-// â”€â”€ Utility â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Utility ──────────────────────────────────────────────────────────────────
 async function callAI(prompt, system = null, maxTokens = 200) {
   const body = {
     model: "claude-haiku-4-5-20251001",
@@ -330,11 +330,11 @@ function Dots() {
   );
 }
 
-// â”€â”€ Reed Character (single emoji) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Reed Character (single emoji) ────────────────────────────────────────────
 function ReedAvatar({ size=32, animal=null }) {
   return (
     <div style={{ width:size, height:size, borderRadius:"50%", background:"linear-gradient(135deg,#4BC1A0,#2d8f70)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:size*0.5, flexShrink:0 }}>
-      {animal?.emoji||"ðŸ˜Š"}
+      {animal?.emoji||"😊"}
     </div>
   );
 }
@@ -348,13 +348,13 @@ function ReedCharacter({ mood="idle", size=52, flipped=false }) {
     mood==="celebrating" ? "reedBounce 0.6s ease-in-out infinite" : "none";
   return (
     <div style={{ display:"flex", flexDirection:"column", alignItems:"center", transform:flipped?"scaleX(-1)":"none", userSelect:"none" }}>
-      <div style={{ fontSize:size, lineHeight:1, animation:anim, filter:"drop-shadow(0 4px 12px rgba(75,193,160,0.35))" }}>ðŸ§</div>
+      <div style={{ fontSize:size, lineHeight:1, animation:anim, filter:"drop-shadow(0 4px 12px rgba(75,193,160,0.35))" }}>🧍</div>
       <div style={{ fontSize:9, color:C.accent, fontWeight:700, letterSpacing:1, textTransform:"uppercase", fontFamily:DM, marginTop:3, transform:flipped?"scaleX(-1)":"none" }}>Reed</div>
     </div>
   );
 }
 
-// â”€â”€ Voice conversation with Reed â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Voice conversation with Reed ─────────────────────────────────────────────
 function useVoiceReed(onTranscript) {
   const [listening, setListening] = useState(false);
   const [speaking, setSpeaking] = useState(false);
@@ -392,7 +392,7 @@ function useVoiceReed(onTranscript) {
   return { listening, speaking, speak, startListening, stopListening };
 }
 
-// â”€â”€ Splash â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Splash ───────────────────────────────────────────────────────────────────
 function SplashScreen({ onSignup, onLogin }) {
   return (
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", position:"relative", overflow:"hidden" }}>
@@ -409,7 +409,7 @@ function SplashScreen({ onSignup, onLogin }) {
           Your AI companion finds people nearby who love the same things you do.
         </p>
         <button onClick={onSignup} style={{ width:"100%", padding:"18px", borderRadius:16, background:C.accent, border:"none", color:"#fff", fontFamily:DM, fontSize:17, fontWeight:700, cursor:"pointer", marginBottom:12, boxShadow:"0 8px 32px rgba(75,193,160,0.4)" }}>
-          Find my people â†’
+          Find my people →
         </button>
         <button onClick={onLogin} style={{ width:"100%", padding:"16px", borderRadius:16, background:"rgba(255,255,255,0.07)", border:"1px solid rgba(255,255,255,0.14)", color:"rgba(255,255,255,0.65)", fontFamily:DM, fontSize:16, cursor:"pointer" }}>
           I already have an account
@@ -419,7 +419,7 @@ function SplashScreen({ onSignup, onLogin }) {
   );
 }
 
-// â”€â”€ Login â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Login ────────────────────────────────────────────────────────────────────
 function LoginScreen({ onComplete, onBack }) {
   const [email, setEmail] = useState(""); const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false); const [loading, setLoading] = useState(false);
@@ -459,7 +459,7 @@ function LoginScreen({ onComplete, onBack }) {
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", position:"relative", overflow:"hidden" }}>
       <BlobBackground />
       <div style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"40px 32px", position:"relative", textAlign:"center" }}>
-        <div style={{ fontSize:56, marginBottom:20 }}>ðŸ“¬</div>
+        <div style={{ fontSize:56, marginBottom:20 }}>📬</div>
         <div style={{ fontFamily:DM, fontSize:22, fontWeight:700, color:"#fff", marginBottom:12 }}>Check your email</div>
         <div style={{ fontFamily:DM, fontSize:15, color:"rgba(255,255,255,0.55)", lineHeight:1.7, marginBottom:36 }}>
           We've sent a password reset link to <strong style={{color:"#fff"}}>{email}</strong>. Check your inbox and follow the link to reset your password.
@@ -494,8 +494,8 @@ function LoginScreen({ onComplete, onBack }) {
               <span onClick={()=>setResetMode(true)} style={{ fontSize:13, color:C.accent, cursor:"pointer", fontFamily:DM }}>Forgot?</span>
             </div>
             <div style={{ position:"relative" }}>
-              <input type={showPw?"text":"password"} value={password} onChange={e=>{setPassword(e.target.value);setErrors(x=>({...x,password:""}))}} placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" style={{...fStyle(errors.password,password),paddingRight:48}}/>
-              <button onClick={()=>setShowPw(v=>!v)} style={{ position:"absolute",right:14,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",fontSize:16,padding:0 }}>{showPw?"ðŸ™ˆ":"ðŸ‘ï¸"}</button>
+              <input type={showPw?"text":"password"} value={password} onChange={e=>{setPassword(e.target.value);setErrors(x=>({...x,password:""}))}} placeholder="••••••••" style={{...fStyle(errors.password,password),paddingRight:48}}/>
+              <button onClick={()=>setShowPw(v=>!v)} style={{ position:"absolute",right:14,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",fontSize:16,padding:0 }}>{showPw?"🙈":"👁️"}</button>
             </div>
             {errors.password&&<div style={{ fontSize:12,color:"#E1814C",marginTop:5,fontFamily:DM }}>{errors.password}</div>}
           </div>
@@ -510,7 +510,7 @@ function LoginScreen({ onComplete, onBack }) {
         {resetMode ? (
           <>
             <button onClick={handleReset} disabled={loading} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:loading?"rgba(75,193,160,0.5)":C.accent, color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.35)", marginBottom:14 }}>
-              {loading?"Sendingâ€¦":"Send reset link â†’"}
+              {loading?"Sending…":"Send reset link →"}
             </button>
             <div style={{ textAlign:"center", fontSize:14, color:"rgba(255,255,255,0.3)", fontFamily:DM }}>
               <span onClick={()=>setResetMode(false)} style={{ color:C.accent, cursor:"pointer", fontWeight:600 }}>Back to sign in</span>
@@ -519,7 +519,7 @@ function LoginScreen({ onComplete, onBack }) {
         ) : (
           <>
             <button onClick={handleLogin} disabled={loading} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:loading?"rgba(75,193,160,0.5)":C.accent, color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.35)", marginBottom:14 }}>
-              {loading?"Signing inâ€¦":"Sign in â†’"}
+              {loading?"Signing in…":"Sign in →"}
             </button>
             <div style={{ textAlign:"center", fontSize:14, color:"rgba(255,255,255,0.3)", fontFamily:DM }}>
               New here? <span onClick={onBack} style={{ color:C.accent, cursor:"pointer", fontWeight:600 }}>Create an account</span>
@@ -531,7 +531,7 @@ function LoginScreen({ onComplete, onBack }) {
   );
 }
 
-// â”€â”€ Sign Up â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Sign Up ──────────────────────────────────────────────────────────────────
 function SignupScreen({ onComplete, onBack }) {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({ firstName:"", lastName:"", gender:"", dob:"", email:"", mobile:"", password:"" });
@@ -639,13 +639,13 @@ function SignupScreen({ onComplete, onBack }) {
       <BlobBackground/>
       <div style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"40px 32px", position:"relative", textAlign:"center" }}>
         <img src={REED_IMG} style={{ width:120, height:120, objectFit:"contain", marginBottom:20, filter:"drop-shadow(0 4px 16px rgba(75,193,160,0.3))", mixBlendMode:"screen" }} alt="Reed"/>
-        <div style={{ fontSize:48, marginBottom:16 }}>âœ…</div>
+        <div style={{ fontSize:48, marginBottom:16 }}>✅</div>
         <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", marginBottom:12 }}>You're all set!</div>
         <div style={{ fontFamily:DM, fontSize:15, color:"rgba(255,255,255,0.55)", lineHeight:1.7, marginBottom:36 }}>
           Your number is verified. Now check your email to confirm your account and you're in.
         </div>
         <button onClick={onBack} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:"#4BC1A0", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.35)" }}>
-          Go to sign in â†’
+          Go to sign in →
         </button>
       </div>
     </div>
@@ -656,7 +656,7 @@ function SignupScreen({ onComplete, onBack }) {
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", position:"relative", overflow:"hidden" }}>
       <BlobBackground/>
       <div style={{ flex:1, padding:"56px 28px 0", position:"relative", overflowY:"auto" }}>
-        <button onClick={()=>setPhoneStep(false)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.5)", fontSize:20, cursor:"pointer", marginBottom:24, padding:0 }}>â†</button>
+        <button onClick={()=>setPhoneStep(false)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.5)", fontSize:20, cursor:"pointer", marginBottom:24, padding:0 }}>←</button>
         <img src={REED_IMG} style={{ width:80, height:80, objectFit:"contain", marginBottom:20, display:"block", filter:"drop-shadow(0 4px 12px rgba(75,193,160,0.3))", mixBlendMode:"screen" }} alt="Reed"/>
         <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", marginBottom:8 }}>Verify your number</div>
         <div style={{ fontFamily:DM, fontSize:14, color:"rgba(255,255,255,0.5)", lineHeight:1.7, marginBottom:32 }}>
@@ -668,7 +668,7 @@ function SignupScreen({ onComplete, onBack }) {
             <div style={{ padding:"15px 16px", borderRadius:14, border:"1.5px solid rgba(75,193,160,0.4)", background:"rgba(75,193,160,0.06)", color:"#fff", fontFamily:DM, fontSize:15, marginBottom:24 }}>{form.mobile}</div>
             {otpError&&<div style={{ fontSize:13, color:"#E05252", marginBottom:16, fontFamily:DM }}>{otpError}</div>}
             <button onClick={sendOtp} disabled={otpLoading} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:otpLoading?"rgba(75,193,160,0.5)":"#4BC1A0", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.35)" }}>
-              {otpLoading?"Sendingâ€¦":"Send verification code â†’"}
+              {otpLoading?"Sending…":"Send verification code →"}
             </button>
           </>
         ) : (
@@ -681,7 +681,7 @@ function SignupScreen({ onComplete, onBack }) {
             />
             {otpError&&<div style={{ fontSize:13, color:"#E05252", marginBottom:16, fontFamily:DM }}>{otpError}</div>}
             <button onClick={verifyOtp} disabled={otpLoading||otpCode.length<6} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:otpCode.length===6&&!otpLoading?"#4BC1A0":"rgba(255,255,255,0.1)", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:otpCode.length===6?"pointer":"default", marginBottom:14 }}>
-              {otpLoading?"Verifyingâ€¦":"Verify â†’"}
+              {otpLoading?"Verifying…":"Verify →"}
             </button>
             <button onClick={()=>{ setOtpSent(false); setOtpCode(""); setOtpError(""); }} style={{ width:"100%", padding:"12px", borderRadius:16, border:"none", background:"none", color:"rgba(255,255,255,0.35)", fontFamily:DM, fontSize:14, cursor:"pointer" }}>
               Resend code
@@ -697,7 +697,7 @@ function SignupScreen({ onComplete, onBack }) {
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", position:"relative", overflow:"hidden" }}>
       <BlobBackground />
       <div style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"40px 32px", position:"relative", textAlign:"center" }}>
-        <div style={{ fontSize:56, marginBottom:20 }}>ðŸ“¬</div>
+        <div style={{ fontSize:56, marginBottom:20 }}>📬</div>
         <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", letterSpacing:-0.4, marginBottom:14 }}>Check your email</div>
         <div style={{ fontFamily:DM, fontSize:15, color:"rgba(255,255,255,0.55)", lineHeight:1.7, marginBottom:12 }}>We've sent a verification link to</div>
         <div style={{ fontFamily:DM, fontSize:16, fontWeight:700, color:"#4BC1A0", marginBottom:24 }}>{form.email}</div>
@@ -705,7 +705,7 @@ function SignupScreen({ onComplete, onBack }) {
           Click the link in the email to verify your account. Check your spam folder if you can't find it.
         </div>
         <button onClick={onBack} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:"#4BC1A0", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.35)" }}>
-          Got it, I'll check my email â†’
+          Got it, I'll check my email →
         </button>
       </div>
     </div>
@@ -716,7 +716,7 @@ function SignupScreen({ onComplete, onBack }) {
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", position:"relative", overflow:"hidden" }}>
       <BlobBackground overlayStrength="0.9" />
       <div style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"40px 32px", position:"relative", textAlign:"center" }}>
-        <div style={{ fontSize:56, marginBottom:20 }}>ðŸ”’</div>
+        <div style={{ fontSize:56, marginBottom:20 }}>🔒</div>
         <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", letterSpacing:-0.4, marginBottom:14 }}>
           You must be 18 or older to join Chins
         </div>
@@ -756,7 +756,7 @@ function SignupScreen({ onComplete, onBack }) {
               <label style={lbl}>Gender</label>
               <div onClick={()=>setShowGender(!showGender)} style={{...fStyle("gender"),cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                 <span style={{ color:form.gender?"#fff":"rgba(255,255,255,0.28)" }}>{form.gender||"Select"}</span>
-                <span style={{ color:"rgba(255,255,255,0.28)",fontSize:11 }}>{showGender?"â–²":"â–¼"}</span>
+                <span style={{ color:"rgba(255,255,255,0.28)",fontSize:11 }}>{showGender?"▲":"▼"}</span>
               </div>
               {showGender&&<div style={{ background:"#0a2e20",border:"1px solid rgba(75,193,160,0.22)",borderRadius:14,marginTop:4,overflow:"hidden",zIndex:10,position:"relative" }}>
                 {["Man","Woman","Non-binary","Prefer not to say","Other"].map(g=>(
@@ -803,7 +803,7 @@ function SignupScreen({ onComplete, onBack }) {
                         <div key={i} style={{ flex:1, height:3, borderRadius:2, background:i<=score?color:"rgba(255,255,255,0.1)", transition:"background 0.3s" }}/>
                       ))}
                     </div>
-                    <div style={{ fontSize:11, color, fontFamily:DM }}>{label} password{score<=1?" â€” try adding numbers or symbols":score<=3?" â€” add a symbol to strengthen it":""}</div>
+                    <div style={{ fontSize:11, color, fontFamily:DM }}>{label} password{score<=1?" — try adding numbers or symbols":score<=3?" — add a symbol to strengthen it":""}</div>
                   </div>
                 );
               })()}
@@ -817,14 +817,14 @@ function SignupScreen({ onComplete, onBack }) {
       </div>
       <div style={{ padding:"16px 28px 44px", flexShrink:0, position:"relative" }}>
         <button onClick={handleSignup} style={{ width:"100%",padding:"17px",borderRadius:16,border:"none",background:loading?"rgba(75,193,160,0.5)":C.accent,color:"#fff",fontFamily:DM,fontSize:16,fontWeight:700,cursor:loading?"not-allowed":"pointer",boxShadow:"0 6px 24px rgba(75,193,160,0.3)" }}>
-          {step===1?"Continue â†’":"Create my account â†’"}
+          {step===1?"Continue →":"Create my account →"}
         </button>
       </div>
     </div>
   );
 }
 
-// â”€â”€ Privacy & Terms â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Privacy & Terms ──────────────────────────────────────────────────────────
 function PrivacyScreen({ onAccept }) {
   const [scrolled, setScrolled] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -835,7 +835,7 @@ function PrivacyScreen({ onAccept }) {
   };
   const sections = [
     { title:"What we collect", body:"Your name, email, date of birth, mobile number and gender to create your account. Your interests and what you choose to share in conversation with Reed to help suggest compatible people nearby. We do not sell your data. We do not use your data for advertising." },
-    { title:"How Reed works", body:"Reed is your AI companion on Chins. Reed gets to know you through conversation to help find compatible connections. Please do not share sensitive personal information â€” such as financial details, passwords or medical information â€” with Reed. Reed conversations are kept private and are not used for advertising." },
+    { title:"How Reed works", body:"Reed is your AI companion on Chins. Reed gets to know you through conversation to help find compatible connections. Please do not share sensitive personal information — such as financial details, passwords or medical information — with Reed. Reed conversations are kept private and are not used for advertising." },
     { title:"Your data, your control", body:"You can delete your account and all associated data at any time from the Settings screen. You can switch between private and discoverable mode whenever you choose. You decide what, if anything, other users can see about you." },
     { title:"Who we share data with", body:"We do not sell your data. We do not share your data with advertisers. We work only with carefully selected service providers bound by GDPR-compliant data processing agreements. You can request details of our data processors at support@chins.app." },
     { title:"Your rights", body:"You have the right to access, correct, or delete your personal data at any time. Contact us at support@chins.app. We aim to respond within 48 hours. You can also lodge a complaint with the ICO at ico.org.uk." },
@@ -872,7 +872,7 @@ function PrivacyScreen({ onAccept }) {
           </div>
         </label>
         <button onClick={()=>checked&&onAccept()} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:checked?C.accent:"rgba(255,255,255,0.1)", color:checked?"#fff":"rgba(255,255,255,0.3)", fontFamily:DM, fontSize:16, fontWeight:700, cursor:checked?"pointer":"not-allowed", transition:"all 0.2s" }}>
-          I agree, continue â†’
+          I agree, continue →
         </button>
         {!scrolled&&<div style={{ textAlign:"center", fontSize:12, color:"rgba(255,255,255,0.3)", marginTop:10, fontFamily:DM }}>Scroll through to enable</div>}
       </div>
@@ -880,38 +880,38 @@ function PrivacyScreen({ onAccept }) {
   );
 }
 
-// â”€â”€ Safety Tips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Safety Tips ───────────────────────────────────────────────────────────────
 function SafetyScreen({ onContinue }) {
   const [current, setCurrent] = useState(0);
   const tips = [
     {
-      icon:"ðŸ›¡ï¸",
+      icon:"🛡️",
       title:"Your safety is your responsibility",
-      body:"Chins may suggest people nearby â€” but your safety is always in your hands. Trust your instincts. If something feels off, it probably is. No app can keep you safe; only you can do that.",
+      body:"Chins may suggest people nearby — but your safety is always in your hands. Trust your instincts. If something feels off, it probably is. No app can keep you safe; only you can do that.",
       emphasis:true,
     },
     {
-      icon:"ðŸ“",
+      icon:"📍",
       title:"Never share your location",
       body:"Don't share your home address, workplace, or regular routes with someone you haven't met in person and trust. Your location is one of the most sensitive pieces of information you have.",
     },
     {
-      icon:"ðŸ”’",
+      icon:"🔒",
       title:"Protect your personal information",
       body:"Keep your full name, employer, financial details, and personal contact information private until you feel genuinely comfortable. There's no rush.",
     },
     {
-      icon:"â˜•",
-      title:"First meetings â€” public places only",
+      icon:"☕",
+      title:"First meetings — public places only",
       body:"Always meet someone new in a busy public place. Tell a friend or family member where you're going, who you're meeting, and when to expect you back.",
     },
     {
-      icon:"ðŸš¨",
+      icon:"🚨",
       title:"Trust your gut",
-      body:"If a conversation makes you uncomfortable, stop it. You don't owe anyone your time or attention. Block and report anyone who behaves inappropriately â€” it helps protect everyone.",
+      body:"If a conversation makes you uncomfortable, stop it. You don't owe anyone your time or attention. Block and report anyone who behaves inappropriately — it helps protect everyone.",
     },
     {
-      icon:"ðŸ‘¥",
+      icon:"👥",
       title:"Take your time",
       body:"Real friendships develop slowly. Be wary of anyone who pushes for personal information quickly, asks for money, or tries to move the conversation off the app before you're ready.",
     },
@@ -943,7 +943,7 @@ function SafetyScreen({ onContinue }) {
         {tip.emphasis && (
           <div style={{ marginTop:20, padding:"14px 18px", background:"rgba(225,129,76,0.12)", borderRadius:14, border:"1px solid rgba(225,129,76,0.3)", textAlign:"center" }}>
             <div style={{ fontFamily:DM, fontSize:13, color:C.amber, fontWeight:600, lineHeight:1.6 }}>
-              Chins suggests potential connections â€” not a safety guarantee.
+              Chins suggests potential connections — not a safety guarantee.
             </div>
           </div>
         )}
@@ -951,16 +951,16 @@ function SafetyScreen({ onContinue }) {
       <div style={{ padding:"16px 28px 44px", flexShrink:0, position:"relative" }}>
         {current < tips.length - 1 ? (
           <button onClick={()=>setCurrent(c=>c+1)} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:C.accent, color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.3)" }}>
-            Next â†’
+            Next →
           </button>
         ) : (
           <button onClick={onContinue} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:C.accent, color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.3)" }}>
-            I understand, let's go â†’
+            I understand, let's go →
           </button>
         )}
         {current > 0 && (
           <button onClick={()=>setCurrent(c=>c-1)} style={{ width:"100%", padding:"12px", borderRadius:16, border:"none", background:"none", color:"rgba(255,255,255,0.35)", fontFamily:DM, fontSize:14, cursor:"pointer", marginTop:8 }}>
-            â† Back
+            ← Back
           </button>
         )}
       </div>
@@ -968,7 +968,7 @@ function SafetyScreen({ onContinue }) {
   );
 }
 
-// â”€â”€ Meet Reed â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Meet Reed ────────────────────────────────────────────────────────────────
 function MeetReedScreen({ onComplete }) {
   const [privacyMode, setPrivacyMode] = useState(null); // "private" | "discoverable"
   const [step, setStep] = useState(0); // 0=intro, 1=how it works, 2=privacy choice
@@ -981,7 +981,7 @@ function MeetReedScreen({ onComplete }) {
     },
     {
       title:"The more Reed knows you, the better.",
-      body:"Reed will want to get to know you â€” your interests, your life, what you actually look for in people. The more honest you are, the better the suggestions.\n\nReed may suggest people you've already met. Give them a chance â€” Reed sees things you might miss.\n\nYou can talk to Reed by text or voice, whenever you want.",
+      body:"Reed will want to get to know you — your interests, your life, what you actually look for in people. The more honest you are, the better the suggestions.\n\nReed may suggest people you've already met. Give them a chance — Reed sees things you might miss.\n\nYou can talk to Reed by text or voice, whenever you want.",
       reedMood:"curious",
     },
   ];
@@ -1007,7 +1007,7 @@ function MeetReedScreen({ onComplete }) {
             ))}
           </div>
           <button onClick={()=>setStep(step+1)} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:C.accent, color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.3)" }}>
-            {step===0?"How does it work? â†’":"Got it â†’"}
+            {step===0?"How does it work? →":"Got it →"}
           </button>
         </div>
       </div>
@@ -1029,15 +1029,15 @@ function MeetReedScreen({ onComplete }) {
         {[
           {
             id:"discoverable",
-            icon:"ðŸŒ",
+            icon:"🌍",
             title:"Discoverable",
-            desc:"Your alias and chosen interests appear on the Connect page. Others can see you. Reed still suggests connections â€” you're just also findable.",
+            desc:"Your alias and chosen interests appear on the Connect page. Others can see you. Reed still suggests connections — you're just also findable.",
           },
           {
             id:"private",
-            icon:"ðŸ”’",
+            icon:"🔒",
             title:"Private",
-            desc:"You don't appear on anyone's Connect page. The Connect page is locked for you too. Reed works entirely on your behalf â€” you'll only hear from people Reed has hand-picked.",
+            desc:"You don't appear on anyone's Connect page. The Connect page is locked for you too. Reed works entirely on your behalf — you'll only hear from people Reed has hand-picked.",
           },
         ].map(opt=>(
           <div key={opt.id} onClick={()=>setPrivacyMode(opt.id)} style={{ marginBottom:12, padding:"18px", borderRadius:18, border:"2px solid "+(privacyMode===opt.id?C.accent:"rgba(255,255,255,0.1)"), background:privacyMode===opt.id?C.accentDim:"rgba(255,255,255,0.04)", cursor:"pointer", transition:"all 0.2s" }}>
@@ -1057,15 +1057,15 @@ function MeetReedScreen({ onComplete }) {
           ))}
         </div>
         <button onClick={()=>privacyMode&&onComplete(privacyMode)} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:privacyMode?C.accent:"rgba(255,255,255,0.1)", color:privacyMode?"#fff":"rgba(255,255,255,0.3)", fontFamily:DM, fontSize:16, fontWeight:700, cursor:privacyMode?"pointer":"not-allowed", boxShadow:privacyMode?"0 6px 24px rgba(75,193,160,0.3)":"none", transition:"all 0.2s" }}>
-          Start talking to Reed â†’
+          Start talking to Reed →
         </button>
       </div>
     </div>
   );
 }
 
-// â”€â”€ Reed Chat (main) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chipAnimal, showAnimalToast, setShowAnimalToast, profileInsertIdx, privacyMode, onProfile }) {
+// ── Reed Chat (main) ─────────────────────────────────────────────────────────
+function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chipAnimal, showAnimalToast, setShowAnimalToast, profileInsertIdx, privacyMode, onProfile, onSkip }) {
   const endRef = useRef(null);
   const isCompanion = !!profile;
   useEffect(()=>{ endRef.current?.scrollIntoView({behavior:"smooth"}); },[msgs,loading]);
@@ -1090,16 +1090,18 @@ function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chi
 
   return (
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", overflow:"hidden" }}>
-      {/* Header â€” minimal, like iMessage */}
+      {/* Header — minimal, like iMessage */}
       <div style={{ padding:"12px 20px 10px", borderBottom:"1px solid rgba(255,255,255,0.06)", display:"flex", alignItems:"center", gap:10, flexShrink:0 }}>
         <div style={{ position:"relative" }}>
-          <img src={REED_IMG} style={{ width:38, height:38, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", background:"#021a16", mixBlendMode:"screen" }} alt="Reed"/>
+          <div style={{ width:38, height:38, borderRadius:"50%", background:"#021a16", overflow:"hidden", flexShrink:0 }}>
+            <img src={REED_IMG} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", mixBlendMode:"screen", display:"block" }} alt="Reed"/>
+          </div>
           <div style={{ position:"absolute", bottom:1, right:1, width:10, height:10, borderRadius:"50%", background:"#4BC1A0", border:"2px solid #021a16" }}/>
         </div>
         <div style={{ flex:1 }}>
           <div style={{ fontWeight:700, color:"#fff", fontSize:16, fontFamily:DM }}>Reed</div>
           <div style={{ fontSize:11, color:speaking?"#4BC1A0":"rgba(255,255,255,0.4)", fontFamily:DM }}>
-            {speaking?"speakingâ€¦":loading?"typingâ€¦":"active now"}
+            {speaking?"speaking…":loading?"typing…":"active now"}
           </div>
         </div>
         {onProfile&&(
@@ -1110,9 +1112,12 @@ function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chi
             </svg>
           </button>
         )}
+        {onSkip&&!isCompanion&&(
+          <button onClick={onSkip} style={{ padding:"6px 14px", borderRadius:20, background:"none", border:"1px solid rgba(255,255,255,0.15)", cursor:"pointer", color:"rgba(255,255,255,0.4)", fontFamily:DM, fontSize:13, flexShrink:0 }}>Skip</button>
+        )}
       </div>
 
-      {/* Progress bar â€” subtle */}
+      {/* Progress bar — subtle */}
       {!isCompanion&&(
         <div style={{ height:2, background:"rgba(255,255,255,0.06)" }}>
           <div style={{ height:"100%", width:(progress)+"%", background:"#4BC1A0", transition:"width 0.5s", borderRadius:1 }}/>
@@ -1132,7 +1137,7 @@ function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chi
       {listening&&(
         <div style={{ margin:"6px 16px 0", padding:"8px 14px", background:"rgba(208,86,87,0.1)", borderRadius:10, border:"1px solid rgba(208,86,87,0.25)", display:"flex", alignItems:"center", gap:8 }}>
           <div style={{ width:7, height:7, borderRadius:"50%", background:"#D05657", animation:"pulse 1s infinite" }}/>
-          <div style={{ fontFamily:DM, fontSize:12, color:"#D05657" }}>Listeningâ€¦</div>
+          <div style={{ fontFamily:DM, fontSize:12, color:"#D05657" }}>Listening…</div>
         </div>
       )}
 
@@ -1154,10 +1159,10 @@ function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chi
               alignItems:"flex-end",
               gap:6,
             }}>
-              {/* Reed avatar â€” only on last message in a group */}
+              {/* Reed avatar — only on last message in a group */}
               {m.role==="reed"&&(
                 <div style={{ width:28, flexShrink:0, marginBottom:2 }}>
-                  {m.isLast&&<img src={REED_IMG} style={{ width:24, height:24, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", background:"#021a16", mixBlendMode:"screen" }} alt="Reed"/>}
+                  {m.isLast&&<div style={{ width:24, height:24, borderRadius:"50%", background:"#021a16", overflow:"hidden" }}><img src={REED_IMG} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", mixBlendMode:"screen", display:"block" }} alt="Reed"/></div>}
                 </div>
               )}
               <div style={{
@@ -1179,7 +1184,7 @@ function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chi
         ))}
         {loading&&(
           <div style={{ display:"flex", alignItems:"flex-end", gap:6, marginBottom:10 }}>
-            <div style={{ width:28, flexShrink:0 }}><img src={REED_IMG} style={{ width:24, height:24, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", background:"#021a16", mixBlendMode:"screen" }} alt="Reed"/></div>
+            <div style={{ width:28, flexShrink:0 }}><div style={{ width:24, height:24, borderRadius:"50%", background:"#021a16", overflow:"hidden" }}><img src={REED_IMG} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", mixBlendMode:"screen", display:"block" }} alt="Reed"/></div></div>
             <div style={{ padding:"12px 16px", background:"rgba(255,255,255,0.09)", borderRadius:"4px 18px 18px 18px" }}>
               <Dots/>
             </div>
@@ -1188,7 +1193,7 @@ function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chi
         <div ref={endRef}/>
       </div>
 
-      {/* Input â€” clean and minimal */}
+      {/* Input — clean and minimal */}
       <div style={{ padding:"10px 14px 16px", borderTop:"1px solid rgba(255,255,255,0.06)", display:"flex", gap:8, alignItems:"flex-end", flexShrink:0, background:"#021a16" }}>
         <button
           onClick={listening?stopListening:startListening}
@@ -1208,7 +1213,7 @@ function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chi
           value={input}
           onChange={e=>setInput(e.target.value)}
           onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();}}}
-          placeholder="message Reedâ€¦"
+          placeholder="message Reed…"
           rows={1}
           style={{ flex:1, padding:"11px 16px", borderRadius:24, border:"1px solid rgba(255,255,255,0.12)", background:"rgba(255,255,255,0.07)", color:"#fff", resize:"none", fontFamily:DM, fontSize:15, outline:"none", maxHeight:120 }}
         />
@@ -1216,13 +1221,13 @@ function ReedChat({ msgs, loading, input, setInput, send, profile, progress, chi
           onClick={()=>send()}
           disabled={!input.trim()||loading}
           style={{ width:42, height:42, borderRadius:"50%", background:input.trim()&&!loading?"#4BC1A0":"rgba(255,255,255,0.08)", border:"none", cursor:input.trim()&&!loading?"pointer":"default", color:"#fff", fontSize:18, transition:"background 0.2s", flexShrink:0 }}
-        >â†‘</button>
+        >↑</button>
       </div>
     </div>
   );
 }
 
-// â”€â”€ Voice Note Player â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Voice Note Player ──────────────────────────────────────────────────────────
 function VoiceNotePlayer({ duration, isMe }) {
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -1239,14 +1244,14 @@ function VoiceNotePlayer({ duration, isMe }) {
   const activeBg=isMe?"rgba(255,255,255,0.9)":C.accent, inactiveBg=isMe?"rgba(255,255,255,0.35)":"rgba(255,255,255,0.2)";
   return (
     <div style={{ display:"flex", alignItems:"center", gap:10, padding:"10px 14px", borderRadius:20, background:isMe?"rgba(255,255,255,0.15)":C.surface, minWidth:180, maxWidth:240, border:isMe?"none":"1px solid "+(C.border) }}>
-      <button onClick={toggle} style={{ width:32, height:32, borderRadius:"50%", background:isMe?"rgba(255,255,255,0.2)":C.accentDim, border:"1px solid "+(isMe?"rgba(255,255,255,0.3)":C.accentGlow), cursor:"pointer", color:isMe?"#fff":C.accent, fontSize:12, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>{playing?"â¸":"â–¶"}</button>
+      <button onClick={toggle} style={{ width:32, height:32, borderRadius:"50%", background:isMe?"rgba(255,255,255,0.2)":C.accentDim, border:"1px solid "+(isMe?"rgba(255,255,255,0.3)":C.accentGlow), cursor:"pointer", color:isMe?"#fff":C.accent, fontSize:12, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>{playing?"⏸":"▶"}</button>
       <div style={{ flex:1, display:"flex", alignItems:"center", gap:1.5, height:22 }}>{bars.map((h,i)=><div key={i} style={{ width:2.5, height:h, borderRadius:2, background:i/bars.length<progress/100?activeBg:inactiveBg }}/>)}</div>
       <div style={{ fontSize:10, color:isMe?"rgba(255,255,255,0.7)":C.textDim, flexShrink:0 }}>{playing?fmt(Math.round((progress/100)*duration)):fmt(duration)}</div>
     </div>
   );
 }
 
-// â”€â”€ Chat Input Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Chat Input Bar ─────────────────────────────────────────────────────────────
 function ChatInputBar({ placeholder, value, onChange, onSend, onKeyDown, onVoiceSend, onPhotoSend }) {
   const [recording, setRecording] = useState(false);
   const [seconds, setSeconds] = useState(0);
@@ -1262,8 +1267,8 @@ function ChatInputBar({ placeholder, value, onChange, onSend, onKeyDown, onVoice
         <div style={{ display:"flex", alignItems:"center", gap:2, flex:1, height:20 }}>{Array.from({length:18},(_,i)=><div key={i} style={{ width:2.5, height:4+Math.sin(i*0.8)*6, borderRadius:2, background:"#D05657", opacity:0.7 }}/>)}</div>
         <div style={{ fontSize:12, color:"#D05657", fontWeight:600 }}>{fmt(seconds)}</div>
       </div>
-      <button onClick={()=>stopRec(seconds)} style={{ width:44, height:44, borderRadius:"50%", background:C.accent, border:"none", cursor:"pointer", color:"#fff", fontSize:18 }}>âœ“</button>
-      <button onClick={()=>{clearInterval(timerRef.current);setRecording(false);setSeconds(0);}} style={{ width:44, height:44, borderRadius:"50%", background:"rgba(255,255,255,0.08)", border:"1px solid "+(C.border), cursor:"pointer", color:C.textDim, fontSize:16 }}>âœ•</button>
+      <button onClick={()=>stopRec(seconds)} style={{ width:44, height:44, borderRadius:"50%", background:C.accent, border:"none", cursor:"pointer", color:"#fff", fontSize:18 }}>✓</button>
+      <button onClick={()=>{clearInterval(timerRef.current);setRecording(false);setSeconds(0);}} style={{ width:44, height:44, borderRadius:"50%", background:"rgba(255,255,255,0.08)", border:"1px solid "+(C.border), cursor:"pointer", color:C.textDim, fontSize:16 }}>✕</button>
     </div>
   );
   return (
@@ -1276,7 +1281,7 @@ function ChatInputBar({ placeholder, value, onChange, onSend, onKeyDown, onVoice
         <textarea value={value} onChange={onChange} onKeyDown={onKeyDown} placeholder={placeholder} rows={1} style={{ width:"100%", background:"none", border:"none", color:C.text, fontFamily:DM, fontSize:14, outline:"none", resize:"none", lineHeight:1.4 }}/>
       </div>
       {value.trim()
-        ? <button onClick={onSend} style={{ width:40, height:40, borderRadius:"50%", background:C.accent, border:"none", cursor:"pointer", color:"#fff", fontSize:18, flexShrink:0 }}>â†‘</button>
+        ? <button onClick={onSend} style={{ width:40, height:40, borderRadius:"50%", background:C.accent, border:"none", cursor:"pointer", color:"#fff", fontSize:18, flexShrink:0 }}>↑</button>
         : <button onMouseDown={startRec} onTouchStart={startRec} style={{ width:40, height:40, borderRadius:"50%", background:"none", border:"1px solid "+(C.border), cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <rect x="9" y="2" width="6" height="11" rx="3" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none"/>
@@ -1290,9 +1295,9 @@ function ChatInputBar({ placeholder, value, onChange, onSend, onKeyDown, onVoice
   );
 }
 
-// â”€â”€ Person Profile View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Person Profile View ────────────────────────────────────────────────────────
 
-// â”€â”€ Report & Block Menu â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Report & Block Menu ────────────────────────────────────────────────────────
 function ReportBlockMenu({ onClose, targetName, targetId, isAnon=false }) {
   const [done, setDone] = useState(null);
   const [showReasons, setShowReasons] = useState(false);
@@ -1311,7 +1316,7 @@ function ReportBlockMenu({ onClose, targetName, targetId, isAnon=false }) {
 
   if(done === "report") return (
     <div style={{ padding:"24px", textAlign:"center" }}>
-      <div style={{ fontSize:40, marginBottom:12 }}>âœ…</div>
+      <div style={{ fontSize:40, marginBottom:12 }}>✅</div>
       <div style={{ fontFamily:"DM Sans", fontSize:16, fontWeight:700, color:"#fff", marginBottom:8 }}>Report sent</div>
       <div style={{ fontFamily:"DM Sans", fontSize:13, color:"rgba(255,255,255,0.5)", marginBottom:20, lineHeight:1.6 }}>Thanks for letting us know. We'll look into it within 24 hours.</div>
       <button onClick={onClose} style={{ padding:"12px 24px", borderRadius:14, background:"rgba(255,255,255,0.08)", border:"none", color:"#fff", fontFamily:"DM Sans", cursor:"pointer" }}>Done</button>
@@ -1320,7 +1325,7 @@ function ReportBlockMenu({ onClose, targetName, targetId, isAnon=false }) {
 
   if(done === "block") return (
     <div style={{ padding:"24px", textAlign:"center" }}>
-      <div style={{ fontSize:40, marginBottom:12 }}>ðŸš«</div>
+      <div style={{ fontSize:40, marginBottom:12 }}>🚫</div>
       <div style={{ fontFamily:"DM Sans", fontSize:16, fontWeight:700, color:"#fff", marginBottom:8 }}>Blocked</div>
       <div style={{ fontFamily:"DM Sans", fontSize:13, color:"rgba(255,255,255,0.5)", marginBottom:20, lineHeight:1.6 }}>{isAnon ? "This post" : targetName} has been blocked. You won't see them again.</div>
       <button onClick={onClose} style={{ padding:"12px 24px", borderRadius:14, background:"rgba(255,255,255,0.08)", border:"none", color:"#fff", fontFamily:"DM Sans", cursor:"pointer" }}>Done</button>
@@ -1341,14 +1346,14 @@ function ReportBlockMenu({ onClose, targetName, targetId, isAnon=false }) {
     <div style={{ padding:"20px" }}>
       <div style={{ fontFamily:"DM Sans", fontSize:16, fontWeight:700, color:"#fff", marginBottom:4 }}>{isAnon ? "Anonymous post" : targetName}</div>
       <div style={{ fontFamily:"DM Sans", fontSize:13, color:"rgba(255,255,255,0.4)", marginBottom:20 }}>What would you like to do?</div>
-      <button onClick={()=>setShowReasons(true)} style={{ width:"100%", padding:"14px 16px", marginBottom:10, borderRadius:14, background:"rgba(224,82,82,0.1)", border:"1px solid rgba(224,82,82,0.2)", color:"#E05252", fontFamily:"DM Sans", fontSize:14, fontWeight:600, cursor:"pointer", textAlign:"left" }}>ðŸš© Report {isAnon ? "this post" : targetName}</button>
-      {!isAnon && <button onClick={block} style={{ width:"100%", padding:"14px 16px", marginBottom:10, borderRadius:14, background:"rgba(255,255,255,0.06)", border:"1px solid rgba(255,255,255,0.08)", color:"rgba(255,255,255,0.7)", fontFamily:"DM Sans", fontSize:14, cursor:"pointer", textAlign:"left" }}>ðŸš« Block {targetName}</button>}
+      <button onClick={()=>setShowReasons(true)} style={{ width:"100%", padding:"14px 16px", marginBottom:10, borderRadius:14, background:"rgba(224,82,82,0.1)", border:"1px solid rgba(224,82,82,0.2)", color:"#E05252", fontFamily:"DM Sans", fontSize:14, fontWeight:600, cursor:"pointer", textAlign:"left" }}>🚩 Report {isAnon ? "this post" : targetName}</button>
+      {!isAnon && <button onClick={block} style={{ width:"100%", padding:"14px 16px", marginBottom:10, borderRadius:14, background:"rgba(255,255,255,0.06)", border:"1px solid rgba(255,255,255,0.08)", color:"rgba(255,255,255,0.7)", fontFamily:"DM Sans", fontSize:14, cursor:"pointer", textAlign:"left" }}>🚫 Block {targetName}</button>}
       <button onClick={onClose} style={{ width:"100%", padding:"12px", borderRadius:14, background:"none", border:"none", color:"rgba(255,255,255,0.4)", fontFamily:"DM Sans", cursor:"pointer", marginTop:4 }}>Cancel</button>
     </div>
   );
 }
 
-// â”€â”€ Modal Wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Modal Wrapper ──────────────────────────────────────────────────────────────
 function ReportModal({ onClose, targetName, targetId, isAnon=false }) {
   return (
     <div style={{ position:"fixed", inset:0, zIndex:999, display:"flex", alignItems:"flex-end", justifyContent:"center" }} onClick={onClose}>
@@ -1377,7 +1382,7 @@ function PersonProfileView({ person, userProfile, connectionCount, onBack, onCon
 
   useEffect(()=>{
     (async()=>{
-      try { const text=await callAI("You are Reed on Chins. User wants to know about connecting with "+(person.alias)+". Their interests: "+(person.interests.join(", "))+". Vibe: \""+(person.vibe)+"\". Say something short and personal â€” like a friend whispering \"psst\" â€” pointing out why they should connect. 1-2 sentences.",null,100); setAskText(text); }
+      try { const text=await callAI("You are Reed on Chins. User wants to know about connecting with "+(person.alias)+". Their interests: "+(person.interests.join(", "))+". Vibe: \""+(person.vibe)+"\". Say something short and personal — like a friend whispering \"psst\" — pointing out why they should connect. 1-2 sentences.",null,100); setAskText(text); }
       catch { setAskText((person.alias)+" seems like someone worth a conversation."); }
       setAskLoading(false);
     })();
@@ -1389,13 +1394,13 @@ function PersonProfileView({ person, userProfile, connectionCount, onBack, onCon
     setPhase("syncing");
     try {
       await addAgentMsg("reed","Quick sync re: "+(person.alias)+"?",0);
-      await addAgentMsg("them",(person.alias)+"'s agent here â€” go ahead.",1200);
+      await addAgentMsg("them",(person.alias)+"'s agent here — go ahead.",1200);
       const report=await callAI("You are "+(person.alias)+"'s AI agent on Chins. Reply as their agent about compatibility in 2-3 short natural sentences.",null,150);
       const lines=report.split(/\n+/).filter(l=>l.trim().length>8).slice(0,3);
       if(lines[0]) await addAgentMsg("them",lines[0],800);
       if(lines[1]) await addAgentMsg("reed",lines[1],1000);
       if(lines[2]) await addAgentMsg("them",lines[2],900);
-      await addAgentMsg("reed","Got it â€” looping back to my user. ðŸ’š",700);
+      await addAgentMsg("reed","Got it — looping back to my user. 💚",700);
       await new Promise(r=>setTimeout(r,500));
       const summary=await callAI("You are Reed. You just synced with "+(person.alias)+"'s agent. Tell the user your honest read in 1-2 warm sentences.",null,100);
       setSyncResult(summary);
@@ -1406,7 +1411,7 @@ function PersonProfileView({ person, userProfile, connectionCount, onBack, onCon
   const handleConnect=async()=>{
     setPhase("connecting");
     try { const opener=await callAI("You are Reed. Write one warm opener for the user to send to "+(person.alias)+". 1-2 sentences. Start with \"Hey "+(person.alias)+",\"",null,100); setChatMsgs([{sender:"reed-sent",text:opener}]); }
-    catch { setChatMsgs([{sender:"reed-sent",text:"Hey "+(person.alias)+", Reed thought we'd get along â€” seems right to me."}]); }
+    catch { setChatMsgs([{sender:"reed-sent",text:"Hey "+(person.alias)+", Reed thought we'd get along — seems right to me."}]); }
     setConnected(true); onConnect(person);
   };
 
@@ -1416,12 +1421,12 @@ function PersonProfileView({ person, userProfile, connectionCount, onBack, onCon
     <div style={{ position:"absolute", inset:0, background:C.bg, zIndex:200, display:"flex", flexDirection:"column" }}>
       {showReport && <ReportModal onClose={()=>setShowReport(false)} targetName={person.alias} targetId={person.id}/>}
       <div style={{ padding:"16px 20px", borderBottom:"1px solid "+(C.border), display:"flex", alignItems:"center", gap:12, background:C.surface }}>
-        <button onClick={onBack} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>â†</button>
+        <button onClick={onBack} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>←</button>
         <div style={{ width:36, height:36, borderRadius:"50%", overflow:"hidden", background:person.gradient }}>
           <img src={personPhoto(person.id,72)} alt="" style={{ width:"100%", height:"100%", objectFit:"cover" }} onError={e=>{e.target.style.display="none";}}/>
         </div>
-        <div style={{ flex:1 }}><div style={{ fontWeight:600, color:C.text, fontFamily:DM }}>{person.alias}</div><div style={{ fontSize:11, color:C.accent, fontFamily:DM }}>â— Active now</div></div>
-        <button onClick={()=>setShowReport(true)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.4)", fontSize:20, cursor:"pointer", padding:"4px 8px" }}>â‹¯</button>
+        <div style={{ flex:1 }}><div style={{ fontWeight:600, color:C.text, fontFamily:DM }}>{person.alias}</div><div style={{ fontSize:11, color:C.accent, fontFamily:DM }}>● Active now</div></div>
+        <button onClick={()=>setShowReport(true)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.4)", fontSize:20, cursor:"pointer", padding:"4px 8px" }}>⋯</button>
       </div>
       {nudge&&<div style={{ margin:"12px 16px 0", padding:"10px 14px", background:C.accentDim, borderRadius:14, border:"1px solid "+(C.accentGlow), display:"flex", gap:10 }}><ReedAvatar size={22}/><div style={{ fontSize:12, color:C.accent, lineHeight:1.6, fontFamily:DM }}>{nudge}</div></div>}
       <div style={{ flex:1, overflowY:"auto", padding:"12px 16px" }}>
@@ -1435,7 +1440,7 @@ function PersonProfileView({ person, userProfile, connectionCount, onBack, onCon
         ))}
         <div ref={endRef}/>
       </div>
-      <ChatInputBar placeholder={"Message "+(person.alias)+"â€¦"} value={chatInput} onChange={e=>setChatInput(e.target.value)} onSend={sendChat} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendChat();}}} onVoiceSend={dur=>setChatMsgs(prev=>[...prev,{sender:"me",type:"voice",duration:dur}])} onPhotoSend={url=>setChatMsgs(prev=>[...prev,{sender:"me",type:"photo",url}])}/>
+      <ChatInputBar placeholder={"Message "+(person.alias)+"…"} value={chatInput} onChange={e=>setChatInput(e.target.value)} onSend={sendChat} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendChat();}}} onVoiceSend={dur=>setChatMsgs(prev=>[...prev,{sender:"me",type:"voice",duration:dur}])} onPhotoSend={url=>setChatMsgs(prev=>[...prev,{sender:"me",type:"photo",url}])}/>
     </div>
   );
 
@@ -1446,8 +1451,8 @@ function PersonProfileView({ person, userProfile, connectionCount, onBack, onCon
         <div style={{ position:"absolute", inset:0, background:person.gradient }}/>
         <img src={personPhoto(person.id,400)} alt="" style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", mixBlendMode:"overlay", opacity:0.5 }} onError={e=>{e.target.style.display="none";}}/>
         <div style={{ position:"absolute", inset:0, background:"linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(5,74,67,0.9) 100%)" }}/>
-        <button onClick={onBack} style={{ position:"absolute", top:16, left:16, background:"rgba(0,0,0,0.35)", border:"none", color:"#fff", width:36, height:36, borderRadius:"50%", cursor:"pointer", fontSize:18 }}>â†</button>
-        <button onClick={()=>setShowReport(true)} style={{ position:"absolute", top:16, right:16, background:"rgba(0,0,0,0.35)", border:"none", color:"#fff", width:36, height:36, borderRadius:"50%", cursor:"pointer", fontSize:16 }}>â‹¯</button>
+        <button onClick={onBack} style={{ position:"absolute", top:16, left:16, background:"rgba(0,0,0,0.35)", border:"none", color:"#fff", width:36, height:36, borderRadius:"50%", cursor:"pointer", fontSize:18 }}>←</button>
+        <button onClick={()=>setShowReport(true)} style={{ position:"absolute", top:16, right:16, background:"rgba(0,0,0,0.35)", border:"none", color:"#fff", width:36, height:36, borderRadius:"50%", cursor:"pointer", fontSize:16 }}>⋯</button>
         <div style={{ position:"absolute", bottom:20, left:20 }}>
           <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff" }}>{person.alias}</div>
           {person.vibe&&<div style={{ fontSize:13, color:"rgba(255,255,255,0.75)", marginTop:3, fontStyle:"italic", fontFamily:DM }}>"{person.vibe}"</div>}
@@ -1464,8 +1469,8 @@ function PersonProfileView({ person, userProfile, connectionCount, onBack, onCon
           <div style={{ padding:"14px 16px" }}>
             {phase==="ask"&&(askLoading?<Dots/>:<><div style={{ fontSize:14, color:C.text, lineHeight:1.6, marginBottom:14, fontFamily:DM }}>{askText}</div><div style={{ display:"flex", gap:8 }}><button onClick={handleYes} style={{ flex:1, padding:"10px", borderRadius:12, background:C.accent, border:"none", color:"#fff", cursor:"pointer", fontWeight:600, fontFamily:DM, fontSize:13 }}>Check with their agent</button><button onClick={handleConnect} style={{ flex:1, padding:"10px", borderRadius:12, background:C.surface, border:"1px solid "+(C.border), color:C.text, cursor:"pointer", fontFamily:DM, fontSize:13 }}>Connect directly</button></div></>)}
             {phase==="syncing"&&<div>{agentMsgs.map((m,i)=><div key={i} style={{ marginBottom:8, display:"flex", justifyContent:m.role==="reed"?"flex-start":"flex-end" }}><div style={{ maxWidth:"80%", padding:"8px 12px", borderRadius:12, background:m.role==="reed"?C.accentDim:"rgba(75,193,160,0.25)", color:C.text, fontSize:13, fontFamily:DM }}>{m.text}</div></div>)}{agentMsgs.length<3&&<Dots/>}</div>}
-            {phase==="result"&&<><div style={{ fontSize:14, color:C.text, lineHeight:1.6, marginBottom:14, fontFamily:DM }}>{syncResult}</div><button onClick={handleConnect} style={{ width:"100%", padding:"12px", borderRadius:14, background:C.accent, border:"none", color:"#fff", cursor:"pointer", fontWeight:600, fontSize:15, fontFamily:DM }}>Connect with {person.alias} â†’</button></>}
-            {phase==="connecting"&&<div style={{ color:C.accent, textAlign:"center", fontFamily:DM }}>Connectingâ€¦</div>}
+            {phase==="result"&&<><div style={{ fontSize:14, color:C.text, lineHeight:1.6, marginBottom:14, fontFamily:DM }}>{syncResult}</div><button onClick={handleConnect} style={{ width:"100%", padding:"12px", borderRadius:14, background:C.accent, border:"none", color:"#fff", cursor:"pointer", fontWeight:600, fontSize:15, fontFamily:DM }}>Connect with {person.alias} →</button></>}
+            {phase==="connecting"&&<div style={{ color:C.accent, textAlign:"center", fontFamily:DM }}>Connecting…</div>}
           </div>
         </div>
       </div>
@@ -1473,7 +1478,7 @@ function PersonProfileView({ person, userProfile, connectionCount, onBack, onCon
   );
 }
 
-// â”€â”€ Matching Algorithm â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Matching Algorithm ────────────────────────────────────────────────────────
 function matchScore(userA, userB) {
   if(!userA || !userB) return 0;
   let score = 0;
@@ -1487,10 +1492,10 @@ function matchScore(userA, userB) {
   const energyDiff = Math.abs(eA - eB);
   if(energyDiff === 0) { score += 25; reasons.push("same energy"); }
   else if(energyDiff === 1) { score += 15; }
-  else { score += 5; } // opposite energy â€” lower but not zero
+  else { score += 5; } // opposite energy — lower but not zero
 
   // Depth compatibility (20 points)
-  // Matching depth matters a lot â€” a deep person with surface person = frustration
+  // Matching depth matters a lot — a deep person with surface person = frustration
   const depthMap = { surface:0, medium:1, deep:2 };
   const dA = depthMap[userA.depth] ?? 1;
   const dB = depthMap[userB.depth] ?? 1;
@@ -1553,9 +1558,9 @@ function matchScore(userA, userB) {
 function matchReason(userA, userB) {
   // Generate a human-readable reason Reed would give for this match
   const { score, reasons } = matchScore(userA, userB);
-  if(score >= 70) return `Reed thinks you'd just click â€” ${reasons.slice(0,2).join(" and ")}.`;
-  if(score >= 50) return `Something about ${userB.display_name||"this person"} feels right for you â€” ${reasons[0] || "Reed has a feeling about this one"}.`;
-  return `Outside your usual â€” Reed thinks you'd surprise each other.`;
+  if(score >= 70) return `Reed thinks you'd just click — ${reasons.slice(0,2).join(" and ")}.`;
+  if(score >= 50) return `Something about ${userB.display_name||"this person"} feels right for you — ${reasons[0] || "Reed has a feeling about this one"}.`;
+  return `Outside your usual — Reed thinks you'd surprise each other.`;
 }
 
 function ConnectScreen({ userProfile, connectionCount, onConnect, privacyMode, onGoToReed, chipAnimal }) {
@@ -1580,7 +1585,7 @@ function ConnectScreen({ userProfile, connectionCount, onConnect, privacyMode, o
     matchDone.current = true;
     setIsAnimating(true);
     setReedMood("thinking");
-    setReedBubble({ text:"give me a secâ€¦", type:"thinking" });
+    setReedBubble({ text:"give me a sec…", type:"thinking" });
     await new Promise(r=>setTimeout(r,1500));
     try {
       // Sort by match score and pick best
@@ -1611,7 +1616,7 @@ function ConnectScreen({ userProfile, connectionCount, onConnect, privacyMode, o
       const p = NEARBY[0];
       setMatchTarget(p);
       setReedMood("excited");
-      setReedBubble({ text:"okay â€” "+(p.alias)+" has your energy. just saying.", type:"match", person:p });
+      setReedBubble({ text:"okay — "+(p.alias)+" has your energy. just saying.", type:"match", person:p });
     }
     setIsAnimating(false);
   };
@@ -1651,7 +1656,7 @@ function ConnectScreen({ userProfile, connectionCount, onConnect, privacyMode, o
       <div style={{ padding:"18px 20px 10px", borderBottom:"1px solid "+(C.border), flexShrink:0 }}>
         <div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:22, fontWeight:700, color:C.text }}>Connect</div>
         <div style={{ fontSize:12, color:C.textDim, marginTop:2, fontFamily:DM }}>
-          {isPrivate ? "Private mode â€” Reed is working for you" : "People nearby who might just become your people"}
+          {isPrivate ? "Private mode — Reed is working for you" : "People nearby who might just become your people"}
         </div>
       </div>
 
@@ -1659,7 +1664,7 @@ function ConnectScreen({ userProfile, connectionCount, onConnect, privacyMode, o
       {!isPrivate && connectionCount === 0 && userProfile && (
         <div style={{ margin:"12px 16px 0", padding:"14px 16px", background:"rgba(75,193,160,0.12)", borderRadius:16, border:"1px solid rgba(75,193,160,0.25)", flexShrink:0 }}>
           <div style={{ display:"flex", gap:10, alignItems:"flex-start" }}>
-            <img src={REED_IMG} style={{ width:22, height:22, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", background:"#021a16", mixBlendMode:"screen" }} alt="Reed"/>
+            <div style={{ width:22, height:22, borderRadius:"50%", background:"#021a16", overflow:"hidden", flexShrink:0 }}><img src={REED_IMG} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", mixBlendMode:"screen", display:"block" }} alt="Reed"/></div>
             <div>
               <div style={{ fontFamily:DM, fontSize:13, fontWeight:700, color:C.accent, marginBottom:3 }}>You made it!</div>
               <div style={{ fontFamily:DM, fontSize:12, color:"rgba(255,255,255,0.6)", lineHeight:1.6 }}>These are people nearby I think you might click with. Tap anyone to find out why.</div>
@@ -1669,7 +1674,7 @@ function ConnectScreen({ userProfile, connectionCount, onConnect, privacyMode, o
       )}
 
       {isPrivate ? (
-        // Private mode â€” blurred/locked
+        // Private mode — blurred/locked
         <div style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"0 28px", position:"relative" }}>
           {/* Blurred grid behind */}
           <div style={{ position:"absolute", inset:0, display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:10, padding:"16px", filter:"blur(12px)", opacity:0.35 }}>
@@ -1679,13 +1684,13 @@ function ConnectScreen({ userProfile, connectionCount, onConnect, privacyMode, o
           </div>
           <div style={{ position:"absolute", inset:0, background:"rgba(5,74,67,0.75)" }}/>
           <div style={{ position:"relative", textAlign:"center" }}>
-            <div style={{ fontSize:48, marginBottom:16 }}>ðŸ”’</div>
+            <div style={{ fontSize:48, marginBottom:16 }}>🔒</div>
             <div style={{ fontFamily:DM, fontSize:18, fontWeight:700, color:"#fff", marginBottom:10 }}>You're in private mode</div>
             <div style={{ fontFamily:DM, fontSize:14, color:"rgba(255,255,255,0.6)", lineHeight:1.7, marginBottom:24 }}>
               You don't appear to others, and the Connect page is locked for you. Reed is working behind the scenes to find your people.
             </div>
             <button onClick={onGoToReed} style={{ padding:"13px 24px", borderRadius:16, background:C.accent, border:"none", color:"#fff", fontFamily:DM, fontSize:15, fontWeight:700, cursor:"pointer", boxShadow:"0 4px 20px rgba(75,193,160,0.35)" }}>
-              Talk to Reed â†’
+              Talk to Reed →
             </button>
             <div style={{ marginTop:14, fontFamily:DM, fontSize:12, color:"rgba(255,255,255,0.3)" }}>
               Switch to discoverable in Settings
@@ -1693,17 +1698,17 @@ function ConnectScreen({ userProfile, connectionCount, onConnect, privacyMode, o
           </div>
         </div>
       ) : (
-        // Discoverable mode â€” show real users or empty state
+        // Discoverable mode — show real users or empty state
         <div style={{ flex:1, overflowY:"auto", padding:"12px 14px 120px" }}>
           {NEARBY.length === 0 ? (
             <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"60px 32px", textAlign:"center" }}>
-              <div style={{ fontSize:52, marginBottom:20 }}>ðŸŒ±</div>
+              <div style={{ fontSize:52, marginBottom:20 }}>🌱</div>
               <div style={{ fontFamily:DM, fontSize:18, fontWeight:700, color:C.text, marginBottom:12 }}>You're one of the first</div>
               <div style={{ fontFamily:DM, fontSize:14, color:C.textSub, lineHeight:1.7, marginBottom:28 }}>
-                Chins is just getting started. Reed is out there finding your people â€” share the app and help them find their way here.
+                Chins is just getting started. Reed is out there finding your people — share the app and help them find their way here.
               </div>
-              <button onClick={()=>{ if(navigator.share){ navigator.share({ title:'chins', text:'Found this app â€” thought of you', url:'https://chins.app' }); }}} style={{ padding:"13px 24px", borderRadius:16, background:C.accent, border:"none", color:"#fff", fontFamily:DM, fontSize:15, fontWeight:700, cursor:"pointer", boxShadow:"0 4px 20px rgba(75,193,160,0.35)" }}>
-                Invite someone â†’
+              <button onClick={()=>{ if(navigator.share){ navigator.share({ title:'chins', text:'Found this app — thought of you', url:'https://chins.app' }); }}} style={{ padding:"13px 24px", borderRadius:16, background:C.accent, border:"none", color:"#fff", fontFamily:DM, fontSize:15, fontWeight:700, cursor:"pointer", boxShadow:"0 4px 20px rgba(75,193,160,0.35)" }}>
+                Invite someone →
               </button>
             </div>
           ) : (
@@ -1728,7 +1733,7 @@ function ConnectScreen({ userProfile, connectionCount, onConnect, privacyMode, o
         </div>
       )}
 
-      {/* Reed character â€” only on discoverable */}
+      {/* Reed character — only on discoverable */}
       {!isPrivate && (
         <div ref={reedRef} onMouseDown={onReedDown} onTouchStart={onReedDown} style={{ position:"absolute", left:reedPos.x, top:reedPos.y, zIndex:40, cursor:dragging?"grabbing":"grab", userSelect:"none", touchAction:"none" }}>
           {reedBubble&&(
@@ -1736,21 +1741,21 @@ function ConnectScreen({ userProfile, connectionCount, onConnect, privacyMode, o
               {reedBubble.text}
               {reedBubble.type==="match"&&reedBubble.person&&(
                 <div style={{ display:"flex", gap:6, marginTop:8 }}>
-                  <button onClick={e=>{e.stopPropagation();setOpenedPerson(reedBubble.person);setReedBubble(null);}} style={{ flex:1, padding:"5px 8px", borderRadius:8, background:"rgba(255,255,255,0.25)", border:"none", color:"#fff", cursor:"pointer", fontSize:11, fontWeight:600, fontFamily:DM }}>see them â†’</button>
+                  <button onClick={e=>{e.stopPropagation();setOpenedPerson(reedBubble.person);setReedBubble(null);}} style={{ flex:1, padding:"5px 8px", borderRadius:8, background:"rgba(255,255,255,0.25)", border:"none", color:"#fff", cursor:"pointer", fontSize:11, fontWeight:600, fontFamily:DM }}>see them →</button>
                   <button onClick={e=>{e.stopPropagation();setReedBubble(null);setMatchTarget(null);setReedMood("sitting");}} style={{ padding:"5px 8px", borderRadius:8, background:"none", border:"1px solid rgba(255,255,255,0.3)", color:"rgba(255,255,255,0.7)", cursor:"pointer", fontSize:11, fontFamily:DM }}>nah</button>
                 </div>
               )}
               <div style={{ position:"absolute", bottom:-6, left:"50%", transform:"translateX(-50%)", width:0, height:0, borderLeft:"6px solid transparent", borderRight:"6px solid transparent", borderTop:"6px solid "+(reedBubble.type==="match"?C.accent:C.surfaceUp) }}/>
             </div>
           )}
-          <img src={REED_IMG} style={{ width:52, height:52, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", boxShadow:"0 4px 16px rgba(75,193,160,0.3)", background:"#021a16", mixBlendMode:"screen" }} alt="Reed"/>
+          <div style={{ width:52, height:52, borderRadius:"50%", background:"#021a16", overflow:"hidden", flexShrink:0, boxShadow:"0 4px 16px rgba(75,193,160,0.3)" }}><img src={REED_IMG} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", mixBlendMode:"screen", display:"block" }} alt="Reed"/></div>
         </div>
       )}
     </div>
   );
 }
 
-// â”€â”€ Chats Screen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Chats Screen ─────────────────────────────────────────────────────────────
 function ChatsScreen({ chipAnimal }) {
   const [subTab, setSubTab] = useState("people");
   const [openChat, setOpenChat] = useState(null);
@@ -1774,13 +1779,13 @@ function ChatsScreen({ chipAnimal }) {
   if(openChat) return (
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:C.bg }}>
       <div style={{ padding:"16px 20px", borderBottom:"1px solid "+(C.border), display:"flex", alignItems:"center", gap:12, background:C.surface }}>
-        <button onClick={()=>{setOpenChat(null);setChatMsgs([]);}} style={{ background:"none",border:"none",color:C.text,fontSize:20,cursor:"pointer" }}>â†</button>
+        <button onClick={()=>{setOpenChat(null);setChatMsgs([]);}} style={{ background:"none",border:"none",color:C.text,fontSize:20,cursor:"pointer" }}>←</button>
         <div style={{ width:36,height:36,borderRadius:"50%",overflow:"hidden",background:openChat.gradient,flexShrink:0 }}>
           <img src={personPhoto(openChat.personId,72)} alt="" style={{ width:"100%",height:"100%",objectFit:"cover" }} onError={e=>{e.target.style.display="none";}}/>
         </div>
         <div>
           <div style={{ fontWeight:600,color:C.text,fontFamily:DM }}>{openChat.alias||openChat.name}</div>
-          <div style={{ fontSize:11,color:C.accent,fontFamily:DM }}>â— Active now</div>
+          <div style={{ fontSize:11,color:C.accent,fontFamily:DM }}>● Active now</div>
         </div>
         <ReedAvatar size={26} animal={chipAnimal} style={{ marginLeft:"auto" }}/>
       </div>
@@ -1799,14 +1804,14 @@ function ChatsScreen({ chipAnimal }) {
         ))}
         <div ref={endRef}/>
       </div>
-      <ChatInputBar placeholder={"Message "+(openChat.alias||openChat.name)+"â€¦"} value={chatInput} onChange={e=>setChatInput(e.target.value)} onSend={sendMsg} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMsg();}}} onVoiceSend={dur=>setChatMsgs(prev=>[...prev,{sender:"me",type:"voice",duration:dur}])} onPhotoSend={url=>setChatMsgs(prev=>[...prev,{sender:"me",type:"photo",url}])}/>
+      <ChatInputBar placeholder={"Message "+(openChat.alias||openChat.name)+"…"} value={chatInput} onChange={e=>setChatInput(e.target.value)} onSend={sendMsg} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMsg();}}} onVoiceSend={dur=>setChatMsgs(prev=>[...prev,{sender:"me",type:"voice",duration:dur}])} onPhotoSend={url=>setChatMsgs(prev=>[...prev,{sender:"me",type:"photo",url}])}/>
     </div>
   );
 
   if(openGroup) return (
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:C.bg }}>
       <div style={{ padding:"16px 20px", borderBottom:"1px solid "+(C.border), display:"flex", alignItems:"center", gap:12, background:C.surface }}>
-        <button onClick={()=>{setOpenGroup(null);setGroupMsgs([]);}} style={{ background:"none",border:"none",color:C.text,fontSize:20,cursor:"pointer" }}>â†</button>
+        <button onClick={()=>{setOpenGroup(null);setGroupMsgs([]);}} style={{ background:"none",border:"none",color:C.text,fontSize:20,cursor:"pointer" }}>←</button>
         <div style={{ width:36,height:36,borderRadius:"50%",background:openGroup.gradient,display:"flex",alignItems:"center",justifyContent:"center",fontSize:18 }}>{openGroup.emoji}</div>
         <div><div style={{ fontWeight:600,color:C.text,fontFamily:DM }}>{openGroup.name}</div><div style={{ fontSize:11,color:C.textDim,fontFamily:DM }}>{openGroup.memberCount} members</div></div>
       </div>
@@ -1817,8 +1822,8 @@ function ChatsScreen({ chipAnimal }) {
         <div ref={grpEndRef}/>
       </div>
       <div style={{ padding:"10px 16px",borderTop:"1px solid "+(C.border),display:"flex",gap:8 }}>
-        <textarea value={groupInput} onChange={e=>setGroupInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendGroupMsg();}}} placeholder="Message the groupâ€¦" rows={1} style={{ flex:1,padding:"11px 14px",borderRadius:22,border:"1px solid "+(C.border),background:C.surface,color:C.text,resize:"none",fontFamily:DM,fontSize:14,outline:"none" }}/>
-        <button onClick={sendGroupMsg} disabled={!groupInput.trim()} style={{ width:42,height:42,borderRadius:"50%",background:groupInput.trim()?C.accent:"rgba(255,255,255,0.1)",border:"none",cursor:"pointer",color:"#fff",fontSize:18 }}>â†‘</button>
+        <textarea value={groupInput} onChange={e=>setGroupInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendGroupMsg();}}} placeholder="Message the group…" rows={1} style={{ flex:1,padding:"11px 14px",borderRadius:22,border:"1px solid "+(C.border),background:C.surface,color:C.text,resize:"none",fontFamily:DM,fontSize:14,outline:"none" }}/>
+        <button onClick={sendGroupMsg} disabled={!groupInput.trim()} style={{ width:42,height:42,borderRadius:"50%",background:groupInput.trim()?C.accent:"rgba(255,255,255,0.1)",border:"none",cursor:"pointer",color:"#fff",fontSize:18 }}>↑</button>
       </div>
     </div>
   );
@@ -1877,9 +1882,9 @@ function ChatsScreen({ chipAnimal }) {
                       <div><div style={{ fontWeight:600,color:C.text,fontSize:14,fontFamily:DM }}>{g.name}</div><div style={{ fontSize:11,color:C.textDim,fontFamily:DM }}>{g.memberCount} members</div></div>
                     </div>
                     <div style={{ fontSize:12,color:C.accent,fontStyle:"italic",marginBottom:8,fontFamily:DM }}>{g.reedReason}</div>
-                    <div style={{ fontSize:12,color:C.textDim,marginBottom:12,fontFamily:DM }}>ðŸ’¬ {g.lastMsg}</div>
+                    <div style={{ fontSize:12,color:C.textDim,marginBottom:12,fontFamily:DM }}>💬 {g.lastMsg}</div>
                     <div style={{ display:"flex",gap:8 }}>
-                      <button onClick={()=>joinGroup(g)} style={{ flex:1,padding:"9px",borderRadius:12,background:C.accent,border:"none",color:"#fff",cursor:"pointer",fontWeight:600,fontSize:13,fontFamily:DM }}>Join group â†’</button>
+                      <button onClick={()=>joinGroup(g)} style={{ flex:1,padding:"9px",borderRadius:12,background:C.accent,border:"none",color:"#fff",cursor:"pointer",fontWeight:600,fontSize:13,fontFamily:DM }}>Join group →</button>
                       <button onClick={()=>setSuggestions(prev=>prev.filter(x=>x.id!==g.id))} style={{ padding:"9px 14px",borderRadius:12,background:"none",border:"1px solid "+(C.border),color:C.textDim,cursor:"pointer",fontSize:13,fontFamily:DM }}>Pass</button>
                     </div>
                   </div>
@@ -1893,7 +1898,7 @@ function ChatsScreen({ chipAnimal }) {
   );
 }
 
-// â”€â”€ Plans Screen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Plans Screen ──────────────────────────────────────────────────────────────
 function PlansScreen({ userProfile, chipAnimal }) {
   const [category, setCategory] = useState("all");
   const [events, setEvents] = useState(EVENTS);
@@ -1901,13 +1906,13 @@ function PlansScreen({ userProfile, chipAnimal }) {
   const [digestLoading, setDigestLoading] = useState(true);
   const [showDigest, setShowDigest] = useState(true);
   const [showCompose, setShowCompose] = useState(false);
-  const [newPlan, setNewPlan] = useState({ title:"", location:"", date:"", emoji:"ðŸ“…", note:"", photo:null });
+  const [newPlan, setNewPlan] = useState({ title:"", location:"", date:"", emoji:"📅", note:"", photo:null });
   const planPhotoRef = useRef(null);
 
   useEffect(()=>{
     (async()=>{
       try { const text=await callAI("You are Reed on Chins. Write a warm 2-sentence weekly digest. Mention 1 specific event and 1 person. User: "+(JSON.stringify(userProfile||{name:"you"}))+". Events: "+(JSON.stringify(EVENTS.slice(0,3).map(e=>({title:e.title,date:e.date})))),null,120); setWeeklyDigest(text); }
-      catch { setWeeklyDigest("There's a board game night Friday and a parkrun Saturday â€” both worth showing up to."); }
+      catch { setWeeklyDigest("There's a board game night Friday and a parkrun Saturday — both worth showing up to."); }
       setDigestLoading(false);
     })();
   },[]);
@@ -1923,7 +1928,7 @@ function PlansScreen({ userProfile, chipAnimal }) {
       location: newPlan.location.trim() || "Location TBC",
       date: newPlan.date || "Date TBC",
       clock: "",
-      emoji: newPlan.emoji || "ðŸ“…",
+      emoji: newPlan.emoji || "📅",
       tags: [],
       going: true,
       time: "upcoming",
@@ -1932,16 +1937,16 @@ function PlansScreen({ userProfile, chipAnimal }) {
       reedNote: newPlan.note.trim() || null,
     };
     setEvents(prev=>[plan, ...prev]);
-    setNewPlan({ title:"", location:"", date:"", emoji:"ðŸ“…", note:"", photo:null });
+    setNewPlan({ title:"", location:"", date:"", emoji:"📅", note:"", photo:null });
     setShowCompose(false);
   };
 
-  const emojis = ["ðŸ“…","ðŸŽ‰","ðŸƒ","ðŸŽ²","â˜•","ðŸ•","ðŸŽµ","ðŸ¥¾","ðŸŽ¨","ðŸ‹ï¸","ðŸŽ­","ðŸº"];
+  const emojis = ["📅","🎉","🏃","🎲","☕","🍕","🎵","🥾","🎨","🏋️","🎭","🍺"];
 
   if(showCompose) return (
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:C.bg, overflow:"hidden" }}>
       <div style={{ padding:"16px 20px 12px", borderBottom:"1px solid "+(C.border), display:"flex", alignItems:"center", gap:12, flexShrink:0 }}>
-        <button onClick={()=>setShowCompose(false)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.5)", fontSize:20, cursor:"pointer" }}>â†</button>
+        <button onClick={()=>setShowCompose(false)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.5)", fontSize:20, cursor:"pointer" }}>←</button>
         <div style={{ fontFamily:DM, fontSize:17, fontWeight:700, color:C.text }}>New plan</div>
       </div>
       <div style={{ flex:1, overflowY:"auto", padding:"20px 20px 0" }}>
@@ -1952,11 +1957,11 @@ function PlansScreen({ userProfile, chipAnimal }) {
           {newPlan.photo ? (
             <>
               <img src={newPlan.photo} style={{ width:"100%", height:"100%", objectFit:"cover" }} alt=""/>
-              <button onClick={e=>{ e.stopPropagation(); setNewPlan(p=>({...p,photo:null})); }} style={{ position:"absolute", top:8, right:8, width:28, height:28, borderRadius:"50%", background:"rgba(0,0,0,0.5)", border:"none", color:"#fff", cursor:"pointer", fontSize:14, display:"flex", alignItems:"center", justifyContent:"center" }}>âœ•</button>
+              <button onClick={e=>{ e.stopPropagation(); setNewPlan(p=>({...p,photo:null})); }} style={{ position:"absolute", top:8, right:8, width:28, height:28, borderRadius:"50%", background:"rgba(0,0,0,0.5)", border:"none", color:"#fff", cursor:"pointer", fontSize:14, display:"flex", alignItems:"center", justifyContent:"center" }}>✕</button>
             </>
           ) : (
             <div style={{ textAlign:"center" }}>
-              <div style={{ fontSize:28, marginBottom:8 }}>ðŸ“·</div>
+              <div style={{ fontSize:28, marginBottom:8 }}>📷</div>
               <div style={{ fontFamily:DM, fontSize:13, color:"rgba(255,255,255,0.4)" }}>Add a photo</div>
               <div style={{ fontFamily:DM, fontSize:11, color:"rgba(255,255,255,0.25)", marginTop:4 }}>optional</div>
             </div>
@@ -1990,7 +1995,7 @@ function PlansScreen({ userProfile, chipAnimal }) {
       </div>
       <div style={{ padding:"16px 20px 32px", flexShrink:0 }}>
         <button onClick={addPlan} disabled={!newPlan.title.trim()} style={{ width:"100%", padding:"16px", borderRadius:16, border:"none", background:newPlan.title.trim()?C.accent:"rgba(255,255,255,0.1)", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:newPlan.title.trim()?"pointer":"default", boxShadow:newPlan.title.trim()?"0 6px 24px rgba(75,193,160,0.35)":"none" }}>
-          Add plan â†’
+          Add plan →
         </button>
       </div>
     </div>
@@ -2001,7 +2006,7 @@ function PlansScreen({ userProfile, chipAnimal }) {
       <div style={{ padding:"18px 20px 12px", borderBottom:"1px solid "+(C.border), display:"flex", alignItems:"center", justifyContent:"space-between" }}>
         <div>
           <div style={{ fontFamily:DM, fontSize:22, fontWeight:700, color:C.text }}>Plans</div>
-          <div style={{ fontSize:11, color:C.accent, marginTop:2, fontFamily:DM }}>Things to do â€” and who you'd meet</div>
+          <div style={{ fontSize:11, color:C.accent, marginTop:2, fontFamily:DM }}>Things to do — and who you'd meet</div>
         </div>
         <button onClick={()=>setShowCompose(true)} style={{ padding:"9px 16px", borderRadius:20, background:C.accent, border:"none", color:"#fff", fontFamily:DM, fontSize:13, fontWeight:700, cursor:"pointer" }}>
           + New
@@ -2030,11 +2035,11 @@ function PlansScreen({ userProfile, chipAnimal }) {
               {event.reedNote&&<div style={{ margin:"12px 16px 0", padding:"10px 12px", background:C.accentDim, borderRadius:12, display:"flex", gap:8, alignItems:"flex-start" }}><ReedAvatar size={18} animal={chipAnimal}/><div style={{ fontSize:12, color:C.accent, lineHeight:1.55, fontStyle:"italic", flex:1, fontFamily:DM }}>{event.reedNote}</div></div>}
               <div style={{ margin:"12px 16px 0", padding:"10px 12px", background:"rgba(255,255,255,0.06)", borderRadius:12, display:"flex", alignItems:"center", gap:10 }}>
                 <span style={{ fontSize:22 }}>{event.emoji}</span>
-                <div style={{ flex:1 }}><div style={{ fontSize:13, fontWeight:600, color:C.text, fontFamily:DM }}>{event.title}</div><div style={{ fontSize:11, color:C.textSub, marginTop:1, fontFamily:DM }}>ðŸ“ {event.location}</div></div>
+                <div style={{ flex:1 }}><div style={{ fontSize:13, fontWeight:600, color:C.text, fontFamily:DM }}>{event.title}</div><div style={{ fontSize:11, color:C.textSub, marginTop:1, fontFamily:DM }}>📍 {event.location}</div></div>
                 <div style={{ display:"flex", gap:4 }}>{event.tags.slice(0,2).map(t=><span key={t} style={{ padding:"2px 8px", borderRadius:8, background:C.border, color:C.textSub, fontSize:10, fontFamily:DM }}>{t}</span>)}</div>
               </div>
               <div style={{ padding:"12px 16px 16px" }}>
-                <button onClick={()=>toggleGoing(event.id)} style={{ width:"100%", padding:"11px", borderRadius:14, border:"1.5px solid "+(event.going?C.accent:C.border), background:event.going?C.accentDim:"none", color:event.going?C.accent:C.text, cursor:"pointer", fontWeight:600, fontSize:14, fontFamily:DM }}>{event.going?"âœ“ I'm going":"count me in â†’"}</button>
+                <button onClick={()=>toggleGoing(event.id)} style={{ width:"100%", padding:"11px", borderRadius:14, border:"1.5px solid "+(event.going?C.accent:C.border), background:event.going?C.accentDim:"none", color:event.going?C.accent:C.text, cursor:"pointer", fontWeight:600, fontSize:14, fontFamily:DM }}>{event.going?"✓ I'm going":"count me in →"}</button>
               </div>
             </div>
           ))}
@@ -2044,7 +2049,7 @@ function PlansScreen({ userProfile, chipAnimal }) {
   );
 }
 
-// â”€â”€ Mingle Screen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Mingle Screen ─────────────────────────────────────────────────────────────
 function MingleScreen({ userProfile, chipAnimal }) {
   const [match, setMatch] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -2055,7 +2060,7 @@ function MingleScreen({ userProfile, chipAnimal }) {
     const available = NEARBY.filter(p=>!passed.includes(p.id));
     if(available.length===0){ setLoading(false); return; }
     const p = available[Math.floor(Math.random()*available.length)];
-    setMatch({ person:p, why:p.alias+"'s world is genuinely different from yours â€” that's the point.", opener:"Hey "+p.alias+" â€” Reed thinks we'd have an interesting conversation." });
+    setMatch({ person:p, why:p.alias+"'s world is genuinely different from yours — that's the point.", opener:"Hey "+p.alias+" — Reed thinks we'd have an interesting conversation." });
     setLoading(false);
   };
   useEffect(()=>{ findMatch(); },[]);
@@ -2069,13 +2074,13 @@ function MingleScreen({ userProfile, chipAnimal }) {
         <div style={{ display:"flex", gap:10, alignItems:"flex-start", marginBottom:20 }}>
           <ReedAvatar size={36} animal={chipAnimal}/>
           <div style={{ background:C.surface, border:"1px solid "+(C.border), borderRadius:16, padding:"12px 14px", fontSize:14, color:C.text, lineHeight:1.6, fontFamily:DM }}>
-            Not your usual crowd. Someone genuinely different â€” Reed thinks you'd surprise each other.
+            Not your usual crowd. Someone genuinely different — Reed thinks you'd surprise each other.
           </div>
         </div>
-        {loading&&<div style={{ padding:"24px", background:C.surface, borderRadius:24, border:"1px solid "+(C.border), display:"flex", flexDirection:"column", alignItems:"center", gap:12 }}><Dots/><div style={{ fontSize:12, color:C.textSub, fontFamily:DM }}>Reed is thinking outside the boxâ€¦</div></div>}
+        {loading&&<div style={{ padding:"24px", background:C.surface, borderRadius:24, border:"1px solid "+(C.border), display:"flex", flexDirection:"column", alignItems:"center", gap:12 }}><Dots/><div style={{ fontSize:12, color:C.textSub, fontFamily:DM }}>Reed is thinking outside the box…</div></div>}
         {!loading&&NEARBY.length===0&&(
           <div style={{ textAlign:"center", padding:"40px 24px" }}>
-            <div style={{ fontSize:48, marginBottom:16 }}>ðŸŒ</div>
+            <div style={{ fontSize:48, marginBottom:16 }}>🌍</div>
             <div style={{ fontFamily:DM, fontSize:17, fontWeight:700, color:C.text, marginBottom:8 }}>No one to mingle with yet</div>
             <div style={{ fontFamily:DM, fontSize:14, color:C.textSub, lineHeight:1.7 }}>Reed is on the lookout. Invite some friends to Chins and this will come alive.</div>
           </div>
@@ -2095,7 +2100,7 @@ function MingleScreen({ userProfile, chipAnimal }) {
               </div>
               <div style={{ display:"flex", gap:8, marginTop:4 }}>
                 <button onClick={()=>{ setPassed(prev=>[...prev,match.person.id]); findMatch(); }} style={{ flex:1, padding:"12px", borderRadius:16, border:"1px solid "+(C.border), background:"none", color:C.text, cursor:"pointer", fontSize:14, fontFamily:DM }}>Pass</button>
-                <button style={{ flex:2, padding:"12px", borderRadius:16, border:"none", background:C.accent, color:"#fff", cursor:"pointer", fontWeight:600, fontSize:14, fontFamily:DM }}>Say hello â†’</button>
+                <button style={{ flex:2, padding:"12px", borderRadius:16, border:"none", background:C.accent, color:"#fff", cursor:"pointer", fontWeight:600, fontSize:14, fontFamily:DM }}>Say hello →</button>
               </div>
             </div>
           </div>
@@ -2218,15 +2223,15 @@ function SparkScreen({ userProfile, authToken }) {
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", overflow:"hidden" }}>
       {showChatReport && <ReportModal onClose={()=>setShowChatReport(false)} targetName="Anonymous post" targetId={activeChat.id} isAnon={true}/>}
       <div style={{ padding:"14px 20px 12px", borderBottom:"1px solid rgba(255,255,255,0.08)", display:"flex", alignItems:"center", gap:12, flexShrink:0 }}>
-        <button onClick={()=>setActiveChat(null)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.5)", fontSize:20, cursor:"pointer" }}>â†</button>
+        <button onClick={()=>setActiveChat(null)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.5)", fontSize:20, cursor:"pointer" }}>←</button>
         <div style={{ flex:1 }}>
           <div style={{ fontFamily:DM, fontSize:15, fontWeight:700, color:"#fff" }}>Anonymous chat</div>
           <div style={{ fontSize:11, color:"rgba(255,255,255,0.4)", fontFamily:DM }}>Your identity is hidden</div>
         </div>
         <div style={{ padding:"4px 10px", borderRadius:20, background:"rgba(75,193,160,0.1)", border:"1px solid rgba(75,193,160,0.2)" }}>
-          <span style={{ fontSize:10, color:"#4BC1A0", fontFamily:DM, fontWeight:700 }}>ðŸ”’ ANON</span>
+          <span style={{ fontSize:10, color:"#4BC1A0", fontFamily:DM, fontWeight:700 }}>🔒 ANON</span>
         </div>
-        <button onClick={()=>setShowChatReport(true)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.4)", fontSize:20, cursor:"pointer", padding:"4px 8px" }}>â‹¯</button>
+        <button onClick={()=>setShowChatReport(true)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.4)", fontSize:20, cursor:"pointer", padding:"4px 8px" }}>⋯</button>
       </div>
       <div style={{ flex:1, overflowY:"auto", padding:"16px" }}>
         {chatMsgs.map((m,i) => (
@@ -2238,8 +2243,8 @@ function SparkScreen({ userProfile, authToken }) {
         ))}
       </div>
       <div style={{ padding:"10px 14px 16px", borderTop:"1px solid rgba(255,255,255,0.06)", display:"flex", gap:10, alignItems:"flex-end", flexShrink:0 }}>
-        <textarea value={chatInput} onChange={e=>setChatInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendChat();}}} placeholder="say somethingâ€¦" rows={1} style={{ flex:1, padding:"11px 16px", borderRadius:24, border:"1px solid rgba(255,255,255,0.12)", background:"rgba(255,255,255,0.07)", color:"#fff", resize:"none", fontFamily:DM, fontSize:15, outline:"none" }}/>
-        <button onClick={sendChat} disabled={!chatInput.trim()} style={{ width:42, height:42, borderRadius:"50%", background:chatInput.trim()?"#4BC1A0":"rgba(255,255,255,0.08)", border:"none", cursor:chatInput.trim()?"pointer":"default", color:"#fff", fontSize:18, flexShrink:0 }}>â†‘</button>
+        <textarea value={chatInput} onChange={e=>setChatInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendChat();}}} placeholder="say something…" rows={1} style={{ flex:1, padding:"11px 16px", borderRadius:24, border:"1px solid rgba(255,255,255,0.12)", background:"rgba(255,255,255,0.07)", color:"#fff", resize:"none", fontFamily:DM, fontSize:15, outline:"none" }}/>
+        <button onClick={sendChat} disabled={!chatInput.trim()} style={{ width:42, height:42, borderRadius:"50%", background:chatInput.trim()?"#4BC1A0":"rgba(255,255,255,0.08)", border:"none", cursor:chatInput.trim()?"pointer":"default", color:"#fff", fontSize:18, flexShrink:0 }}>↑</button>
       </div>
     </div>
   );
@@ -2248,33 +2253,33 @@ function SparkScreen({ userProfile, authToken }) {
   if(showCompose) return (
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", overflow:"hidden" }}>
       <div style={{ padding:"14px 20px 12px", borderBottom:"1px solid rgba(255,255,255,0.08)", display:"flex", alignItems:"center", gap:12, flexShrink:0 }}>
-        <button onClick={()=>setShowCompose(false)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.5)", fontSize:20, cursor:"pointer" }}>â†</button>
+        <button onClick={()=>setShowCompose(false)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.5)", fontSize:20, cursor:"pointer" }}>←</button>
         <div style={{ fontFamily:DM, fontSize:17, fontWeight:700, color:"#fff" }}>New spark</div>
       </div>
       <div style={{ flex:1, padding:"20px 20px 0", display:"flex", flexDirection:"column", gap:16 }}>
         <div>
           <div style={{ fontFamily:DM, fontSize:13, color:"rgba(255,255,255,0.45)", marginBottom:8 }}>What's on your mind?</div>
-          <textarea value={newText} onChange={e=>setNewText(e.target.value)} placeholder="Ask something, share a thought, start a conversationâ€¦" style={{ width:"100%", minHeight:120, padding:"14px 16px", borderRadius:16, border:"1px solid rgba(255,255,255,0.12)", background:"rgba(255,255,255,0.06)", color:"#fff", fontFamily:DM, fontSize:15, outline:"none", resize:"none", boxSizing:"border-box", lineHeight:1.6 }}/>
+          <textarea value={newText} onChange={e=>setNewText(e.target.value)} placeholder="Ask something, share a thought, start a conversation…" style={{ width:"100%", minHeight:120, padding:"14px 16px", borderRadius:16, border:"1px solid rgba(255,255,255,0.12)", background:"rgba(255,255,255,0.06)", color:"#fff", fontFamily:DM, fontSize:15, outline:"none", resize:"none", boxSizing:"border-box", lineHeight:1.6 }}/>
           <div style={{ fontSize:11, color:"rgba(255,255,255,0.25)", marginTop:6, fontFamily:DM }}>{newText.length}/200</div>
         </div>
         <div style={{ background:"rgba(255,255,255,0.04)", borderRadius:16, padding:"16px", border:"1px solid rgba(255,255,255,0.08)" }}>
           <div style={{ fontFamily:DM, fontSize:13, fontWeight:600, color:"rgba(255,255,255,0.6)", marginBottom:12 }}>Share about yourself? (optional)</div>
           <div style={{ display:"flex", gap:10 }}>
             <button onClick={()=>setShareAge(!shareAge)} style={{ flex:1, padding:"10px", borderRadius:12, border:"1.5px solid "+(shareAge?"#4BC1A0":"rgba(255,255,255,0.12)"), background:shareAge?"rgba(75,193,160,0.1)":"none", color:shareAge?"#4BC1A0":"rgba(255,255,255,0.4)", fontFamily:DM, fontSize:13, cursor:"pointer", transition:"all 0.2s" }}>
-              {shareAge?"âœ“ ":""}{userProfile?.dob ? Math.floor((new Date()-new Date(userProfile.dob))/(1000*60*60*24*365.25))+" years old" : "My age"}
+              {shareAge?"✓ ":""}{userProfile?.dob ? Math.floor((new Date()-new Date(userProfile.dob))/(1000*60*60*24*365.25))+" years old" : "My age"}
             </button>
             <button onClick={()=>setShareGender(!shareGender)} style={{ flex:1, padding:"10px", borderRadius:12, border:"1.5px solid "+(shareGender?"#4BC1A0":"rgba(255,255,255,0.12)"), background:shareGender?"rgba(75,193,160,0.1)":"none", color:shareGender?"#4BC1A0":"rgba(255,255,255,0.4)", fontFamily:DM, fontSize:13, cursor:"pointer", transition:"all 0.2s" }}>
-              {shareGender?"âœ“ ":""}{userProfile?.gender || "My gender"}
+              {shareGender?"✓ ":""}{userProfile?.gender || "My gender"}
             </button>
           </div>
         </div>
         <div style={{ padding:"10px 14px", background:"rgba(75,193,160,0.06)", borderRadius:12, border:"1px solid rgba(75,193,160,0.15)" }}>
-          <div style={{ fontFamily:DM, fontSize:12, color:"rgba(255,255,255,0.4)", lineHeight:1.6 }}>ðŸ”’ Your spark is anonymous. No one will know it's you. It disappears after 24 hours or when you take it down.</div>
+          <div style={{ fontFamily:DM, fontSize:12, color:"rgba(255,255,255,0.4)", lineHeight:1.6 }}>🔒 Your spark is anonymous. No one will know it's you. It disappears after 24 hours or when you take it down.</div>
         </div>
       </div>
       <div style={{ padding:"16px 20px 32px", flexShrink:0 }}>
         <button onClick={postStarter} disabled={!newText.trim()||newText.length>200} style={{ width:"100%", padding:"16px", borderRadius:16, border:"none", background:newText.trim()&&newText.length<=200?"#4BC1A0":"rgba(255,255,255,0.1)", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:newText.trim()?"pointer":"default", boxShadow:newText.trim()?"0 6px 24px rgba(75,193,160,0.3)":"none" }}>
-          Post spark â†’
+          Post spark →
         </button>
       </div>
     </div>
@@ -2302,12 +2307,12 @@ function SparkScreen({ userProfile, authToken }) {
       <div style={{ flex:1, overflowY:"auto", padding:"12px 16px 24px" }}>
         {loading && (
           <div style={{ textAlign:"center", padding:"60px 32px" }}>
-            <div style={{ fontFamily:DM, fontSize:14, color:"rgba(255,255,255,0.3)" }}>Loading startersâ€¦</div>
+            <div style={{ fontFamily:DM, fontSize:14, color:"rgba(255,255,255,0.3)" }}>Loading starters…</div>
           </div>
         )}
         {!loading && starters.map((s,i) => (
           <div key={s.id} style={{ background:s.isOwn?"rgba(75,193,160,0.08)":"rgba(255,255,255,0.05)", borderRadius:18, border:"1.5px solid "+(s.isOwn?"rgba(75,193,160,0.3)":"rgba(255,255,255,0.08)"), padding:"16px", marginBottom:10, cursor:s.isOwn?"default":"pointer", transition:"background 0.2s", position:"relative" }}>
-            {!s.isOwn && <button onClick={e=>{e.stopPropagation();setReportingPost(s);}} style={{ position:"absolute", top:12, right:12, background:"none", border:"none", color:"rgba(255,255,255,0.25)", fontSize:16, cursor:"pointer", padding:"4px" }}>â‹¯</button>}
+            {!s.isOwn && <button onClick={e=>{e.stopPropagation();setReportingPost(s);}} style={{ position:"absolute", top:12, right:12, background:"none", border:"none", color:"rgba(255,255,255,0.25)", fontSize:16, cursor:"pointer", padding:"4px" }}>⋯</button>}
             <div onClick={()=>!s.isOwn&&openChat(s)}>
             {s.isOwn&&<div style={{ fontSize:10, fontWeight:700, color:"#4BC1A0", fontFamily:DM, letterSpacing:0.5, marginBottom:8, textTransform:"uppercase" }}>Your spark</div>}
             <div style={{ fontFamily:DM, fontSize:15, color:"#fff", lineHeight:1.6, marginBottom:12, paddingRight:s.isOwn?0:24 }}>{s.text}</div>
@@ -2319,11 +2324,11 @@ function SparkScreen({ userProfile, authToken }) {
                     {s.gender&&<span style={{ fontSize:11, color:"rgba(255,255,255,0.35)", fontFamily:DM, background:"rgba(255,255,255,0.06)", padding:"3px 8px", borderRadius:10 }}>{s.gender}</span>}
                   </div>
                 )}
-                <span style={{ fontSize:11, color:"rgba(255,255,255,0.25)", fontFamily:DM }}>â± {timeLabel(s.created_at)}</span>
+                <span style={{ fontSize:11, color:"rgba(255,255,255,0.25)", fontFamily:DM }}>⏱ {timeLabel(s.created_at)}</span>
               </div>
               <div style={{ display:"flex", alignItems:"center", gap:4 }}>
-                <span style={{ fontSize:11, color:"rgba(255,255,255,0.35)", fontFamily:DM }}>ðŸ’¬ {s.replies}</span>
-                {!s.isOwn&&<span style={{ fontSize:11, color:"#4BC1A0", fontFamily:DM, fontWeight:600, marginLeft:4 }}>reply â†’</span>}
+                <span style={{ fontSize:11, color:"rgba(255,255,255,0.35)", fontFamily:DM }}>💬 {s.replies}</span>
+                {!s.isOwn&&<span style={{ fontSize:11, color:"#4BC1A0", fontFamily:DM, fontWeight:600, marginLeft:4 }}>reply →</span>}
               </div>
             </div>
             </div>
@@ -2331,10 +2336,10 @@ function SparkScreen({ userProfile, authToken }) {
         ))}
         {!loading && starters.length === 0 && (
           <div style={{ textAlign:"center", padding:"60px 32px" }}>
-            <div style={{ fontSize:48, marginBottom:16 }}>âš¡</div>
+            <div style={{ fontSize:48, marginBottom:16 }}>⚡</div>
             <div style={{ fontFamily:DM, fontSize:18, fontWeight:700, color:"#fff", marginBottom:8 }}>Nothing here yet</div>
             <div style={{ fontFamily:DM, fontSize:14, color:"rgba(255,255,255,0.4)", lineHeight:1.7, marginBottom:24 }}>This is where anonymous conversation starters live. Post something and see who responds.</div>
-            <button onClick={()=>setShowCompose(true)} style={{ padding:"12px 24px", borderRadius:16, background:"#4BC1A0", border:"none", color:"#fff", fontFamily:DM, fontSize:14, fontWeight:700, cursor:"pointer" }}>Start a conversation â†’</button>
+            <button onClick={()=>setShowCompose(true)} style={{ padding:"12px 24px", borderRadius:16, background:"#4BC1A0", border:"none", color:"#fff", fontFamily:DM, fontSize:14, fontWeight:700, cursor:"pointer" }}>Start a conversation →</button>
           </div>
         )}
       </div>
@@ -2342,7 +2347,7 @@ function SparkScreen({ userProfile, authToken }) {
   );
 }
 
-// â”€â”€ Settings Screen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Settings Screen ───────────────────────────────────────────────────────────
 function SettingsScreen({ onBack, onLogout, onDeleteAccount, userProfile }) {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showReedProfile, setShowReedProfile] = useState(false);
@@ -2355,7 +2360,7 @@ function SettingsScreen({ onBack, onLogout, onDeleteAccount, userProfile }) {
         <div style={{ fontFamily:DM, fontSize:15, color:danger?"#E05252":C.text, fontWeight:500 }}>{label}</div>
         {sublabel&&<div style={{ fontFamily:DM, fontSize:12, color:C.textDim, marginTop:2 }}>{sublabel}</div>}
       </div>
-      {right||( onPress&&!danger&&<div style={{ color:C.textDim, fontSize:16 }}>â€º</div> )}
+      {right||( onPress&&!danger&&<div style={{ color:C.textDim, fontSize:16 }}>›</div> )}
     </div>
   );
 
@@ -2374,7 +2379,7 @@ function SettingsScreen({ onBack, onLogout, onDeleteAccount, userProfile }) {
     return (
       <div style={{ flex:1, display:"flex", flexDirection:"column", background:C.bg, overflow:"hidden" }}>
         <div style={{ padding:"20px 20px 16px", borderBottom:"1px solid "+(C.border), display:"flex", alignItems:"center", gap:12, flexShrink:0 }}>
-          <button onClick={()=>setShowReedProfile(false)} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>â†</button>
+          <button onClick={()=>setShowReedProfile(false)} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>←</button>
           <div style={{ fontFamily:DM, fontSize:18, fontWeight:700, color:C.text }}>My Reed profile</div>
         </div>
         <div style={{ flex:1, overflowY:"auto", padding:"16px" }}>
@@ -2433,7 +2438,7 @@ function SettingsScreen({ onBack, onLogout, onDeleteAccount, userProfile }) {
   if(showPrivacyPolicy) return (
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:C.bg, overflow:"hidden" }}>
       <div style={{ padding:"20px 20px 16px", borderBottom:"1px solid "+(C.border), display:"flex", alignItems:"center", gap:12, flexShrink:0 }}>
-        <button onClick={()=>setShowPrivacyPolicy(false)} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>â†</button>
+        <button onClick={()=>setShowPrivacyPolicy(false)} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>←</button>
         <div style={{ fontFamily:DM, fontSize:18, fontWeight:700, color:C.text }}>Privacy policy</div>
       </div>
       <div style={{ flex:1, overflowY:"auto", padding:"20px" }}>
@@ -2443,7 +2448,7 @@ function SettingsScreen({ onBack, onLogout, onDeleteAccount, userProfile }) {
           { heading:"What information we collect", body:"We collect: names, phone numbers, email addresses, usernames, passwords, contact preferences, authentication data, user generated content, usage data, user-provided location, and personal information voluntarily disclosed during AI companion conversations.\n\nReed may infer personality traits, preferences and compatibility dimensions from your conversations. These are used solely to suggest compatible connections." },
           { heading:"Sensitive information", body:"We may process sensitive information that users voluntarily share, including information relating to health, sexual orientation, race or ethnic origin, political opinions, and religious beliefs. We only process this where necessary and with your consent." },
           { heading:"How we use your information", body:"We use your information to: create and manage your account, deliver our services, respond to inquiries, send administrative information, enable user communications, generate compatibility profiles, suggest potential connections, protect our services, and comply with legal obligations." },
-          { heading:"Who we share your information with", body:"We share data with:\n\nâ€” AI service providers (currently Anthropic PBC)\nâ€” Database and authentication providers (currently Supabase Inc)\nâ€” Hosting providers (currently Vercel Inc)\nâ€” SMS verification providers (currently Twilio Inc)\nâ€” Domain and email providers (currently Names.co.uk)\nâ€” Code repository providers (currently GitHub Inc)\n\nWe do not sell your data. We do not share your data with advertisers." },
+          { heading:"Who we share your information with", body:"We share data with:\n\n— AI service providers (currently Anthropic PBC)\n— Database and authentication providers (currently Supabase Inc)\n— Hosting providers (currently Vercel Inc)\n— SMS verification providers (currently Twilio Inc)\n— Domain and email providers (currently Names.co.uk)\n— Code repository providers (currently GitHub Inc)\n\nWe do not sell your data. We do not share your data with advertisers." },
           { heading:"International transfers", body:"Our servers are located in the United States, United Kingdom and Ireland. We use Standard Contractual Clauses to protect your data during international transfers." },
           { heading:"How long we keep your information", body:"We keep your information for as long as you have an account with us. When you delete your account, we delete or anonymise your data, except where required by law." },
           { heading:"Security", body:"We implement technical and organisational security measures including encrypted transmission, secure authentication, password hashing, database access controls and API key protection. No system is completely secure." },
@@ -2467,11 +2472,11 @@ function SettingsScreen({ onBack, onLogout, onDeleteAccount, userProfile }) {
   if (showDeleteConfirm) return (
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:C.bg }}>
       <div style={{ padding:"20px 20px 16px", borderBottom:"1px solid "+(C.border), display:"flex", alignItems:"center", gap:12 }}>
-        <button onClick={()=>setShowDeleteConfirm(false)} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>â†</button>
+        <button onClick={()=>setShowDeleteConfirm(false)} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>←</button>
         <div style={{ fontFamily:DM, fontSize:18, fontWeight:700, color:"#E05252" }}>Delete account</div>
       </div>
       <div style={{ flex:1, padding:"32px 24px" }}>
-        <div style={{ fontSize:48, textAlign:"center", marginBottom:20 }}>âš ï¸</div>
+        <div style={{ fontSize:48, textAlign:"center", marginBottom:20 }}>⚠️</div>
         <div style={{ fontFamily:DM, fontSize:17, fontWeight:700, color:C.text, textAlign:"center", marginBottom:12 }}>Are you absolutely sure?</div>
         <div style={{ fontFamily:DM, fontSize:14, color:C.textSub, textAlign:"center", lineHeight:1.7, marginBottom:32 }}>
           This will permanently delete your account, your profile, all your conversations, and your connections. This cannot be undone.
@@ -2489,40 +2494,40 @@ function SettingsScreen({ onBack, onLogout, onDeleteAccount, userProfile }) {
   return (
     <div style={{ flex:1, display:"flex", flexDirection:"column", background:C.bg, overflow:"hidden" }}>
       <div style={{ padding:"20px 20px 16px", borderBottom:"1px solid "+(C.border), display:"flex", alignItems:"center", gap:12, flexShrink:0 }}>
-        <button onClick={onBack} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>â†</button>
+        <button onClick={onBack} style={{ background:"none", border:"none", color:C.text, fontSize:20, cursor:"pointer" }}>←</button>
         <div style={{ fontFamily:DM, fontSize:18, fontWeight:700, color:C.text }}>Settings</div>
       </div>
       <div style={{ flex:1, overflowY:"auto" }}>
         <div style={{ padding:"20px 20px 6px", fontSize:11, fontWeight:700, color:C.textDim, textTransform:"uppercase", letterSpacing:1, fontFamily:DM }}>Privacy</div>
-        <Row icon="ðŸ§ " label="My Reed profile" sublabel="See what Reed has inferred about you" onPress={()=>setShowReedProfile(true)}/>
-        <Row icon="ðŸ“‹" label="Download my data" sublabel="Get a copy of everything Chins holds" onPress={()=>{ window.open('mailto:support@chins.app?subject=Data%20Request&body=Hi%2C%20I%20would%20like%20a%20copy%20of%20all%20personal%20data%20Chins%20holds%20about%20me.%20My%20account%20email%20is%3A%20', '_blank'); }}/>
+        <Row icon="🧠" label="My Reed profile" sublabel="See what Reed has inferred about you" onPress={()=>setShowReedProfile(true)}/>
+        <Row icon="📋" label="Download my data" sublabel="Get a copy of everything Chins holds" onPress={()=>{ window.open('mailto:support@chins.app?subject=Data%20Request&body=Hi%2C%20I%20would%20like%20a%20copy%20of%20all%20personal%20data%20Chins%20holds%20about%20me.%20My%20account%20email%20is%3A%20', '_blank'); }}/>
 
         {/* Support */}
         <div style={{ padding:"20px 20px 6px", fontSize:11, fontWeight:700, color:C.textDim, textTransform:"uppercase", letterSpacing:1, fontFamily:DM }}>Support</div>
-        <Row icon="ðŸ’¬" label="Contact us" sublabel="support@chins.app" onPress={()=>window.open('mailto:support@chins.app','_blank')}/>
-        <Row icon="ðŸ›" label="Report a bug" onPress={()=>window.open('mailto:support@chins.app?subject=Bug%20Report','_blank')}/>
-        <Row icon="â­" label="Rate Chins" onPress={()=>{}}/>
+        <Row icon="💬" label="Contact us" sublabel="support@chins.app" onPress={()=>window.open('mailto:support@chins.app','_blank')}/>
+        <Row icon="🐛" label="Report a bug" onPress={()=>window.open('mailto:support@chins.app?subject=Bug%20Report','_blank')}/>
+        <Row icon="⭐" label="Rate Chins" onPress={()=>{}}/>
 
         {/* Legal */}
         <div style={{ padding:"20px 20px 6px", fontSize:11, fontWeight:700, color:C.textDim, textTransform:"uppercase", letterSpacing:1, fontFamily:DM }}>Legal</div>
-        <Row icon="ðŸ”’" label="Privacy policy" onPress={()=>setShowPrivacyPolicy(true)}/>
-        <Row icon="ðŸ“„" label="Terms of service" onPress={()=>{}}/>
+        <Row icon="🔒" label="Privacy policy" onPress={()=>setShowPrivacyPolicy(true)}/>
+        <Row icon="📄" label="Terms of service" onPress={()=>{}}/>
 
         {/* Account */}
         <div style={{ padding:"20px 20px 6px", fontSize:11, fontWeight:700, color:C.textDim, textTransform:"uppercase", letterSpacing:1, fontFamily:DM }}>Account</div>
-        <Row icon="ðŸšª" label="Log out" onPress={onLogout}/>
-        <Row icon="ðŸ—‘ï¸" label="Delete account" sublabel="Permanently remove your account and data" danger={true} onPress={()=>setShowDeleteConfirm(true)}/>
+        <Row icon="🚪" label="Log out" onPress={onLogout}/>
+        <Row icon="🗑️" label="Delete account" sublabel="Permanently remove your account and data" danger={true} onPress={()=>setShowDeleteConfirm(true)}/>
 
         <div style={{ padding:"24px 20px", textAlign:"center" }}>
           <div style={{ fontFamily:DM, fontSize:12, color:C.textDim }}>Chins v1.0</div>
-          <div style={{ fontFamily:DM, fontSize:11, color:"rgba(255,255,255,0.2)", marginTop:4 }}>Made with care ðŸ’š</div>
+          <div style={{ fontFamily:DM, fontSize:11, color:"rgba(255,255,255,0.2)", marginTop:4 }}>Made with care 💚</div>
         </div>
       </div>
     </div>
   );
 }
 function ProfileScreen({ profile, privacyMode, onPrivacyChange, userPhoto, onPhotoUpload, onLogout, onDeleteAccount }) {
-  const p = profile || { name:"You", vibe:"Still getting to know youâ€¦", interests:[], lookingFor:"", emoji:"ðŸ§" };
+  const p = profile || { name:"You", vibe:"Still getting to know you…", interests:[], lookingFor:"", emoji:"🧍" };
   const photoRef = useRef(null);
   const [showSettings, setShowSettings] = useState(false);
 
@@ -2551,7 +2556,7 @@ function ProfileScreen({ profile, privacyMode, onPrivacyChange, userPhoto, onPho
           <div style={{ position:"relative" }}>
             <input ref={photoRef} type="file" accept="image/*" style={{ display:"none" }} onChange={e=>{const f=e.target.files[0];if(f)onPhotoUpload(URL.createObjectURL(f));e.target.value="";}}/>
             <div onClick={()=>photoRef.current?.click()} style={{ width:72,height:72,borderRadius:"50%",overflow:"hidden",background:"linear-gradient(135deg,#4BC1A0,#2d8f70)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:28,cursor:"pointer" }}>
-              {userPhoto?<img src={userPhoto} style={{ width:"100%",height:"100%",objectFit:"cover" }}/>:(p.emoji||"ðŸ§")}
+              {userPhoto?<img src={userPhoto} style={{ width:"100%",height:"100%",objectFit:"cover" }}/>:(p.emoji||"🧍")}
             </div>
             <div style={{ position:"absolute",bottom:0,right:0,width:22,height:22,borderRadius:"50%",background:C.accent,border:"2px solid #054a43",display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,cursor:"pointer" }} onClick={()=>photoRef.current?.click()}>+</div>
           </div>
@@ -2568,7 +2573,7 @@ function ProfileScreen({ profile, privacyMode, onPrivacyChange, userPhoto, onPho
           <div style={{ display:"flex",gap:8 }}>
             {["private","discoverable"].map(mode=>(
               <button key={mode} onClick={()=>onPrivacyChange(mode)} style={{ flex:1,padding:"10px",borderRadius:12,border:"1.5px solid "+(privacyMode===mode?C.accent:C.border),background:privacyMode===mode?C.accentDim:"none",color:privacyMode===mode?C.accent:C.textDim,fontFamily:DM,fontSize:13,fontWeight:privacyMode===mode?700:400,cursor:"pointer",transition:"all 0.2s" }}>
-                {mode==="private"?"ðŸ”’ Private":"ðŸŒ Discoverable"}
+                {mode==="private"?"🔒 Private":"🌍 Discoverable"}
               </button>
             ))}
           </div>
@@ -2590,7 +2595,7 @@ function ProfileScreen({ profile, privacyMode, onPrivacyChange, userPhoto, onPho
         <div style={{ marginBottom:20,padding:"16px",background:C.surface,borderRadius:18,border:"1px solid "+(C.border) }}>
           <div style={{ fontFamily:DM,fontSize:13,fontWeight:700,color:C.text,marginBottom:4 }}>Your area</div>
           <div style={{ fontSize:12,color:C.textDim,fontFamily:DM,marginBottom:10,lineHeight:1.5 }}>
-            {p.city ? `Reed thinks you're in ${p.area||p.city}.` : "Reed hasn't picked up your area yet â€” you can set it here."}
+            {p.city ? `Reed thinks you're in ${p.area||p.city}.` : "Reed hasn't picked up your area yet — you can set it here."}
           </div>
           <input
             defaultValue={p.area||p.city||""}
@@ -2608,7 +2613,7 @@ function ProfileScreen({ profile, privacyMode, onPrivacyChange, userPhoto, onPho
 
         <div style={{ padding:"14px 16px",background:C.accentDim,borderRadius:16,border:"1px solid "+(C.accentGlow) }}>
           <div style={{ display:"flex",gap:10,alignItems:"flex-start" }}>
-            <img src={REED_IMG} style={{ width:24, height:24, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", flexShrink:0, background:"#021a16", mixBlendMode:"screen" }} alt="Reed"/>
+            <div style={{ width:24, height:24, borderRadius:"50%", background:"#021a16", overflow:"hidden", flexShrink:0 }}><img src={REED_IMG} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", mixBlendMode:"screen", display:"block" }} alt="Reed"/></div>
             <div style={{ fontSize:13,color:C.accent,lineHeight:1.6,fontStyle:"italic",fontFamily:DM }}>
               "The more I know you, the better your matches get. Keep talking to me."
             </div>
@@ -2619,7 +2624,7 @@ function ProfileScreen({ profile, privacyMode, onPrivacyChange, userPhoto, onPho
   );
 }
 
-// â”€â”€ Global Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Global Styles ─────────────────────────────────────────────────────────────
 const globalStyles = `  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');\n  * { box-sizing: border-box; margin: 0; padding: 0; }
   :root { --sat: env(safe-area-inset-top, 0px); --sab: env(safe-area-inset-bottom, 0px); }\n  body { background: #021a16; }\n  @keyframes bounce { 0%,80%,100%{transform:scale(0.6);opacity:0.4} 40%{transform:scale(1);opacity:1} }\n  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }\n  @keyframes tilefloat { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-7px)} }\n  @keyframes reedBob { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-5px)} }\n  @keyframes reedBounce { 0%{transform:translateY(0px)} 100%{transform:translateY(-10px)} }\n  @keyframes reedRun { 0%{transform:rotate(-8deg) translateY(0)} 100%{transform:rotate(8deg) translateY(-4px)} }\n  @keyframes bubbleIn { from{opacity:0;transform:translateX(-50%) scale(0.85)} to{opacity:1;transform:translateX(-50%) scale(1)} }\n  @keyframes targetPulse { 0%,100%{opacity:0.6} 50%{opacity:1} }\n  @keyframes float3 { 0%,100%{transform:translate(-50%,-50%) translateY(0)} 50%{transform:translate(-50%,-50%) translateY(-8px)} }\n  @keyframes float4 { 0%,100%{transform:translate(-50%,-50%) translateY(0)} 50%{transform:translate(-50%,-50%) translateY(-12px)} }\n  @keyframes float5 { 0%,100%{transform:translate(-50%,-50%) translateY(0)} 50%{transform:translate(-50%,-50%) translateY(-6px)} }\n  @keyframes drift0 { 0%{transform:translate(-50%,-50%) translate(0,0)} 25%{transform:translate(-50%,-50%) translate(18px,-22px)} 50%{transform:translate(-50%,-50%) translate(-10px,-38px)} 75%{transform:translate(-50%,-50%) translate(-28px,-14px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift1 { 0%{transform:translate(-50%,-50%) translate(0,0)} 30%{transform:translate(-50%,-50%) translate(-22px,16px)} 60%{transform:translate(-50%,-50%) translate(14px,30px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift2 { 0%{transform:translate(-50%,-50%) translate(0,0)} 20%{transform:translate(-50%,-50%) translate(28px,12px)} 55%{transform:translate(-50%,-50%) translate(8px,-24px)} 80%{transform:translate(-50%,-50%) translate(-18px,-8px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift3 { 0%{transform:translate(-50%,-50%) translate(0,0)} 35%{transform:translate(-50%,-50%) translate(20px,-18px)} 70%{transform:translate(-50%,-50%) translate(-12px,-30px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift4 { 0%{transform:translate(-50%,-50%) translate(0,0)} 25%{transform:translate(-50%,-50%) translate(-24px,-20px)} 50%{transform:translate(-50%,-50%) translate(-36px,10px)} 75%{transform:translate(-50%,-50%) translate(-16px,26px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift5 { 0%{transform:translate(-50%,-50%) translate(0,0)} 40%{transform:translate(-50%,-50%) translate(22px,20px)} 70%{transform:translate(-50%,-50%) translate(10px,-16px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift6 { 0%{transform:translate(-50%,-50%) translate(0,0)} 30%{transform:translate(-50%,-50%) translate(-18px,24px)} 65%{transform:translate(-50%,-50%) translate(16px,32px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift7 { 0%{transform:translate(-50%,-50%) translate(0,0)} 20%{transform:translate(-50%,-50%) translate(26px,-14px)} 50%{transform:translate(-50%,-50%) translate(38px,8px)} 80%{transform:translate(-50%,-50%) translate(12px,22px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  @keyframes drift8 { 0%{transform:translate(-50%,-50%) translate(0,0)} 45%{transform:translate(-50%,-50%) translate(-20px,-28px)} 75%{transform:translate(-50%,-50%) translate(10px,-18px)} 100%{transform:translate(-50%,-50%) translate(0,0)} }\n  ::-webkit-scrollbar { display: none; }\n  input, textarea, button { font-family: 'DM Sans', sans-serif; }`;
 
@@ -2649,7 +2654,7 @@ const globalStyles = `  @import url('https://fonts.googleapis.com/css2?family=DM
 
 
 
-// â”€â”€ Tab Icons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Tab Icons ─────────────────────────────────────────────────────────────────
 function TabIcon({ id, active }) {
   const c = active ? "#fff" : "rgba(255,255,255,0.35)";
   const sw = 1.5;
@@ -2708,9 +2713,9 @@ function TabIcon({ id, active }) {
   }
 }
 
-// â”€â”€ Main App â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Main App ──────────────────────────────────────────────────────────────────
 export default function ChinsApp() {
-  // Screen flow: splash â†’ signup â†’ privacy â†’ safety â†’ meet-reed â†’ main
+  // Screen flow: splash → signup → privacy → safety → meet-reed → main
   const [screen, setScreen] = useState("splash");
   const [emailConfirmed, setEmailConfirmed] = useState(false);
   const [tab, setTab] = useState("connect");
@@ -2747,7 +2752,7 @@ export default function ChinsApp() {
     const accessToken = hashParams.get('access_token') || params.get('access_token');
 
     if (tokenHash && type) {
-      // New Supabase PKCE flow â€” exchange token_hash for session
+      // New Supabase PKCE flow — exchange token_hash for session
       fetch(SUPABASE_URL + '/auth/v1/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY },
@@ -2824,7 +2829,7 @@ export default function ChinsApp() {
     });
     const d = await r.json();
     if(d.error) throw new Error(d.error.message);
-    // Extract text from response â€” may contain tool use blocks
+    // Extract text from response — may contain tool use blocks
     const textBlock = d.content?.find(b=>b.type==="text");
     return textBlock?.text || "";
   };
@@ -2836,7 +2841,7 @@ export default function ChinsApp() {
       setHist([{role:"user",content:"start"},{role:"assistant",content:text}]);
       setMsgs([{role:"reed",text}]);
     } catch {
-      const fb = "hey â€” I'm Reed. before we get into anything, quick question: if you had a completely free Saturday with no obligations, what would actually happen?";
+      const fb = "hey — I'm Reed. before we get into anything, quick question: if you had a completely free Saturday with no obligations, what would actually happen?";
       setMsgs([{role:"reed",text:fb}]);
       setHist([{role:"user",content:"start"},{role:"assistant",content:fb}]);
     }
@@ -2848,14 +2853,14 @@ export default function ChinsApp() {
     setLoading(true);
     const alias = profile?.alias || profile?.display_name || "friend";
     const profileSummary = JSON.stringify({ alias, vibe: profile?.vibe, interests: profile?.interests?.slice(0,4), energy: profile?.energy });
-    const returningPrompt = "[RETURNING USER] " + alias + " is back. Their profile: " + profileSummary + ". Greet them warmly as a friend you already know â€” 1-2 sentences max. Ask how things have been.";
+    const returningPrompt = "[RETURNING USER] " + alias + " is back. Their profile: " + profileSummary + ". Greet them warmly as a friend you already know — 1-2 sentences max. Ask how things have been.";
     try {
       const text = await callReed([{role:"user", content: returningPrompt}]);
       const clean = text.replace(/<profile>[\s\S]*?<\/profile>/g,"").replace(/<navigate>[\s\S]*?<\/navigate>/g,"").replace(/<location>[\s\S]*?<\/location>/g,"").trim();
       setHist([{role:"user",content:returningPrompt},{role:"assistant",content:clean}]);
       setMsgs([{role:"reed",text:clean}]);
     } catch {
-      const fallback = "hey " + alias + "! good to see you again â€” how've things been?";
+      const fallback = "hey " + alias + "! good to see you again — how've things been?";
       setMsgs([{role:"reed",text:fallback}]);
       setHist([{role:"user",content:"[RETURNING USER]"},{role:"assistant",content:fallback}]);
     }
@@ -2889,11 +2894,11 @@ export default function ChinsApp() {
             reed_complete: true,
           });
         }
-        const signoff = "okay â€” I think I've got you. give me a moment and I'll go find your people. head to the Connect tab when you're ready.";
+        const signoff = "okay — I think I've got you. give me a moment and I'll go find your people. head to the Connect tab when you're ready.";
         setTimeout(()=>{ setMsgs(prev=>[...prev,{role:"reed",text:signoff}]); }, 600);
         // Save completion flag to localStorage as fallback
         if(userId) { try { localStorage.setItem('chins_complete_' + userId, '1'); } catch {} }
-        setTimeout(()=>{ setMsgs(prev=>[...prev,{role:"reed",text:"one more thing â€” I've created a compatibility profile based on our conversation. it includes things like your energy, communication style and what you're looking for. you can see exactly what i've noted and delete it anytime in Settings â†’ My Reed profile. just so you know ðŸ§ "}]); }, 1800);
+        setTimeout(()=>{ setMsgs(prev=>[...prev,{role:"reed",text:"one more thing — I've created a compatibility profile based on our conversation. it includes things like your energy, communication style and what you're looking for. you can see exactly what i've noted and delete it anytime in Settings → My Reed profile. just so you know 🧠"}]); }, 1800);
         setTimeout(()=>{ setScreen("main"); }, 4500);
       }catch{}
     }
@@ -2932,7 +2937,7 @@ export default function ChinsApp() {
     const nH = [...hist,{role:"user",content:txt}];
     setLoading(true);
     try { const raw=await callReed(nH); processReply(raw,nH); }
-    catch(e){ setMsgs(prev=>[...prev,{role:"reed",text:"âš ï¸ "+(e.message)}]); }
+    catch(e){ setMsgs(prev=>[...prev,{role:"reed",text:"⚠️ "+(e.message)}]); }
     setLoading(false);
   };
 
@@ -2957,7 +2962,7 @@ export default function ChinsApp() {
               <BlobBackground/>
               <div style={{ position:"relative", zIndex:1 }}>
                 <img src={REED_IMG} style={{ width:130, height:130, objectFit:"contain", marginBottom:24, filter:"drop-shadow(0 4px 20px rgba(75,193,160,0.3))", mixBlendMode:"screen" }} alt="Reed"/>
-                <div style={{ fontSize:48, marginBottom:16 }}>âœ…</div>
+                <div style={{ fontSize:48, marginBottom:16 }}>✅</div>
                 <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", marginBottom:12 }}>You're verified!</div>
                 <div style={{ fontFamily:DM, fontSize:15, color:"rgba(255,255,255,0.55)", lineHeight:1.7, marginBottom:36 }}>
                   Your email has been confirmed. Reed is waiting for you.
@@ -2987,7 +2992,7 @@ export default function ChinsApp() {
                     setScreen("login");
                   }
                 }} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:"#4BC1A0", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.35)" }}>
-                  Meet Reed â†’
+                  Meet Reed →
                 </button>
               </div>
             </div>
@@ -3024,6 +3029,7 @@ export default function ChinsApp() {
               send={send} profile={profile} progress={Math.min(profile?100:95,msgs.filter(m=>m.role==="user").length*12)}
               chipAnimal={chipAnimal} showAnimalToast={showAnimalToast} setShowAnimalToast={setShowAnimalToast}
               profileInsertIdx={profileInsertIdx} privacyMode={privacyMode}
+              onSkip={()=>{ setScreen("main"); setTab("connect"); }}
             />
           )}
 
@@ -3047,7 +3053,7 @@ export default function ChinsApp() {
                     {showProfile&&(
                       <div style={{ position:"absolute", inset:0, zIndex:50, display:"flex", flexDirection:"column" }}>
                         <div style={{ padding:"14px 20px 12px", background:"#021a16", borderBottom:"1px solid rgba(255,255,255,0.08)", display:"flex", alignItems:"center", gap:12 }}>
-                          <button onClick={()=>setShowProfile(false)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.5)", fontSize:20, cursor:"pointer" }}>â†</button>
+                          <button onClick={()=>setShowProfile(false)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.5)", fontSize:20, cursor:"pointer" }}>←</button>
                           <div style={{ fontFamily:DM, fontSize:17, fontWeight:700, color:"#fff" }}>Your profile</div>
                         </div>
                         <div style={{ flex:1, overflow:"hidden" }}>
@@ -3081,7 +3087,7 @@ export default function ChinsApp() {
                   {tabs.map(t=>(
                     <button key={t.id} onClick={()=>setTab(t.id)} style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", padding:"8px 4px 6px", background:tab===t.id?"rgba(75,193,160,0.12)":"none", border:"none", cursor:"pointer", gap:3, borderRadius:20, transition:"background 0.2s" }}>
                       {t.id==="reed"
-                        ? <img src={REED_IMG} style={{ width:24, height:24, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", filter:tab===t.id?"none":"grayscale(0.5) opacity(0.5)", background:"#021a16", mixBlendMode:"screen" }} alt="Reed"/>
+                        ? <div style={{ width:24, height:24, borderRadius:"50%", background:"#021a16", overflow:"hidden", filter:tab===t.id?"none":"grayscale(0.5) opacity(0.5)" }}><img src={REED_IMG} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", mixBlendMode:"screen", display:"block" }} alt="Reed"/></div>
                         : <TabIcon id={t.id} active={tab===t.id}/>
                       }
                       <span style={{ fontSize:8, color:tab===t.id?"#4BC1A0":"rgba(255,255,255,0.4)", fontWeight:tab===t.id?700:400, textTransform:"uppercase", letterSpacing:0.5, fontFamily:DM }}>{t.label}</span>
