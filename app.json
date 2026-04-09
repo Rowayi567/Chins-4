@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "backgroundColor": "#021a16",
-    "platforms": ["android"],
+    "platforms": ["android", "ios"],
     "entryPoint": "./index.js",
     "splash": {
       "backgroundColor": "#021a16"
@@ -16,6 +16,17 @@
       "backgroundColor": "#021a16",
       "adaptiveIcon": {
         "backgroundColor": "#054a43"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "app.chins.social",
+      "buildNumber": "1",
+      "backgroundColor": "#021a16",
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Chins uses your microphone so you can send voice messages to Reed.",
+        "NSCameraUsageDescription": "Chins uses your camera so you can add a profile photo.",
+        "NSPhotoLibraryUsageDescription": "Chins uses your photo library so you can choose a profile photo."
       }
     },
     "extra": {
