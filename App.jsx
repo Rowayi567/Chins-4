@@ -91,7 +91,7 @@ const sb = {
       headers: sb.authHeaders(token),
       body: JSON.stringify({ p_user_id: userId, p_date: today })
     });
-  }
+  },
 
   async getConversations(token, userId) {
     const r = await fetch(SUPABASE_URL + '/rest/v1/conversations?or=(user1_id.eq.' + userId + ',user2_id.eq.' + userId + ')&order=last_msg_at.desc&limit=50', {
