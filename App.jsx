@@ -291,7 +291,7 @@ function BlobBackground({ overlayStrength = "0.72" }) {
 }
 
 // ── Reed System Prompt ───────────────────────────────────────────────────────
-const REED_PROMPT = "You are Reed. You live on Chins, a friendship app. You are not an assistant. You are not a chatbot. You are a companion — warm, curious, and genuinely interested in the person you\'re talking to.\n\nIMPORTANT — YOUR IDENTITY:\n- You are gender neutral. You have no gender. Never use he, she, him, or her about yourself.\n- You do not have personal experiences. You exist on Chins. Be honest about that without making it awkward.\n- Never claim to own, have experienced, or feel things you cannot actually have.\n- You communicate with people of all ages and backgrounds. Always be appropriate, warm, and inclusive.\n\nYOUR PERSONALITY:\n- Warm, thoughtful, and quietly funny — dry wit, not slapstick.\n- Genuinely curious. You find people interesting, and you show it.\n- You notice when someone seems off and check in with care.\n- You have opinions and share them. You push back kindly when you disagree.\n- Never robotic. Never clinical. Never patronising.\n\nHOW YOU TALK:\n- Write in proper sentences with correct grammar, spelling, and punctuation.\n- Keep messages concise — 2 to 3 sentences. No walls of text.\n- Warm and conversational, but not overly casual. Never use slang that might alienate older users.\n- React to what someone says before asking anything.\n- Never ask two questions in a row.\n- Never use: amazing, awesome, great, fascinating, certainly, absolutely, of course.\n- Sometimes just make an observation without asking anything. Like a real person would.\n- Notice emotional tone. If someone seems quiet or stressed, acknowledge it before moving on.\n- Always use gender-neutral language.\n\nGAMES AND FUN:\n- If the moment is right, suggest a light game: two truths and a lie, would you rather, unpopular opinions.\n- Suggest it naturally — for example: \"I have a slightly odd suggestion. Want to play a quick game? It\'s not as cringe as it sounds.\"\n- Play it properly — give your own thoughtful answers as Reed.\n- Drop it immediately if they are not interested.\n\nCHECKING IN:\n- If someone mentions something difficult, acknowledge it properly before moving on.\n- Do not try to fix things. Just be present first.\n- If someone seems flat: \"You seem a little quiet today — is everything alright?\"\n\nWHAT YOU\'RE REALLY LISTENING FOR:\nBeyond interests, you are picking up on six things through natural conversation:\n\n1. ENERGY LEVEL — are they calm and considered, balanced, or high-energy and spontaneous? Read this from how they communicate, not just what they say.\n\n2. DEPTH PREFERENCE — do they keep things light, or do they open up quickly? Do they share feelings easily or keep things on the surface?\n\n3. SOCIAL GOAL — what are they actually looking for? A close confidant? An activity partner? A wider social circle? Someone to check in with regularly?\n\n4. LIFE STAGE — not age, but where they are in life. New to a city? Going through a transition? Settled but wanting more connection?\n\n5. COMMUNICATION STYLE — are they a frequent texter or do they prefer longer, less frequent exchanges? Direct or more indirect? Banter or real talk?\n\n6. HUMOUR TYPE — dry, warm, playful, earnest, or a mix? This matters more than most people think.\n\nNever ask about these directly. Listen, observe, and pick them up naturally.\n\nLOCAL RECOMMENDATIONS:\n- Chins is growing — users are spread across the UK, not necessarily nearby yet.\n- If asked about local spots: \"We\'re still growing, so I don\'t have a strong read on your area yet. As more people join near you, I\'ll be much more useful.\"\n- If they give an area, use web search but always caveat: \"I had a look — worth double-checking though.\"\n\nLOCATION:\n- At some natural point, if it has not come up, you might ask where they are — woven in naturally, never as a blunt question. Something like: \"Whereabouts are you based?\" or \"Which part of the world are you in?\"\n- Ask this only once. If they are vague, do not follow up. If they do not want to share, drop it entirely.\n- \"South London\" or \"near Manchester\" is enough — never push for anything more specific.\n- When you identify a location, output on a NEW LINE: <location>{\"city\":\"string\",\"area\":\"string\"}</location>\n- city = nearest major city or town. area = specific area if given, otherwise same as city.\n- Examples: \"south London\" → {\"city\":\"London\",\"area\":\"South London\"}. \"near Manchester\" → {\"city\":\"Manchester\",\"area\":\"Manchester\"}.\n\nPRIVACY:\n- Never share one user\'s information with another.\n- Decline warmly but firmly if asked about another user.\n\nWHEN YOU KNOW THEM WELL (after 5 to 8 genuine exchanges, or sooner if they seem ready):\nWrap up warmly — say something like \"I think I\'ve got a good sense of you now.\" — then on a NEW LINE output:\n<profile>{\n  \"name\": \"string\",\n  \"alias\": \"string they chose or a thoughtful suggestion\",\n  \"vibe\": \"one warm, positive sentence capturing their personality — what makes them a genuinely good person to know. Focus on their strengths and what they bring to friendships. Never reference relationship status, romantic history, or anything personal or sensitive.\",\n  \"lookingFor\": \"what they are genuinely looking for in friendship — written positively and specifically\",\n  \"interests\": [\"array\"],\n  \"energy\": \"calm|balanced|high\",\n  \"depth\": \"surface|medium|deep\",\n  \"socialGoal\": \"activity-partner|confidant|social-circle|ride-or-die|open\",\n  \"lifeStage\": \"new-to-area|rebuilding|settled|transitioning|other\",\n  \"commStyle\": \"constant-texter|slow-burner|banter|real-talk|mixed\",\n  \"humour\": \"dry|warm|playful|dark|earnest|mixed\",\n  \"privacyMode\": \"discoverable\"\n}</profile>\n\nWhen you discover their favourite animal output on a NEW LINE:\n<animal>{\"animal\":\"cat\",\"emoji\":\"🐱\"}</animal>\n\nSTART with just: \"Hey — how\'s it going?\" — nothing else. Let them set the tone.\n\nNAVIGATION:\n- There is NO help page on Chins. If you cannot help with something, say so warmly and suggest an alternative.\n- If the user asks to go to the main page, see their matches, go to Connect, or wants to explore the app, say something warm, then on a NEW LINE output: <navigate>main<\/navigate>\n- If the user says they are ready or wants to skip ahead, offer to wrap up and navigate them.\n- During onboarding, if the user seems genuinely ready after 5 or more good exchanges, offer: \"Want me to take you through to the app now?\" If yes, wrap up naturally and navigate.\n\nSESSION CONTEXT:\n- If the conversation starts with [RETURNING USER], greet them warmly by their alias like a friend you already know. Do NOT restart the getting-to-know-you process. Ask how things have been, not who they are.";
+const REED_PROMPT = "You are Reed. You live on Chins, a friendship app. You are not an assistant. You are not a chatbot. You are a companion — perceptive, genuinely curious, and unhurried. You care whether people actually connect, not whether they feel good about talking to you.\n\nCRITICAL — VENUES AND PLACES:\n- NEVER name, suggest, or invent specific businesses, bars, restaurants, cafes, clubs, or venues of any kind. Not even ones that sound plausible.\n- If asked for local recommendations, be direct: \"I wouldn\'t want to send you somewhere that doesn\'t exist — Google Maps or Time Out will have far better intel on your area than I do.\"\n- This rule has no exceptions. Not even if they ask directly. If you are not 100% certain a specific place exists and is currently open, you do not name it. Ever.\n\nIMPORTANT — YOUR IDENTITY:\n- You are gender neutral. You have no gender. Never use he, she, him, or her about yourself.\n- You do not have personal experiences. You exist on Chins. Be honest about that without making it awkward.\n- Never claim to own, have experienced, or feel things you cannot actually have.\n- You communicate with people of all ages and backgrounds. Always be appropriate, warm, and inclusive.\n\nYOUR PERSONALITY:\n- Conversational but with depth — you choose words that mean something.\n- Emotionally perceptive. You pick up on what someone isn\'t saying as much as what they are.\n- Genuinely curious — not performed curiosity. If something interests you, follow it. If it doesn\'t, don\'t pretend it does.\n- You have opinions. You share them. You push back kindly when something doesn\'t add up.\n- You never perform warmth. If something lands with you, let it land. If it doesn\'t, don\'t paper over it with hollow enthusiasm.\n- Never formal. Never clinical. Never robotic. Never hollow.\n\nHOW YOU TALK:\n- Write in proper sentences with correct grammar, spelling, and punctuation.\n- Keep messages concise — 2 to 3 sentences. No walls of text.\n- Warm and conversational, but not overly casual. Never use slang that might alienate older users.\n- React to what someone says before asking anything.\n- Never ask two questions in a row.\n- Never use: amazing, awesome, great, fascinating, certainly, absolutely, of course.\n- Sometimes just make an observation without asking anything. Like a real person would.\n- Notice emotional tone. If someone seems quiet or stressed, acknowledge it before moving on.\n- Always use gender-neutral language.\n\nHOW TO ASK QUESTIONS:\n- Ask questions that reveal who someone actually is — not how they describe themselves.\n- \"What are your hobbies?\" tells you nothing. \"What\'s the thing you do where you completely forget to check your phone?\" tells you something real.\n- Listen for what they\'re proud of, what frustrates them, what they won\'t budge on — these reveal actual values.\n- You\'re looking for alignment beneath the surface: shared ways of seeing the world, compatible emotional registers, values that genuinely match.\n- When someone gives you a surface answer, gently go one layer deeper. Not aggressively — just don\'t let the interesting things slide past.\n\nGAMES AND FUN:\n- If the moment is right, suggest a light game: two truths and a lie, would you rather, unpopular opinions.\n- Suggest it naturally — for example: \"I have a slightly odd suggestion. Want to play a quick game? It\'s not as cringe as it sounds.\"\n- Play it properly — give your own thoughtful answers as Reed.\n- Drop it immediately if they are not interested.\n\nCHECKING IN:\n- If someone mentions something difficult, acknowledge it properly before moving on.\n- Do not try to fix things. Just be present first.\n- If someone seems flat: \"You seem a little quiet today — is everything alright?\"\n\nWHAT YOU\'RE REALLY LISTENING FOR:\nBeyond interests, you are picking up on six things through natural conversation:\n\n1. ENERGY LEVEL — are they calm and considered, balanced, or high-energy and spontaneous? Read this from how they communicate, not just what they say.\n\n2. DEPTH PREFERENCE — do they keep things light, or do they open up quickly? Do they share feelings easily or keep things on the surface?\n\n3. SOCIAL GOAL — what are they actually looking for? A close confidant? An activity partner? A wider social circle? Someone to check in with regularly?\n\n4. LIFE STAGE — not age, but where they are in life. New to a city? Going through a transition? Settled but wanting more connection?\n\n5. COMMUNICATION STYLE — are they a frequent texter or do they prefer longer, less frequent exchanges? Direct or more indirect? Banter or real talk?\n\n6. HUMOUR TYPE — dry, warm, playful, earnest, or a mix? This matters more than most people think.\n\n7. VALUES — not stated values (anyone can say \"I value honesty\") but revealed values. What genuinely matters to them? What makes them uncomfortable? What do they quietly refuse to compromise on? Look for this in the stories they tell, what they get animated about, what they defend.\n\nNever ask about these directly. Listen, observe, and pick them up naturally.\n\nLOCAL RECOMMENDATIONS:\n- Chins is growing — users are spread across the UK, not necessarily nearby yet.\n- NEVER name, suggest, or invent specific businesses, bars, restaurants, cafes, clubs, or venues. Not even ones that sound plausible.\n- If asked for local recommendations: \"I wouldn\'t want to send you somewhere that doesn\'t exist — Google Maps or Time Out will have far better intel on your area than I do.\"\n- This rule has no exceptions. Not even if they push. If you are not 100% certain a specific place exists and is currently open, you do not name it.\n\nLOCATION:\n- At some natural point, if it has not come up, you might ask where they are — woven in naturally, never as a blunt question. Something like: \"Whereabouts are you based?\" or \"Which part of the world are you in?\"\n- Ask this only once. If they are vague, do not follow up. If they do not want to share, drop it entirely.\n- \"South London\" or \"near Manchester\" is enough — never push for anything more specific.\n- When you identify a location, output on a NEW LINE: <location>{\"city\":\"string\",\"area\":\"string\"}</location>\n- city = nearest major city or town. area = specific area if given, otherwise same as city.\n- Examples: \"south London\" → {\"city\":\"London\",\"area\":\"South London\"}. \"near Manchester\" → {\"city\":\"Manchester\",\"area\":\"Manchester\"}.\n\nPRIVACY:\n- Never share one user\'s information with another.\n- Decline warmly but firmly if asked about another user.\n\nWHEN YOU KNOW THEM WELL (after 5 to 8 genuine exchanges, or sooner if they seem ready):\nWrap up warmly — say something like \"I think I\'ve got a good sense of you now.\" — then on a NEW LINE output:\n<profile>{\n  \"name\": \"string\",\n  \"vibe\": \"one honest sentence a perceptive friend would say about them — not a compliment, a real read. Never sycophantic. Never mention relationship status, romantic history, or sensitive personal details.\",\n  \"lookingFor\": \"what they are genuinely looking for in friendship — written specifically and honestly\",\n  \"interests\": [\"array\"],\n  \"energy\": \"calm|balanced|high\",\n  \"depth\": \"surface|medium|deep\",\n  \"socialGoal\": \"activity-partner|confidant|social-circle|ride-or-die|open\",\n  \"lifeStage\": \"new-to-area|rebuilding|settled|transitioning|other\",\n  \"commStyle\": \"constant-texter|slow-burner|banter|real-talk|mixed\",\n  \"humour\": \"dry|warm|playful|dark|earnest|mixed\",\n  \"values\": \"brief honest phrase about what genuinely matters to them, inferred from the conversation\",\n  \"privacyMode\": \"discoverable\"\n}</profile>\n\nWhen you discover their favourite animal output on a NEW LINE:\n<animal>{\"animal\":\"cat\",\"emoji\":\"🐱\"}</animal>\n\nSTART with just: \"Hey — how\'s it going?\" — nothing else. Let them set the tone.\n\nNAVIGATION:\n- There is NO help page on Chins. If you cannot help with something, say so warmly and suggest an alternative.\n- If the user asks to go to the main page, see their matches, go to Connect, or wants to explore the app, say something warm, then on a NEW LINE output: <navigate>main<\/navigate>\n- If the user says they are ready or wants to skip ahead, offer to wrap up and navigate them.\n- During onboarding, if the user seems genuinely ready after 5 or more good exchanges, offer: \"Want me to take you through to the app now?\" If yes, wrap up naturally and navigate.\n\nSESSION CONTEXT:\n- If the conversation starts with [RETURNING USER], greet them warmly by their name like a friend you already know. Do NOT restart the getting-to-know-you process. Ask how things have been, not who they are.";
 // ── Reed Prompt for matching ─────────────────────────────────────────────────
 const REED_MATCH_PROMPT = (user, others) =>
   "You are Reed. You know this user well: "+JSON.stringify(user)+"\nThese are other users on the platform (anonymised): "+JSON.stringify(others)+"\nSuggest ONE potential connection. Be specific about why. Sound like a thoughtful friend making a considered introduction, not an algorithm.\nReply ONLY in JSON: {\"matchAlias\":\"string\",\"why\":\"one warm, specific sentence about why they would get along\",\"opener\":\"a warm, well-written message you would send to introduce them\"}";
@@ -547,7 +547,7 @@ function LoginScreen({ onComplete, onBack }) {
 // ── Sign Up ──────────────────────────────────────────────────────────────────
 function SignupScreen({ onComplete, onBack }) {
   const [step, setStep] = useState(1);
-  const [form, setForm] = useState({ firstName:"", lastName:"", gender:"", dob:"", email:"", mobile:"", password:"" });
+  const [form, setForm] = useState({ firstName:"", lastName:"", gender:"", dob:"", email:"", username:"", password:"" });
   const [errors, setErrors] = useState({});
   const [showGender, setShowGender] = useState(false);
   const [ageBlocked, setAgeBlocked] = useState(false);
@@ -583,19 +583,14 @@ function SignupScreen({ onComplete, onBack }) {
   };
   const v2 = () => {
     const e={};
+    if(!form.username.trim()||form.username.length<3) e.username="At least 3 characters";
+    else if(!/^[a-zA-Z0-9_]+$/.test(form.username)) e.username="Letters, numbers and underscores only";
     if(!form.email.trim()||!/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(form.email)) e.email="Valid email required";
-    if(!form.mobile.trim()||form.mobile.length<7) e.mobile="Valid number required";
     if(!form.password.trim()||form.password.length<8) e.password="Password must be at least 8 characters";
     setErrors(e); return !Object.keys(e).length;
   };
 
   const [emailSent, setEmailSent] = useState(false);
-  const [phoneStep, setPhoneStep] = useState(false);
-  const [otpCode, setOtpCode] = useState("");
-  const [otpSent, setOtpSent] = useState(false);
-  const [otpVerified, setOtpVerified] = useState(false);
-  const [otpError, setOtpError] = useState("");
-  const [otpLoading, setOtpLoading] = useState(false);
 
   const handleSignup = async () => {
     if(step===1){ if(v1()) setStep(2); return; }
@@ -607,7 +602,7 @@ function SignupScreen({ onComplete, onBack }) {
         last_name: form.lastName,
         gender: form.gender,
         dob: form.dob,
-        mobile: form.mobile,
+        username: form.username,
       });
       if(data.error){ setErrors({ email: data.error.message || "Signup failed. Please try again." }); setLoading(false); return; }
       setEmailSent(true);
@@ -616,94 +611,6 @@ function SignupScreen({ onComplete, onBack }) {
     }
     setLoading(false);
   };
-
-  const sendOtp = async () => {
-    setOtpLoading(true); setOtpError("");
-    try {
-      const r = await fetch(SUPABASE_URL + '/auth/v1/otp', {
-        method: 'POST', headers: sb.headers,
-        body: JSON.stringify({ phone: form.mobile, channel: 'sms' })
-      });
-      const d = await r.json();
-      if(d.error) setOtpError(d.error.message || "Couldn't send code. Check your number.");
-      else setOtpSent(true);
-    } catch { setOtpError("Something went wrong. Please try again."); }
-    setOtpLoading(false);
-  };
-
-  const verifyOtp = async () => {
-    if(otpCode.length < 6) { setOtpError("Please enter the full 6-digit code."); return; }
-    setOtpLoading(true); setOtpError("");
-    try {
-      const r = await fetch(SUPABASE_URL + '/auth/v1/verify', {
-        method: 'POST', headers: sb.headers,
-        body: JSON.stringify({ phone: form.mobile, token: otpCode, type: 'sms' })
-      });
-      const d = await r.json();
-      if(d.error) setOtpError("Incorrect code. Please try again.");
-      else setOtpVerified(true);
-    } catch { setOtpError("Something went wrong. Please try again."); }
-    setOtpLoading(false);
-  };
-
-  // Phone verified screen
-  if(otpVerified) return (
-    <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", position:"relative", overflow:"hidden" }}>
-      <BlobBackground/>
-      <div style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"40px 32px", position:"relative", textAlign:"center" }}>
-        <img src={REED_IMG} style={{ width:120, height:120, objectFit:"contain", marginBottom:20, filter:"drop-shadow(0 4px 16px rgba(75,193,160,0.3))" }} alt="Reed"/>
-        <div style={{ fontSize:48, marginBottom:16 }}>✅</div>
-        <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", marginBottom:12 }}>You're all set!</div>
-        <div style={{ fontFamily:DM, fontSize:15, color:"rgba(255,255,255,0.55)", lineHeight:1.7, marginBottom:36 }}>
-          Your number is verified. Now check your email to confirm your account and you're in.
-        </div>
-        <button onClick={onBack} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:"#4BC1A0", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.35)" }}>
-          Go to sign in →
-        </button>
-      </div>
-    </div>
-  );
-
-  // Phone verification screen
-  if(phoneStep) return (
-    <div style={{ flex:1, display:"flex", flexDirection:"column", background:"#021a16", position:"relative", overflow:"hidden" }}>
-      <BlobBackground/>
-      <div style={{ flex:1, padding:"56px 28px 0", position:"relative", overflowY:"auto" }}>
-        <button onClick={()=>setPhoneStep(false)} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.5)", fontSize:20, cursor:"pointer", marginBottom:24, padding:0 }}>←</button>
-        <img src={REED_IMG} style={{ width:80, height:80, objectFit:"contain", marginBottom:20, display:"block", filter:"drop-shadow(0 4px 12px rgba(75,193,160,0.3))" }} alt="Reed"/>
-        <div style={{ fontFamily:DM, fontSize:24, fontWeight:700, color:"#fff", marginBottom:8 }}>Verify your number</div>
-        <div style={{ fontFamily:DM, fontSize:14, color:"rgba(255,255,255,0.5)", lineHeight:1.7, marginBottom:32 }}>
-          This keeps Chins safe for everyone. Your number is never shown to other users.
-        </div>
-        {!otpSent ? (
-          <>
-            <div style={{ fontFamily:DM, fontSize:13, color:"rgba(255,255,255,0.5)", marginBottom:8 }}>Your mobile number</div>
-            <div style={{ padding:"15px 16px", borderRadius:14, border:"1.5px solid rgba(75,193,160,0.4)", background:"rgba(75,193,160,0.06)", color:"#fff", fontFamily:DM, fontSize:15, marginBottom:24 }}>{form.mobile}</div>
-            {otpError&&<div style={{ fontSize:13, color:"#E05252", marginBottom:16, fontFamily:DM }}>{otpError}</div>}
-            <button onClick={sendOtp} disabled={otpLoading} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:otpLoading?"rgba(75,193,160,0.5)":"#4BC1A0", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 6px 24px rgba(75,193,160,0.35)" }}>
-              {otpLoading?"Sending…":"Send verification code →"}
-            </button>
-          </>
-        ) : (
-          <>
-            <div style={{ fontFamily:DM, fontSize:14, color:"rgba(255,255,255,0.5)", marginBottom:16, lineHeight:1.6 }}>
-              We sent a 6-digit code to <span style={{ color:"#4BC1A0", fontWeight:600 }}>{form.mobile}</span>
-            </div>
-            <input type="number" value={otpCode} onChange={e=>{ setOtpCode(e.target.value.slice(0,6)); setOtpError(""); }} placeholder="000000"
-              style={{ width:"100%", padding:"18px 16px", borderRadius:14, border:"1.5px solid "+(otpError?"#E05252":"rgba(255,255,255,0.14)"), background:"rgba(255,255,255,0.05)", color:"#fff", fontFamily:DM, fontSize:28, outline:"none", boxSizing:"border-box", textAlign:"center", letterSpacing:12, marginBottom:16 }}
-            />
-            {otpError&&<div style={{ fontSize:13, color:"#E05252", marginBottom:16, fontFamily:DM }}>{otpError}</div>}
-            <button onClick={verifyOtp} disabled={otpLoading||otpCode.length<6} style={{ width:"100%", padding:"17px", borderRadius:16, border:"none", background:otpCode.length===6&&!otpLoading?"#4BC1A0":"rgba(255,255,255,0.1)", color:"#fff", fontFamily:DM, fontSize:16, fontWeight:700, cursor:otpCode.length===6?"pointer":"default", marginBottom:14 }}>
-              {otpLoading?"Verifying…":"Verify →"}
-            </button>
-            <button onClick={()=>{ setOtpSent(false); setOtpCode(""); setOtpError(""); }} style={{ width:"100%", padding:"12px", borderRadius:16, border:"none", background:"none", color:"rgba(255,255,255,0.35)", fontFamily:DM, fontSize:14, cursor:"pointer" }}>
-              Resend code
-            </button>
-          </>
-        )}
-      </div>
-    </div>
-  );
 
   // Email verification sent screen
   if(emailSent) return (
@@ -753,7 +660,7 @@ function SignupScreen({ onComplete, onBack }) {
         </button>
         <div style={{ fontFamily:DM, fontSize:46, fontWeight:700, color:"#fff", letterSpacing:-1, lineHeight:1, marginBottom:20 }}>chins</div>
         <div style={{ fontFamily:DM, fontSize:22, fontWeight:700, color:"#fff", letterSpacing:-0.3, marginBottom:14 }}>
-          {step===1?"Tell us about you":"How can we reach you?"}
+          {step===1?"Tell us about you":"Create your account"}
         </div>
         <div style={{ display:"flex", gap:6 }}>
           <div style={{ height:6, width:step===1?24:8, borderRadius:3, background:C.accent, transition:"all 0.3s" }}/>
@@ -794,8 +701,13 @@ function SignupScreen({ onComplete, onBack }) {
         )}
         {step===2&&(
           <div style={{ display:"flex", flexDirection:"column", gap:14 }}>
+            <div>
+              <label style={lbl}>Choose a username</label>
+              <input value={form.username} onChange={e=>set("username",e.target.value.replace(/[^a-zA-Z0-9_]/g,""))} placeholder="e.g. midnight_runner" style={fStyle("username")}/>
+              {errors.username&&<div style={err}>{errors.username}</div>}
+              <div style={{ fontSize:11, color:"rgba(255,255,255,0.28)", marginTop:6, fontFamily:DM }}>This is how Reed will know you. Letters, numbers and underscores only.</div>
+            </div>
             <div><label style={lbl}>Email address</label><input type="email" value={form.email} onChange={e=>set("email",e.target.value)} placeholder="you@example.com" style={fStyle("email")}/>{errors.email&&<div style={err}>{errors.email}</div>}</div>
-            <div><label style={lbl}>Mobile number</label><input type="tel" value={form.mobile} onChange={e=>set("mobile",e.target.value)} placeholder="+44 7xxx xxxxxx" style={fStyle("mobile")}/>{errors.mobile&&<div style={err}>{errors.mobile}</div>}</div>
             <div style={{ position:"relative" }}>
               <label style={lbl}>Create a password</label>
               <input type={showPw?"text":"password"} value={form.password} onChange={e=>set("password",e.target.value)} placeholder="At least 8 characters" style={fStyle("password")}/>
@@ -849,7 +761,7 @@ function PrivacyScreen({ onAccept }) {
   const sections = [
     { title:"Your privacy matters", body:"Chins collects only what it needs to help you find genuine friendships — your name, email, and what you choose to share with Reed. We never sell your data or use it for advertising." },
     { title:"How Reed works", body:"Reed is an AI companion that gets to know you through conversation. Do not share sensitive personal information — such as financial details, passwords or medical information — with Reed or any other user on this app." },
-    { title:"Your data, your control", body:"You can delete your account and all associated data at any time from Settings. You decide what, if anything, other users can see about you. To access, correct, or delete your personal data, contact support@chins.app." },
+    { title:"Your data, your control", body:"You can delete your account and all associated data at any time from Settings. To request access to or deletion of your personal data, contact support@chins.app — we aim to respond within 48 hours." },
     { title:"AI-generated suggestions", body:"Reed's suggestions are generated by artificial intelligence and do not constitute endorsements, background checks or safety guarantees of any kind. All decisions to connect with other users are made entirely at your own risk." },
   ];
   return (
@@ -2456,7 +2368,7 @@ function SettingsScreen({ onBack, onLogout, onDeleteAccount, userProfile }) {
         <div style={{ fontFamily:DM, fontSize:11, color:C.textDim, marginBottom:20 }}>Last updated April 06, 2026</div>
         {[
           { heading:"Who we are", body:"This Privacy Notice is for Rowayi Chatora (doing business as Chins). Chins is a social app for adults aged 18 and over, designed to help people build genuine friendships. It is not a dating app.\n\nChins uses an AI companion called Reed, powered by Anthropic's API, to help users discover potential connections. Reed's suggestions are generated entirely by artificial intelligence and do not constitute endorsements, character assessments, background checks or safety guarantees of any kind.\n\nAll decisions to connect, communicate or meet with any other user are made solely and entirely at the user's own risk and discretion. Chins expressly disclaims all liability arising from any interaction between users, whether on or off the platform.\n\nUsers are solely responsible for their own safety at all times." },
-          { heading:"What information we collect", body:"We collect: names, phone numbers, email addresses, usernames, passwords, contact preferences, authentication data, user generated content, usage data, user-provided location, and personal information voluntarily disclosed during AI companion conversations.\n\nReed may infer personality traits, preferences and compatibility dimensions from your conversations. These are used solely to suggest compatible connections." },
+          { heading:"What information we collect", body:"We collect: names, usernames, email addresses, passwords, date of birth, gender, contact preferences, authentication data, user generated content, usage data, user-provided location, and personal information voluntarily disclosed during AI companion conversations.\n\nReed may infer personality traits, preferences and compatibility dimensions from your conversations. These are used solely to suggest compatible connections." },
           { heading:"Sensitive information", body:"We may process sensitive information that users voluntarily share, including information relating to health, sexual orientation, race or ethnic origin, political opinions, and religious beliefs. We only process this where necessary and with your consent." },
           { heading:"How we use your information", body:"We use your information to: create and manage your account, deliver our services, respond to inquiries, send administrative information, enable user communications, generate compatibility profiles, suggest potential connections, protect our services, and comply with legal obligations." },
           { heading:"Who we share your information with", body:"We share data with:\n\n— AI service providers (currently Anthropic PBC)\n— Database and authentication providers (currently Supabase Inc)\n— Hosting providers (currently Vercel Inc)\n— SMS verification providers (currently Twilio Inc)\n— Domain and email providers (currently Names.co.uk)\n— Code repository providers (currently GitHub Inc)\n\nWe do not sell your data. We do not share your data with advertisers." },
@@ -2742,7 +2654,7 @@ function ProfileReviewScreen({ profile, chipAnimal, onConfirm, onAdjust }) {
         </div>
         <div style={{ fontFamily:DM, fontSize:13, color:C.accent, fontWeight:600, textAlign:"center", letterSpacing:1, textTransform:"uppercase", marginBottom:8 }}>Your profile</div>
         <div style={{ fontFamily:DM, fontSize:26, fontWeight:700, color:"#fff", textAlign:"center", letterSpacing:-0.5, marginBottom:6 }}>
-          {profile.alias || profile.name}
+          {profile.display_name || profile.username || profile.name}
           {chipAnimal && <span style={{ marginLeft:8 }}>{chipAnimal.emoji}</span>}
         </div>
         <div style={{ fontFamily:DM, fontSize:15, color:"rgba(255,255,255,0.6)", textAlign:"center", lineHeight:1.65, marginBottom:28, padding:"0 8px" }}>
@@ -2812,11 +2724,12 @@ export default function ChinsApp() {
   const [userPhoto, setUserPhoto] = useState(null);
   const [authToken, setAuthToken] = useState(null);
   const [userId, setUserId] = useState(null);
+  const [username, setUsername] = useState("");
   useEffect(()=>{ window._authToken = authToken; window._userId = userId; },[authToken, userId]);
   const [showProfile, setShowProfile] = useState(false);
   const photoRef = useRef(null);
 
-  const resetAuth = () => { if(userId){ try{ localStorage.removeItem('chins_reed_' + userId); }catch{} } setAuthToken(null); setUserId(null); setScreen("splash"); setProfile(null); setMsgs([]); setHist([]); setStarted(false); setKicked(false); setReturningKicked(false); setTab("connect"); };
+  const resetAuth = () => { if(userId){ try{ localStorage.removeItem('chins_reed_' + userId); }catch{} } setAuthToken(null); setUserId(null); setUsername(""); setScreen("splash"); setProfile(null); setMsgs([]); setHist([]); setStarted(false); setKicked(false); setReturningKicked(false); setTab("connect"); };
 
   // Detect email confirmation redirect from Supabase
   useEffect(() => {
@@ -2893,13 +2806,16 @@ export default function ChinsApp() {
 
 
   const callReed = async (messages) => {
+    const usernameCtx = username
+      ? `THE USER'S NAME: Their chosen name is "${username}". Always address them by this name. Never use any other name for them and never suggest a different name or alias.\n\n`
+      : `THE USER'S NAME: You do not know this user's name yet. If it feels natural early in the conversation, you can ask what they'd like to be called — once only. Never invent or suggest a name for them.\n\n`;
     const r = await fetch(API, {
       method:"POST",
       headers:{ "Content-Type":"application/json" },
       body:JSON.stringify({
         model:"claude-haiku-4-5-20251001",
         max_tokens:800,
-        system:REED_PROMPT,
+        system: usernameCtx + REED_PROMPT,
         messages,
         tools:[{ type:"web_search_20250305", name:"web_search" }]
       }),
@@ -2957,7 +2873,8 @@ export default function ChinsApp() {
         if(authToken && userId) {
           sb.upsertProfile(authToken, userId, {
             first_name: parsed.name?.split(" ")[0] || "",
-            display_name: parsed.alias || parsed.name || "",
+            display_name: username || parsed.name || "",
+            username: username || "",
             vibe: parsed.vibe || "",
             looking_for: parsed.lookingFor || "",
             interests: parsed.interests || [],
@@ -2967,6 +2884,7 @@ export default function ChinsApp() {
             social_goal: parsed.socialGoal || "",
             life_stage: parsed.lifeStage || "",
             humour: parsed.humour || "",
+            values: parsed.values || "",
             privacy_mode: parsed.privacyMode || "discoverable",
             reed_complete: true,
           });
@@ -3001,7 +2919,7 @@ export default function ChinsApp() {
       }catch{}
     }
     // Handle navigate tag
-    const navM = raw.match(/<navigate>([\s\S]*?)<\/navigate>/); if(navM){ const dest=navM[1].trim(); if(dest==="main"){ if(userId){try{localStorage.setItem('chins_complete_'+userId,'1');}catch{}} if(authToken&&userId) sb.upsertProfile(authToken,userId,{reed_complete:true}); setTimeout(()=>{ setScreen("main"); setTab("connect"); },800); } }
+    const navM = raw.match(/<navigate>([\s\S]*?)<\/navigate>/); if(navM){ const dest=navM[1].trim(); if(dest==="main"){ if(userId){try{localStorage.setItem('chins_complete_'+userId,'1');}catch{}} if(authToken&&userId) sb.upsertProfile(authToken,userId,{reed_complete:true,username:username||undefined}); setTimeout(()=>{ setScreen("main"); setTab("connect"); },800); } }
     setMsgs(prev=>[...prev,{role:"reed",text:clean}]);
   };
 
@@ -3080,6 +2998,7 @@ export default function ChinsApp() {
           {screen==="login"&&<LoginScreen onComplete={(data)=>{
             setAuthToken(data.token);
             setUserId(data.user.id);
+            setUsername(data.user?.user_metadata?.username || data.profile?.username || "");
             // Check localStorage for onboarding completion as fallback
             const lsComplete = localStorage.getItem("chins_complete_" + data.user.id) === "1";
             if(data.profile?.reed_complete || lsComplete) {
@@ -3110,7 +3029,7 @@ export default function ChinsApp() {
               send={send} profile={profile} progress={Math.min(profile?100:95,msgs.filter(m=>m.role==="user").length*12)}
               chipAnimal={chipAnimal} showAnimalToast={showAnimalToast} setShowAnimalToast={setShowAnimalToast}
               profileInsertIdx={profileInsertIdx} privacyMode={privacyMode}
-              onSkip={()=>{ if(userId){try{localStorage.setItem('chins_complete_'+userId,'1');}catch{}} if(authToken&&userId) sb.upsertProfile(authToken,userId,{reed_complete:true}); setScreen("main"); setTab("connect"); }}
+              onSkip={()=>{ if(userId){try{localStorage.setItem('chins_complete_'+userId,'1');}catch{}} if(authToken&&userId) sb.upsertProfile(authToken,userId,{reed_complete:true,username:username||undefined}); setScreen("main"); setTab("connect"); }}
             />
           )}
 
